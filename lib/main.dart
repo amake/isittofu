@@ -55,32 +55,35 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Padding(
+        child: Container(
+          constraints: BoxConstraints(maxWidth: 800),
           padding: const EdgeInsets.all(32),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Expanded(
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(maxWidth: 800),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Input text to check here...',
-                    ),
-                    maxLines: 50,
-                    minLines: 20,
-                    controller: _controller,
-                    style: Theme.of(context).textTheme.display1,
-                    autofocus: true,
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Input text to check here...',
                   ),
+                  maxLines: 50,
+                  minLines: 20,
+                  controller: _controller,
+                  style: Theme.of(context).textTheme.display1,
+                  autofocus: true,
                 ),
               ),
               const SizedBox(height: 32),
               Expanded(
-                child: ListView.builder(
-                    itemCount: _codePoints.length,
-                    itemBuilder: (context, i) => CodePointTile(_codePoints[i])),
+                child: ListView.separated(
+                  itemCount: _codePoints.length,
+                  separatorBuilder: (context, i) => const Divider(),
+                  itemBuilder: (context, i) => CodePointTile(
+                    _codePoints[i],
+                    key: ValueKey(i),
+                  ),
+                ),
               ),
             ],
           ),
@@ -118,7 +121,11 @@ class CodePointTile extends StatelessWidget {
         : const Icon(Icons.not_interested);
     return ListTile(
       leading: icon,
-      title: Text(String.fromCharCode(codePoint)),
+      title: Text(
+        String.fromCharCode(codePoint),
+        style: Theme.of(context).textTheme.display1,
+      ),
+      subtitle: Text('U+${codePoint.toRadixString(16)}'),
       trailing: PlatformSupport(
         ios: iosMessage,
         android: androidMessage,
@@ -148,6 +155,7 @@ class PlatformSupport extends StatelessWidget {
             Text(android),
           ],
         ),
+        const SizedBox(height: 8),
         Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
