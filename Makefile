@@ -11,6 +11,11 @@ $(bloom_filter_src): $(bloom_filter_data) | pub
 		-p $(bloom_filter_probability) \
 		$(^)
 
+.PHONY: clean
+clean: ## Delete generated files
+clean:
+	find lib -name '*.g.dart' -delete
+
 .PHONY: pub
 pub: pubspec.lock .dart_tool/package_config.json
 
