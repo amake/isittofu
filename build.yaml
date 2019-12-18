@@ -1,0 +1,7 @@
+targets:
+  $default:
+    builders:
+      bloom_filter_builder:
+        options:
+          probability: 0.01
+
