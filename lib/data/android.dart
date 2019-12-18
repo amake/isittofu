@@ -1,31 +1,21 @@
-import 'package:isittofu/data/android10.g.dart';
 import 'package:isittofu/data/android11.g.dart';
 import 'package:isittofu/data/android12.g.dart';
-import 'package:isittofu/data/android13.g.dart';
 import 'package:isittofu/data/android14.g.dart';
-import 'package:isittofu/data/android15.g.dart';
 import 'package:isittofu/data/android16.g.dart';
-import 'package:isittofu/data/android17.g.dart';
 import 'package:isittofu/data/android18.g.dart';
 import 'package:isittofu/data/android19.g.dart';
 import 'package:isittofu/data/android2.g.dart';
-import 'package:isittofu/data/android20.g.dart';
 import 'package:isittofu/data/android21.g.dart';
-import 'package:isittofu/data/android22.g.dart';
 import 'package:isittofu/data/android23.g.dart';
-import 'package:isittofu/data/android24.g.dart';
 import 'package:isittofu/data/android25.g.dart';
 import 'package:isittofu/data/android26.g.dart';
-import 'package:isittofu/data/android27.g.dart';
 import 'package:isittofu/data/android28.g.dart';
 import 'package:isittofu/data/android29.g.dart';
 import 'package:isittofu/data/android3.g.dart';
 import 'package:isittofu/data/android4.g.dart';
 import 'package:isittofu/data/android5.g.dart';
 import 'package:isittofu/data/android6.g.dart';
-import 'package:isittofu/data/android7.g.dart';
 import 'package:isittofu/data/android8.g.dart';
-import 'package:isittofu/data/android9.g.dart';
 import 'package:isittofu/data/common.dart' as common;
 
 final bloomFilters = [
@@ -34,27 +24,27 @@ final bloomFilters = [
   android4BloomFilter,
   android5BloomFilter,
   android6BloomFilter,
-  android7BloomFilter,
+  android6BloomFilter, // Android 7 is same as Android 6
   android8BloomFilter,
-  android9BloomFilter,
-  android10BloomFilter,
+  android8BloomFilter, // Android 9 is same as Android 8
+  android8BloomFilter, // Android 10 is same as Android 8
   android11BloomFilter,
   android12BloomFilter,
-  android13BloomFilter,
+  android12BloomFilter, // Android 13 is same as Android 12
   android14BloomFilter,
-  android15BloomFilter,
+  android14BloomFilter, // Android 15 is same as Android 14
   android16BloomFilter,
-  android17BloomFilter,
+  android16BloomFilter, // Android 17 is same as Android 16
   android18BloomFilter,
   android19BloomFilter,
-  android20BloomFilter,
+  android19BloomFilter, // Android 20 is same as Android 19
   android21BloomFilter,
-  android22BloomFilter,
+  android21BloomFilter, // Android 22 is same as Android 21
   android23BloomFilter,
-  android24BloomFilter,
+  android23BloomFilter, // Android 24 is same as Android 23
   android25BloomFilter,
   android26BloomFilter,
-  android27BloomFilter,
+  android26BloomFilter, // Android 27 is same as Android 26
   android28BloomFilter,
   android29BloomFilter,
 ];
