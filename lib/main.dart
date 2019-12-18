@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:isittofu/data/android10.g.dart';
+import 'package:isittofu/util.dart';
 
 void main() => runApp(MyApp());
 
@@ -36,7 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _textChanged() {
     setState(() {
-      _codePoints = List.from(_controller.text.runes);
+      _codePoints = List.from(_controller.text.runes.unique());
     });
   }
 
