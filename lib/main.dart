@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Is it tofu?'),
     );
   }
 }
@@ -26,7 +26,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   TextEditingController _controller;
-  List<int> _codepoints = const [];
+  List<int> _codePoints = const [];
 
   @override
   void initState() {
@@ -36,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _textChanged() {
     setState(() {
-      _codepoints = List.from(_controller.text.runes);
+      _codePoints = List.from(_controller.text.runes);
     });
   }
 
@@ -53,33 +53,58 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            TextField(
-              controller: _controller,
-            ),
-            ListView.builder(
-                shrinkWrap: true,
-                itemCount: _codepoints.length,
-                itemBuilder: (context, i) {
-                  final cp = _codepoints[i];
-                  final available = android10BloomFilter.mightContain(cp);
-                  final message = available
-                      ? 'Available on Android 10'
-                      : 'Not available on Android 10';
-                  final icon = available
-                      ? const Icon(Icons.thumb_up)
-                      : const Icon(Icons.not_interested);
-                  return ListTile(
-                    leading: icon,
-                    title: Text(String.fromCharCode(cp)),
-                    trailing: Text(message),
-                  );
-                }),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: 800),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Input text to check here...',
+                    ),
+                    maxLines: 50,
+                    minLines: 20,
+                    controller: _controller,
+                    style: Theme.of(context).textTheme.display1,
+                    autofocus: true,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 32),
+              Expanded(
+                child: ListView.builder(
+                    itemCount: _codePoints.length,
+                    itemBuilder: (context, i) => CodePointTile(_codePoints[i])),
+              ),
+            ],
+          ),
         ),
       ),
+    );
+  }
+}
+
+class CodePointTile extends StatelessWidget {
+  const CodePointTile(this.codePoint, {Key key}) : assert(codePoint != null);
+
+  final int codePoint;
+
+  @override
+  Widget build(BuildContext context) {
+    final available = android10BloomFilter.mightContain(codePoint);
+    final message =
+        available ? 'Available on Android 10' : 'Not available on Android 10';
+    final icon = available
+        ? const Icon(Icons.thumb_up)
+        : const Icon(Icons.not_interested);
+    return ListTile(
+      leading: icon,
+      title: Text(String.fromCharCode(codePoint)),
+      trailing: Text(message),
     );
   }
 }
