@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:isittofu/data/android10.g.dart';
+import 'package:isittofu/data/android.dart' as android;
+import 'package:isittofu/data/ios.dart' as ios;
 import 'package:isittofu/util.dart';
 
 void main() => runApp(MyApp());
@@ -90,22 +91,72 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class CodePointTile extends StatelessWidget {
-  const CodePointTile(this.codePoint, {Key key}) : assert(codePoint != null);
+  const CodePointTile(this.codePoint, {Key key})
+      : assert(codePoint != null),
+        super(key: key);
 
   final int codePoint;
 
   @override
   Widget build(BuildContext context) {
-    final available = android10BloomFilter.mightContain(codePoint);
-    final message =
-        available ? 'Available on Android 10' : 'Not available on Android 10';
-    final icon = available
+    print('Inspecting codepoint $codePoint');
+    final iosIndices = ios.supportingIndices(codePoint);
+    print('iOS indices: $iosIndices');
+    final iosRanges = iosIndices.ranges();
+    print('iOS ranges: $iosRanges');
+    final iosMessage = ios.supportedString(iosRanges);
+    print('iOS message: $iosMessage');
+    final androidIndices = android.supportingIndices(codePoint);
+    print('Android indices: $androidIndices');
+    final androidRanges = androidIndices.ranges();
+    print('Android ranges: $androidRanges');
+    final androidMessage = android.supportedString(androidRanges);
+    print('Android message: $androidMessage');
+    print('Done inspecting codepoint $codePoint');
+    final icon = iosIndices.isNotEmpty && androidIndices.isNotEmpty
         ? const Icon(Icons.thumb_up)
         : const Icon(Icons.not_interested);
     return ListTile(
       leading: icon,
       title: Text(String.fromCharCode(codePoint)),
-      trailing: Text(message),
+      trailing: PlatformSupport(
+        ios: iosMessage,
+        android: androidMessage,
+      ),
+    );
+  }
+}
+
+class PlatformSupport extends StatelessWidget {
+  const PlatformSupport({this.android, this.ios, Key key})
+      : assert(android != null),
+        assert(ios != null),
+        super(key: key);
+
+  final String android;
+  final String ios;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const Icon(Icons.android),
+            const SizedBox(width: 16),
+            Text(android),
+          ],
+        ),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            const Icon(Icons.phone_iphone),
+            const SizedBox(width: 16),
+            Text(ios),
+          ],
+        ),
+      ],
     );
   }
 }
