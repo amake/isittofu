@@ -22,6 +22,11 @@ pub: pubspec.lock .dart_tool/package_config.json
 .dart_tool/package_config.json pubspec.lock: pubspec.yaml
 	flutter pub get
 
+.PHONY: web-release-serve
+web-release-serve: ## Serve the web release locally over HTTP
+web-release-serve:
+	cd build/web; python3 -m http.server
+
 .PHONY: help
 help: ## Show this help text
 	$(info usage: make [target])
