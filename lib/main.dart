@@ -7,10 +7,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      title: 'Is it tofu?',
+      theme: ThemeData.localize(ThemeData.light(), Typography.englishLike2018),
       home: TextAnalysisPage(),
     );
   }
