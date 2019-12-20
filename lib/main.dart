@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:isittofu/data/android.dart' as android;
-import 'package:isittofu/data/ios.dart' as ios;
-import 'package:isittofu/util.dart';
+import 'package:isittofu/analyzer.dart';
 
 void main() => runApp(MyApp());
 
@@ -28,7 +26,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   TextEditingController _controller;
-  List<int> _codePoints = const [];
+  TextAnalysis _analysis = TextAnalysis.empty();
 
   @override
   void initState() {
@@ -38,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _textChanged() {
     setState(() {
-      _codePoints = List.from(_controller.text.runes.unique());
+      _analysis = const Analyzer().analyzeText(_controller.text);
     });
   }
 
@@ -77,10 +75,10 @@ class _MyHomePageState extends State<MyHomePage> {
               const SizedBox(height: 32),
               Expanded(
                 child: ListView.separated(
-                  itemCount: _codePoints.length,
+                  itemCount: _analysis.uniqueCodePoints.length,
                   separatorBuilder: (context, i) => const Divider(),
                   itemBuilder: (context, i) => CodePointTile(
-                    _codePoints[i],
+                    _analysis.analysisForIndex(i),
                     key: ValueKey(i),
                   ),
                 ),
@@ -94,41 +92,27 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class CodePointTile extends StatelessWidget {
-  const CodePointTile(this.codePoint, {Key key})
-      : assert(codePoint != null),
+  const CodePointTile(this.analysis, {Key key})
+      : assert(analysis != null),
         super(key: key);
 
-  final int codePoint;
+  final CodePointAnalysis analysis;
 
   @override
   Widget build(BuildContext context) {
-    print('Inspecting codepoint $codePoint');
-    final iosIndices = ios.supportingIndices(codePoint);
-    print('iOS indices: $iosIndices');
-    final iosRanges = iosIndices.ranges();
-    print('iOS ranges: $iosRanges');
-    final iosMessage = ios.supportedString(iosRanges);
-    print('iOS message: $iosMessage');
-    final androidIndices = android.supportingIndices(codePoint);
-    print('Android indices: $androidIndices');
-    final androidRanges = androidIndices.ranges();
-    print('Android ranges: $androidRanges');
-    final androidMessage = android.supportedString(androidRanges);
-    print('Android message: $androidMessage');
-    print('Done inspecting codepoint $codePoint');
-    final icon = iosIndices.isNotEmpty && androidIndices.isNotEmpty
+    final icon = analysis.supported
         ? const Icon(Icons.thumb_up)
         : const Icon(Icons.not_interested);
     return ListTile(
       leading: icon,
       title: Text(
-        String.fromCharCode(codePoint),
+        String.fromCharCode(analysis.codePoint),
         style: Theme.of(context).textTheme.display1,
       ),
-      subtitle: Text('U+${codePoint.toRadixString(16)}'),
+      subtitle: Text(analysis.codePointHex),
       trailing: PlatformSupport(
-        ios: iosMessage,
-        android: androidMessage,
+        ios: analysis.iosSupportString,
+        android: analysis.androidSupportString,
       ),
     );
   }
