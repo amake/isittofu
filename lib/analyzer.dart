@@ -82,6 +82,8 @@ class CodePointPlatformAnalysis {
       this.codePoint, Iterable<int> platformIndices, Iterable<List<int>> ranges)
       : assert(codePoint != null),
         assert(platformIndices != null),
+        assert(listEquals(
+            platformIndices.toList(), List.of(platformIndices)..sort())),
         assert(ranges != null),
         platformIndices = List.unmodifiable(platformIndices),
         ranges = List.unmodifiable(ranges);
