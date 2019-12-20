@@ -54,7 +54,10 @@ class _TextAnalysisPageState extends State<TextAnalysisPage> {
                   minLines: 20,
                   controller: _controller,
                   style: Theme.of(context).textTheme.display1,
-                  autofocus: true,
+                  // This doesn't work right in Flutter Web: on mobile the
+                  // keyboard won't show up, but the field has focus and can't
+                  // be refocused so you can't force it to appear either.
+                  //autofocus: true,
                 ),
               ),
               const SizedBox(height: 32),
