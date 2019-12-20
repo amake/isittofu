@@ -47,7 +47,7 @@ final List<BloomFilter> bloomFilters = [
   ios13_2BloomFilter, // iOS 13.3 is same as iOS 13.2
 ];
 
-enum IOSPlatform {
+enum IosPlatform {
   iOS8_1,
   iOS8_2,
   iOS8_3,
@@ -76,7 +76,7 @@ enum IOSPlatform {
   iOS13_3,
 }
 
-String _toVersionString(int platformIdx) => IOSPlatform.values[platformIdx]
+String _toVersionString(int platformIdx) => IosPlatform.values[platformIdx]
     .toString()
     .split('.')[1]
     .replaceFirst('iOS', '')
