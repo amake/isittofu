@@ -21,7 +21,7 @@ String supportedString(
     return '$osName unsupported';
   }
   final rangeStrings = ranges.map((range) {
-    assert(range.length == 2);
+    assert(range.length == 2, 'Range list must have two members; was $range');
     if (range[0] == range[1]) {
       return versionConverter(range[0]);
     } else {
