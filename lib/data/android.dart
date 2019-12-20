@@ -8,7 +8,7 @@ import 'package:isittofu/data/android19.g.dart';
 import 'package:isittofu/data/android2.g.dart';
 import 'package:isittofu/data/android21.g.dart';
 import 'package:isittofu/data/android23.g.dart';
-import 'package:isittofu/data/android25.g.dart';
+import 'package:isittofu/data/android24.g.dart';
 import 'package:isittofu/data/android26.g.dart';
 import 'package:isittofu/data/android28.g.dart';
 import 'package:isittofu/data/android29.g.dart';
@@ -42,8 +42,8 @@ final List<BloomFilter> bloomFilters = [
   android21BloomFilter,
   android21BloomFilter, // Android 22 is same as Android 21
   android23BloomFilter,
-  android23BloomFilter, // Android 24 is same as Android 23
-  android25BloomFilter,
+  android24BloomFilter,
+  android24BloomFilter, // Android 25 is same as Android 24
   android26BloomFilter,
   android26BloomFilter, // Android 27 is same as Android 26
   android28BloomFilter,
