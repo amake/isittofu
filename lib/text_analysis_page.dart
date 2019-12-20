@@ -61,6 +61,20 @@ class _TextAnalysisPageState extends State<TextAnalysisPage> {
                 ),
               ),
               const SizedBox(height: 32),
+              if (!_analysis.isEmpty) ...[
+                Row(
+                  children: <Widget>[
+                    const Icon(Icons.android),
+                    const SizedBox(width: 16),
+                    Text(_analysis.androidSupportString),
+                    const Spacer(),
+                    const Icon(Icons.phone_iphone),
+                    const SizedBox(width: 16),
+                    Text(_analysis.iosSupportString)
+                  ],
+                ),
+                const SizedBox(height: 32),
+              ],
               Expanded(
                 child: ListView.separated(
                   itemCount: _analysis.uniqueCodePoints.length,

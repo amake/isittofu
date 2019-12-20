@@ -53,7 +53,30 @@ class TextAnalysis {
   final List<int> uniqueCodePoints;
   final Map<int, CodePointAnalysis> analysis;
 
+  bool get isEmpty => text.isEmpty;
+
   CodePointAnalysis analysisForIndex(int i) => analysis[uniqueCodePoints[i]];
+
+  List<int> get iosSupportedIndices =>
+      supportedIndices(analysis.values.map((analysis) => analysis.ios));
+
+  List<int> get androidSupportedIndices =>
+      supportedIndices(analysis.values.map((analysis) => analysis.android));
+
+  List<int> supportedIndices(Iterable<CodePointPlatformAnalysis> analyses) =>
+      analyses.isEmpty
+          ? []
+          : analyses
+              .map((analysis) => analysis.platformIndices.toSet())
+              .reduce((acc, indices) => acc.intersection(indices))
+              .toList()
+        ..sort();
+
+  String get iosSupportString =>
+      ios_data.supportedString(iosSupportedIndices.ranges());
+
+  String get androidSupportString =>
+      android_data.supportedString(androidSupportedIndices.ranges());
 }
 
 class CodePointAnalysis {
