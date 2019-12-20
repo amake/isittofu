@@ -2,7 +2,7 @@ import 'package:bloom_filter/bloom_filter.dart';
 
 Iterable<int> supportingIndices(
     int codePoint, List<BloomFilter> bloomFilters) sync* {
-  for (int i = 0; i < bloomFilters.length; i++) {
+  for (var i = 0; i < bloomFilters.length; i++) {
     final b = bloomFilters[i];
     if (b.mightContain(codePoint)) {
       yield i;

@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Is it tofu?',
       theme: ThemeData.localize(ThemeData.light(), Typography.englishLike2018),
-      home: TextAnalysisPage(),
+      home: const TextAnalysisPage(),
     );
   }
 }

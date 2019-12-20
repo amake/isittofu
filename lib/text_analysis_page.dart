@@ -35,18 +35,18 @@ class _TextAnalysisPageState extends State<TextAnalysisPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Is it tofu?'),
+        title: const Text('Is it tofu?'),
       ),
       body: Center(
         child: Container(
-          constraints: BoxConstraints(maxWidth: 800),
+          constraints: const BoxConstraints(maxWidth: 800),
           padding: const EdgeInsets.all(32),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Expanded(
                 child: TextField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Input text to check here...',
                   ),
@@ -107,7 +107,7 @@ class _CodePointTile extends StatelessWidget {
 }
 
 class _PlatformSupport extends StatelessWidget {
-  const _PlatformSupport({this.android, this.ios, Key key})
+  const _PlatformSupport({@required this.android, @required this.ios, Key key})
       : assert(android != null),
         assert(ios != null),
         super(key: key);

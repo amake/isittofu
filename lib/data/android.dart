@@ -1,3 +1,4 @@
+import 'package:bloom_filter/bloom_filter.dart';
 import 'package:isittofu/data/android11.g.dart';
 import 'package:isittofu/data/android12.g.dart';
 import 'package:isittofu/data/android14.g.dart';
@@ -18,7 +19,7 @@ import 'package:isittofu/data/android6.g.dart';
 import 'package:isittofu/data/android8.g.dart';
 import 'package:isittofu/data/common.dart' as common;
 
-final bloomFilters = [
+final List<BloomFilter> bloomFilters = [
   android2BloomFilter,
   android3BloomFilter,
   android4BloomFilter,
@@ -50,34 +51,34 @@ final bloomFilters = [
 ];
 
 enum AndroidPlatform {
-  Android2,
-  Android3,
-  Android4,
-  Android5,
-  Android6,
-  Android7,
-  Android8,
-  Android9,
-  Android10,
-  Android11,
-  Android12,
-  Android13,
-  Android14,
-  Android15,
-  Android16,
-  Android17,
-  Android18,
-  Android19,
-  Android20,
-  Android21,
-  Android22,
-  Android23,
-  Android24,
-  Android25,
-  Android26,
-  Android27,
-  Android28,
-  Android29,
+  android2,
+  android3,
+  android4,
+  android5,
+  android6,
+  android7,
+  android8,
+  android9,
+  android10,
+  android11,
+  android12,
+  android13,
+  android14,
+  android15,
+  android16,
+  android17,
+  android18,
+  android19,
+  android20,
+  android21,
+  android22,
+  android23,
+  android24,
+  android25,
+  android26,
+  android27,
+  android28,
+  android29,
 }
 
 // See https://source.android.com/setup/start/build-numbers

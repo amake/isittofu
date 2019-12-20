@@ -11,12 +11,11 @@ void main() {
     final file = File('lib/data/android10.txt');
     final lines = file.readAsLinesSync().where((line) => line.isNotEmpty);
     for (final p in [0.1, 0.01]) {
-      final b = BloomFilter.withProbability(p, lines.length);
-      b.addAll(lines);
+      final b = BloomFilter.withProbability(p, lines.length)..addAll(lines);
       expect(b.containsAll(lines), true);
       final linesSet = Set.from(lines);
-      int falsePositives = 0;
-      for (int i = 0; i < 0x10ffff; i++) {
+      var falsePositives = 0;
+      for (var i = 0; i < 0x10ffff; i++) {
         final l = i.toString();
         if (!linesSet.contains(l) && b.mightContain(i)) {
           //print('False positive: $l');
@@ -33,7 +32,7 @@ void main() {
   });
 
   test('serialized bloom filter', () {
-    for (int i = 2; i <= 29; i++) {
+    for (var i = 2; i <= 29; i++) {
       print('Checking Android $i');
       final file = File('lib/data/android$i.txt');
       final lines = file.readAsLinesSync().where((line) => line.isNotEmpty);

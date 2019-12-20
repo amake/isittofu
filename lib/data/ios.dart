@@ -1,3 +1,4 @@
+import 'package:bloom_filter/bloom_filter.dart';
 import 'package:isittofu/data/common.dart' as common;
 import 'package:isittofu/data/ios10.0.g.dart';
 import 'package:isittofu/data/ios10.2.g.dart';
@@ -17,7 +18,7 @@ import 'package:isittofu/data/ios8.3.g.dart';
 import 'package:isittofu/data/ios9.0.g.dart';
 import 'package:isittofu/data/ios9.1.g.dart';
 
-final bloomFilters = [
+final List<BloomFilter> bloomFilters = [
   ios8_1BloomFilter,
   ios8_2BloomFilter,
   ios8_3BloomFilter,
@@ -47,32 +48,32 @@ final bloomFilters = [
 ];
 
 enum IOSPlatform {
-  IOS8_1,
-  IOS8_2,
-  IOS8_3,
-  IOS8_4,
-  IOS9_0,
-  IOS9_1,
-  IOS9_2,
-  IOS9_3,
-  IOS10_0,
-  IOS10_1,
-  IOS10_2,
-  IOS10_3,
-  IOS11_0,
-  IOS11_1,
-  IOS11_2,
-  IOS11_3,
-  IOS11_4,
-  IOS12_0,
-  IOS12_1,
-  IOS12_2,
-  IOS12_3,
-  IOS12_4,
-  IOS13_0,
-  IOS13_1,
-  IOS13_2,
-  IOS13_3,
+  iOS8_1,
+  iOS8_2,
+  iOS8_3,
+  iOS8_4,
+  iOS9_0,
+  iOS9_1,
+  iOS9_2,
+  iOS9_3,
+  iOS10_0,
+  iOS10_1,
+  iOS10_2,
+  iOS10_3,
+  iOS11_0,
+  iOS11_1,
+  iOS11_2,
+  iOS11_3,
+  iOS11_4,
+  iOS12_0,
+  iOS12_1,
+  iOS12_2,
+  iOS12_3,
+  iOS12_4,
+  iOS13_0,
+  iOS13_1,
+  iOS13_2,
+  iOS13_3,
 }
 
 String _toVersionString(int platformIdx) => IOSPlatform.values[platformIdx]
