@@ -117,7 +117,7 @@ String _toVersionString(int platformIdx) {
   final sdk = AndroidPlatform.values[platformIdx]
       .toString()
       .split('.')[1]
-      .replaceFirst('Android', '');
+      .replaceFirst('android', '');
   return sdkToVersion[sdk];
 }
 

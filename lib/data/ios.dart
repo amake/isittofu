@@ -79,7 +79,7 @@ enum IOSPlatform {
 String _toVersionString(int platformIdx) => IOSPlatform.values[platformIdx]
     .toString()
     .split('.')[1]
-    .replaceFirst('IOS', '')
+    .replaceFirst('iOS', '')
     .replaceFirst('_', '.');
 
 Iterable<int> supportingIndices(int codePoint) =>
