@@ -90,7 +90,7 @@ class CodePointAnalysis {
 
   int get codePoint => ios.codePoint;
 
-  String get codePointHex => 'U+${codePoint.toRadixString(16)}';
+  String get codePointHex => 'U+${codePoint.toRadixString(16).padLeft(4, '0')}';
 
   bool get supported => ios.supported && android.supported;
 
