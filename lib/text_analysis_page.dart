@@ -108,7 +108,7 @@ class _CodePointTile extends StatelessWidget {
     return ListTile(
       leading: icon,
       title: Text(
-        String.fromCharCode(analysis.codePoint),
+        analysis.codePointDisplayString,
         style: Theme.of(context).textTheme.display1,
       ),
       subtitle: Text(analysis.codePointHex),

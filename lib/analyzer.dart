@@ -79,6 +79,8 @@ class TextAnalysis {
       android_data.supportedString(androidSupportedIndices.ranges());
 }
 
+final _kRemoveChars = RegExp(r'[\n\r]');
+
 class CodePointAnalysis {
   CodePointAnalysis({@required this.ios, @required this.android})
       : assert(ios != null),
@@ -89,6 +91,9 @@ class CodePointAnalysis {
   final CodePointPlatformAnalysis android;
 
   int get codePoint => ios.codePoint;
+
+  String get codePointDisplayString =>
+      String.fromCharCode(codePoint).replaceAll(_kRemoveChars, '');
 
   String get codePointHex => 'U+${codePoint.toRadixString(16).padLeft(4, '0')}';
 
