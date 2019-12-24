@@ -123,7 +123,7 @@ class CodePointAnalysis implements Comparable {
       }
       final androidComp = android.compareTo(other.android);
       final iosComp = ios.compareTo(other.ios);
-      return min(androidComp, iosComp);
+      return max(androidComp, iosComp);
     }
     throw Exception('Cannot compare $this to $other');
   }
