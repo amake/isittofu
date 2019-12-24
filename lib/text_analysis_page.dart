@@ -155,7 +155,7 @@ class _CodePointTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final icon = analysis.supported
+    final icon = analysis.fullySupported
         ? const Icon(Icons.thumb_up)
         : const Icon(Icons.not_interested);
     return ListTile(

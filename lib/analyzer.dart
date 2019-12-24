@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:isittofu/data/android.dart' as android_data;
 import 'package:isittofu/data/ios.dart' as ios_data;
@@ -100,7 +102,9 @@ class CodePointAnalysis implements Comparable {
 
   String get codePointHex => 'U+${codePoint.toRadixString(16).padLeft(4, '0')}';
 
-  bool get supported => ios.supported && android.supported;
+  bool get fullySupported => ios.supported && android.supported;
+
+  bool get partiallySupported => ios.supported || android.supported;
 
   String get iosSupportString => ios_data.supportedString(ios.ranges);
 
@@ -110,29 +114,22 @@ class CodePointAnalysis implements Comparable {
   @override
   int compareTo(Object other) {
     if (other is CodePointAnalysis) {
-      // If only one is supported, that should be first
-      if (supported && !other.supported) {
-        return -1;
-      } else if (!supported && other.supported) {
+      if (!partiallySupported && !other.partiallySupported) {
+        return 0;
+      } else if (partiallySupported && !other.partiallySupported) {
         return 1;
+      } else if (!partiallySupported && other.partiallySupported) {
+        return -1;
       }
-      // Otherwise sort the one with more stringent (higher minimum) supported
-      // platform first. Android vs iOS order is arbitrary.
-      // Multiply compareTo result by -1 to reverse the natural sort.
-      final androidComparison = android.platformIndices.first
-          .compareTo(other.android.platformIndices.first);
-      if (androidComparison != 0) {
-        return androidComparison * -1;
-      }
-      return ios.platformIndices.first
-              .compareTo(other.ios.platformIndices.first) *
-          -1;
+      final androidComp = android.compareTo(other.android);
+      final iosComp = ios.compareTo(other.ios);
+      return min(androidComp, iosComp);
     }
     throw Exception('Cannot compare $this to $other');
   }
 }
 
-class CodePointPlatformAnalysis {
+class CodePointPlatformAnalysis implements Comparable {
   CodePointPlatformAnalysis(
       this.codePoint, Iterable<int> platformIndices, Iterable<List<int>> ranges)
       : assert(codePoint != null),
@@ -148,4 +145,23 @@ class CodePointPlatformAnalysis {
   final List<List<int>> ranges;
 
   bool get supported => platformIndices.isNotEmpty;
+
+  @override
+  int compareTo(Object other) {
+    if (other is CodePointPlatformAnalysis) {
+      // If only one is supported, that should be first
+      if (!supported && !other.supported) {
+        return 0;
+      } else if (supported && !other.supported) {
+        return 1;
+      } else if (!supported && other.supported) {
+        return -1;
+      }
+      // Otherwise sort the one with more stringent (higher minimum) supported
+      // platform first. Multiply compareTo result by -1 to reverse the natural
+      // sort.
+      return platformIndices.first.compareTo(other.platformIndices.first) * -1;
+    }
+    throw Exception('Cannot compare $this to $other');
+  }
 }
