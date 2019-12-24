@@ -9,6 +9,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^0.1.2
+  provider: ^4.0.0
   bloom_filter:
 #    path: ../bloom_filter
     git:
