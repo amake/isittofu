@@ -1,44 +1,25 @@
 import 'package:bloom_filter/bloom_filter.dart';
-import 'package:isittofu/data/android11.g.dart';
-import 'package:isittofu/data/android12.g.dart';
-import 'package:isittofu/data/android14.g.dart';
+import 'package:isittofu/data/android10.g.dart';
+import 'package:isittofu/data/android15.g.dart';
 import 'package:isittofu/data/android16.g.dart';
+import 'package:isittofu/data/android17.g.dart';
 import 'package:isittofu/data/android18.g.dart';
 import 'package:isittofu/data/android19.g.dart';
-import 'package:isittofu/data/android2.g.dart';
 import 'package:isittofu/data/android21.g.dart';
 import 'package:isittofu/data/android23.g.dart';
 import 'package:isittofu/data/android24.g.dart';
 import 'package:isittofu/data/android26.g.dart';
 import 'package:isittofu/data/android28.g.dart';
 import 'package:isittofu/data/android29.g.dart';
-import 'package:isittofu/data/android3.g.dart';
-import 'package:isittofu/data/android4.g.dart';
-import 'package:isittofu/data/android5.g.dart';
-import 'package:isittofu/data/android6.g.dart';
-import 'package:isittofu/data/android8.g.dart';
 import 'package:isittofu/data/common.dart' as common;
 
 final List<BloomFilter> bloomFilters = [
-  android2BloomFilter,
-  android3BloomFilter,
-  android4BloomFilter,
-  android5BloomFilter,
-  android6BloomFilter,
-  android6BloomFilter, // Android 7 is same as Android 6
-  android8BloomFilter,
-  android8BloomFilter, // Android 9 is same as Android 8
-  android8BloomFilter, // Android 10 is same as Android 8
-  android11BloomFilter,
-  android12BloomFilter,
-  android12BloomFilter, // Android 13 is same as Android 12
-  android14BloomFilter,
-  android14BloomFilter, // Android 15 is same as Android 14
+  android10BloomFilter,
+  android15BloomFilter,
   android16BloomFilter,
-  android16BloomFilter, // Android 17 is same as Android 16
+  android17BloomFilter,
   android18BloomFilter,
   android19BloomFilter,
-  android19BloomFilter, // Android 20 is same as Android 19
   android21BloomFilter,
   android21BloomFilter, // Android 22 is same as Android 21
   android23BloomFilter,
@@ -51,25 +32,12 @@ final List<BloomFilter> bloomFilters = [
 ];
 
 enum AndroidPlatform {
-  android2,
-  android3,
-  android4,
-  android5,
-  android6,
-  android7,
-  android8,
-  android9,
   android10,
-  android11,
-  android12,
-  android13,
-  android14,
   android15,
   android16,
   android17,
   android18,
   android19,
-  android20,
   android21,
   android22,
   android23,
@@ -113,7 +81,7 @@ const sdkToVersion = {
   '29': '10',
 };
 
-String _toVersionString(int platformIdx) {
+String platformToVersionString(int platformIdx) {
   final sdk = AndroidPlatform.values[platformIdx]
       .toString()
       .split('.')[1]
@@ -125,4 +93,4 @@ Iterable<int> supportingIndices(int codePoint) =>
     common.supportingIndices(codePoint, bloomFilters);
 
 String supportedString(List<List<int>> ranges) =>
-    common.supportedString(ranges, _toVersionString, 'Android');
+    common.supportedString(ranges, platformToVersionString, 'Android');

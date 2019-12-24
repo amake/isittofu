@@ -32,11 +32,12 @@ void main() {
   });
 
   test('serialized bloom filter', () {
-    for (var i = 2; i <= 29; i++) {
-      print('Checking Android $i');
-      final file = File('lib/data/android$i.txt');
+    for (var i = 0; i < android.AndroidPlatform.values.length; i++) {
+      final sdk = android.AndroidPlatform.values[i].toString().split('.')[1];
+      final file = File('lib/data/$sdk.txt');
+      print('Checking $sdk');
       final lines = file.readAsLinesSync().where((line) => line.isNotEmpty);
-      final serializedFilter = android.bloomFilters[i - 2];
+      final serializedFilter = android.bloomFilters[i];
       final newFilter = BloomFilter.withProbability(0.01, lines.length)
         ..addAll(lines);
       expect(newFilter.containsAll(lines), true);
