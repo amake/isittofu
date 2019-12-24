@@ -124,12 +124,15 @@ class _TextAnalysisPageState extends State<TextAnalysisPage> {
                       ListView.separated(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        itemCount: _analysis.uniqueCodePoints.length,
+                        itemCount: _analysis.sortedCodePoints.length,
                         separatorBuilder: (context, i) => const Divider(),
-                        itemBuilder: (context, i) => _CodePointTile(
-                          _analysis.analysisForIndex(i),
-                          key: ValueKey(i),
-                        ),
+                        itemBuilder: (context, i) {
+                          final codePoint = _analysis.sortedCodePoints[i];
+                          return _CodePointTile(
+                            _analysis.analysis[codePoint],
+                            key: ValueKey(i),
+                          );
+                        },
                       ),
                     ],
                   ),

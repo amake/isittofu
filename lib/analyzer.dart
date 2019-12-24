@@ -48,10 +48,13 @@ class TextAnalysis {
         assert(uniqueCodePoints != null),
         assert(analysis != null),
         uniqueCodePoints = List.unmodifiable(uniqueCodePoints),
+        sortedCodePoints = List.unmodifiable(List.of(uniqueCodePoints)
+          ..sort((a, b) => analysis[a].compareTo(analysis[b]))),
         analysis = Map.unmodifiable(analysis);
   final String text;
   final List<int> uniqueCodePoints;
   final Map<int, CodePointAnalysis> analysis;
+  final List<int> sortedCodePoints;
 
   bool get isEmpty => text.isEmpty;
 
@@ -81,7 +84,7 @@ class TextAnalysis {
 
 final _kRemoveChars = RegExp(r'[\n\r]');
 
-class CodePointAnalysis {
+class CodePointAnalysis implements Comparable {
   CodePointAnalysis({@required this.ios, @required this.android})
       : assert(ios != null),
         assert(android != null),
@@ -103,6 +106,30 @@ class CodePointAnalysis {
 
   String get androidSupportString =>
       android_data.supportedString(android.ranges);
+
+  @override
+  int compareTo(Object other) {
+    if (other is CodePointAnalysis) {
+      // If only one is supported, that should be first
+      if (supported && !other.supported) {
+        return -1;
+      } else if (!supported && other.supported) {
+        return 1;
+      }
+      // Otherwise sort the one with more stringent (higher minimum) supported
+      // platform first. Android vs iOS order is arbitrary.
+      // Multiply compareTo result by -1 to reverse the natural sort.
+      final androidComparison = android.platformIndices.first
+          .compareTo(other.android.platformIndices.first);
+      if (androidComparison != 0) {
+        return androidComparison * -1;
+      }
+      return ios.platformIndices.first
+              .compareTo(other.ios.platformIndices.first) *
+          -1;
+    }
+    throw Exception('Cannot compare $this to $other');
+  }
 }
 
 class CodePointPlatformAnalysis {
