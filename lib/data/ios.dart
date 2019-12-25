@@ -2,24 +2,23 @@ import 'package:bloom_filter/bloom_filter.dart';
 import 'package:isittofu/data/common.dart' as common;
 import 'package:isittofu/data/ios10.0.g.dart';
 import 'package:isittofu/data/ios10.2.g.dart';
-import 'package:isittofu/data/ios10.3.g.dart';
 import 'package:isittofu/data/ios11.0.g.dart';
 import 'package:isittofu/data/ios11.1.g.dart';
-import 'package:isittofu/data/ios11.4.g.dart';
+import 'package:isittofu/data/ios11.3.g.dart';
 import 'package:isittofu/data/ios12.0.g.dart';
 import 'package:isittofu/data/ios12.1.g.dart';
-import 'package:isittofu/data/ios12.2.g.dart';
-import 'package:isittofu/data/ios12.3.g.dart';
+import 'package:isittofu/data/ios12.4.g.dart';
 import 'package:isittofu/data/ios13.0.g.dart';
 import 'package:isittofu/data/ios13.2.g.dart';
-import 'package:isittofu/data/ios8.1.g.dart';
+import 'package:isittofu/data/ios8.0.g.dart';
 import 'package:isittofu/data/ios8.2.g.dart';
 import 'package:isittofu/data/ios8.3.g.dart';
 import 'package:isittofu/data/ios9.0.g.dart';
 import 'package:isittofu/data/ios9.1.g.dart';
 
 final List<BloomFilter> bloomFilters = [
-  ios8_1BloomFilter,
+  ios8_0BloomFilter,
+  ios8_0BloomFilter, // iOS 8.1 is same as iOS 8.0
   ios8_2BloomFilter,
   ios8_3BloomFilter,
   ios8_3BloomFilter, // iOS 8.4 is same as iOS 8.3
@@ -30,17 +29,16 @@ final List<BloomFilter> bloomFilters = [
   ios10_0BloomFilter,
   ios10_0BloomFilter, // iOS 10.1 is same as iOS 10.0
   ios10_2BloomFilter,
-  ios10_3BloomFilter,
+  ios10_2BloomFilter, // iOS 10.3 is same as iOS 10.2
   ios11_0BloomFilter,
   ios11_1BloomFilter,
   ios11_1BloomFilter, // iOS 11.2 is same as iOS 11.1
-  ios11_1BloomFilter, // iOS 11.3 is same as iOS 11.1
-  ios11_4BloomFilter,
+  ios11_3BloomFilter,
+  ios11_3BloomFilter, // iOS 11.4 is same as iOS 11.3
   ios12_0BloomFilter,
   ios12_1BloomFilter,
-  ios12_2BloomFilter,
-  ios12_3BloomFilter,
-  ios12_3BloomFilter, // iOS 12.4 is same as iOS 12.3
+  ios12_1BloomFilter, // iOS 12.2 is same as iOS 12.1
+  ios12_4BloomFilter,
   ios13_0BloomFilter,
   ios13_0BloomFilter, // iOS 13.1 is same as iOS 13.0
   ios13_2BloomFilter,
@@ -48,6 +46,7 @@ final List<BloomFilter> bloomFilters = [
 ];
 
 enum IosPlatform {
+  iOS8_0,
   iOS8_1,
   iOS8_2,
   iOS8_3,
@@ -68,7 +67,6 @@ enum IosPlatform {
   iOS12_0,
   iOS12_1,
   iOS12_2,
-  iOS12_3,
   iOS12_4,
   iOS13_0,
   iOS13_1,
