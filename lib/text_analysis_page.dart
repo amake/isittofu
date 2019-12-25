@@ -1,9 +1,7 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:isittofu/analyzer.dart';
-import 'package:isittofu/util.dart';
+import 'package:isittofu/window/window.dart';
 import 'package:provider/provider.dart';
 
 class TextAnalysisModel extends ChangeNotifier {
