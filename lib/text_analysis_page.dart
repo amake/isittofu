@@ -1,16 +1,20 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:isittofu/analyzer.dart';
+import 'package:isittofu/util.dart';
 import 'package:provider/provider.dart';
 
 class TextAnalysisModel extends ChangeNotifier {
-  TextAnalysisModel(this.context) {
+  TextAnalysisModel(this.context, {String initialText}) {
     _characterTableSource = CharacterTableSource(this);
+    setText(initialText ?? '');
   }
 
   final BuildContext context;
 
-  String _text = '';
+  String _text;
 
   String get text => _text;
 
@@ -28,12 +32,15 @@ class TextAnalysisModel extends ChangeNotifier {
       _analysis = const Analyzer().analyzeText(text);
       notifyListeners();
       _characterTableSource.notifyListeners();
+      window.setQuery(text);
     }
   }
 }
 
 class TextAnalysisPage extends StatelessWidget {
   const TextAnalysisPage({Key key}) : super(key: key);
+
+  String get initialText => window.decodedQuery;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +49,8 @@ class TextAnalysisPage extends StatelessWidget {
         title: const Text('Is it tofu?'),
       ),
       body: ChangeNotifierProvider(
-        create: (context) => TextAnalysisModel(context),
+        create: (context) =>
+            TextAnalysisModel(context, initialText: initialText),
         child: Center(
           child: Container(
             constraints: const BoxConstraints(maxWidth: 800),
@@ -79,7 +87,10 @@ class _TextInputCardState extends State<_TextInputCard> {
 
   @override
   void initState() {
-    _controller = TextEditingController()..addListener(_textChanged);
+    final initialText =
+        Provider.of<TextAnalysisModel>(context, listen: false).text;
+    _controller = TextEditingController(text: initialText)
+      ..addListener(_textChanged);
     super.initState();
   }
 
@@ -197,7 +208,9 @@ class CharacterTableSource extends DataTableSource {
   CharacterTableSource(this._model) : assert(_model != null);
 
   final TextAnalysisModel _model;
+
   BuildContext get _context => _model.context;
+
   TextAnalysis get _analysis => _model.analysis;
 
   @override
