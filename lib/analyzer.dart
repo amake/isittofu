@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/foundation.dart';
 import 'package:isittofu/data/android.dart' as android_data;
 import 'package:isittofu/data/ios.dart' as ios_data;
@@ -118,9 +116,12 @@ class CodePointAnalysis implements Comparable {
       } else if (!partiallySupported && other.partiallySupported) {
         return -1;
       }
+      // Checking Android first here is arbitrary
       final androidComp = android.compareTo(other.android);
-      final iosComp = ios.compareTo(other.ios);
-      return max(androidComp, iosComp);
+      if (androidComp != 0) {
+        return androidComp;
+      }
+      return ios.compareTo(other.ios);
     }
     throw Exception('Cannot compare $this to $other');
   }
