@@ -179,94 +179,52 @@ class _CharacterBreakdown extends StatelessWidget {
               style: Theme.of(context).textTheme.title,
             ),
           ),
-          const SizedBox(height: 8),
-          ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: Provider.of<TextAnalysisModel>(context)
-                .analysis
-                .sortedCodePoints
-                .length,
-            separatorBuilder: (context, i) => const Divider(),
-            itemBuilder: (context, i) {
-              final analysis = Provider.of<TextAnalysisModel>(context).analysis;
-              final codePoint = analysis.sortedCodePoints[i];
-              return _CodePointTile(
-                analysis.analysis[codePoint],
-                key: ValueKey(i),
-              );
-            },
-          ),
+          const _CharacterTable(),
         ],
       ),
     );
   }
 }
 
-class _CodePointTile extends StatelessWidget {
-  const _CodePointTile(this.analysis, {Key key})
-      : assert(analysis != null),
-        super(key: key);
-
-  final CodePointAnalysis analysis;
+class _CharacterTable extends StatelessWidget {
+  const _CharacterTable({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final analysis = Provider.of<TextAnalysisModel>(context).analysis;
+    return DataTable(
+      columns: const [
+        DataColumn(label: Text('Supported?')),
+        DataColumn(label: Text('Character')),
+        DataColumn(label: Text('Code Point')),
+        DataColumn(label: Text('iOS Support')),
+        DataColumn(label: Text('Android Support')),
+      ],
+      rows: [
+        for (final codePoint in analysis.sortedCodePoints)
+          _buildCodePointRow(context, codePoint)
+      ],
+    );
+  }
+
+  DataRow _buildCodePointRow(BuildContext context, int codePoint) {
+    final analysis =
+        Provider.of<TextAnalysisModel>(context).analysis.analysis[codePoint];
     final icon = analysis.fullySupported
-        ? const Icon(Icons.thumb_up)
-        : const Icon(Icons.not_interested);
-    return ListTile(
-      leading: icon,
-      title: Text(
-        analysis.codePointDisplayString,
-        style: Theme.of(context).textTheme.display1,
-      ),
-      subtitle: Text(analysis.codePointHex),
-      trailing: _PlatformSupport(
-        ios: analysis.iosSupportString,
-        android: analysis.androidSupportString,
-      ),
-    );
-  }
-}
-
-class _PlatformSupport extends StatelessWidget {
-  const _PlatformSupport({@required this.android, @required this.ios, Key key})
-      : assert(android != null),
-        assert(ios != null),
-        super(key: key);
-
-  final String android;
-  final String ios;
-
-  @override
-  Widget build(BuildContext context) {
-    final iconTheme = IconTheme.of(context);
-    return Theme(
-      data: Theme.of(context)
-          .copyWith(iconTheme: iconTheme.copyWith(size: iconTheme.size * 0.75)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              const Icon(Icons.android),
-              const SizedBox(width: 8),
-              Text(android, style: Theme.of(context).textTheme.overline),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              const Icon(Icons.phone_iphone),
-              const SizedBox(width: 8),
-              Text(ios, style: Theme.of(context).textTheme.overline),
-            ],
-          ),
-        ],
-      ),
+        ? const Icon(Icons.thumb_up, color: Colors.green)
+        : const Icon(Icons.not_interested, color: Colors.red);
+    return DataRow(
+      key: ValueKey(codePoint),
+      cells: [
+        DataCell(icon),
+        DataCell(Text(
+          analysis.codePointDisplayString,
+          style: Theme.of(context).textTheme.display1,
+        )),
+        DataCell(Text(analysis.codePointHex)),
+        DataCell(Text(analysis.iosSupportString)),
+        DataCell(Text(analysis.androidSupportString))
+      ],
     );
   }
 }
