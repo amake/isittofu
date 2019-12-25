@@ -4,6 +4,12 @@ import 'package:isittofu/analyzer.dart';
 import 'package:provider/provider.dart';
 
 class TextAnalysisModel extends ChangeNotifier {
+  TextAnalysisModel(this.context) {
+    _characterTableSource = CharacterTableSource(this);
+  }
+
+  final BuildContext context;
+
   String _text = '';
 
   String get text => _text;
@@ -12,11 +18,16 @@ class TextAnalysisModel extends ChangeNotifier {
 
   TextAnalysis get analysis => _analysis;
 
+  CharacterTableSource _characterTableSource;
+
+  CharacterTableSource get characterTableSource => _characterTableSource;
+
   void setText(String text) {
     if (_text != text) {
       _text = text;
       _analysis = const Analyzer().analyzeText(text);
       notifyListeners();
+      _characterTableSource.notifyListeners();
     }
   }
 }
@@ -31,7 +42,7 @@ class TextAnalysisPage extends StatelessWidget {
         title: const Text('Is it tofu?'),
       ),
       body: ChangeNotifierProvider(
-        create: (context) => TextAnalysisModel(),
+        create: (context) => TextAnalysisModel(context),
         child: Center(
           child: Container(
             constraints: const BoxConstraints(maxWidth: 800),
@@ -168,7 +179,6 @@ class _CharacterBreakdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final analysis = Provider.of<TextAnalysisModel>(context).analysis;
     return PaginatedDataTable(
       header: const Text('Character Breakdown'),
       columns: const [
@@ -178,18 +188,17 @@ class _CharacterBreakdown extends StatelessWidget {
         DataColumn(label: Text('iOS Support')),
         DataColumn(label: Text('Android Support')),
       ],
-      source: _CharacterTableSource(analysis, context),
+      source: Provider.of<TextAnalysisModel>(context).characterTableSource,
     );
   }
 }
 
-class _CharacterTableSource extends DataTableSource {
-  _CharacterTableSource(this._analysis, this._context)
-      : assert(_analysis != null),
-        assert(_context != null);
+class CharacterTableSource extends DataTableSource {
+  CharacterTableSource(this._model) : assert(_model != null);
 
-  final TextAnalysis _analysis;
-  final BuildContext _context;
+  final TextAnalysisModel _model;
+  BuildContext get _context => _model.context;
+  TextAnalysis get _analysis => _model.analysis;
 
   @override
   DataRow getRow(int index) {
