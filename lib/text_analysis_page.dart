@@ -168,31 +168,9 @@ class _CharacterBreakdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: Text(
-              'Character Breakdown',
-              style: Theme.of(context).textTheme.title,
-            ),
-          ),
-          const _CharacterTable(),
-        ],
-      ),
-    );
-  }
-}
-
-class _CharacterTable extends StatelessWidget {
-  const _CharacterTable({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
     final analysis = Provider.of<TextAnalysisModel>(context).analysis;
-    return DataTable(
+    return PaginatedDataTable(
+      header: const Text('Character Breakdown'),
       columns: const [
         DataColumn(label: Text('Supported?')),
         DataColumn(label: Text('Character')),
@@ -200,16 +178,23 @@ class _CharacterTable extends StatelessWidget {
         DataColumn(label: Text('iOS Support')),
         DataColumn(label: Text('Android Support')),
       ],
-      rows: [
-        for (final codePoint in analysis.sortedCodePoints)
-          _buildCodePointRow(context, codePoint)
-      ],
+      source: _CharacterTableSource(analysis, context),
     );
   }
+}
 
-  DataRow _buildCodePointRow(BuildContext context, int codePoint) {
-    final analysis =
-        Provider.of<TextAnalysisModel>(context).analysis.analysis[codePoint];
+class _CharacterTableSource extends DataTableSource {
+  _CharacterTableSource(this._analysis, this._context)
+      : assert(_analysis != null),
+        assert(_context != null);
+
+  final TextAnalysis _analysis;
+  final BuildContext _context;
+
+  @override
+  DataRow getRow(int index) {
+    final codePoint = _analysis.sortedCodePoints[index];
+    final analysis = _analysis.analysis[codePoint];
     final icon = analysis.fullySupported
         ? const Icon(Icons.thumb_up, color: Colors.green)
         : const Icon(Icons.not_interested, color: Colors.red);
@@ -219,7 +204,7 @@ class _CharacterTable extends StatelessWidget {
         DataCell(icon),
         DataCell(Text(
           analysis.codePointDisplayString,
-          style: Theme.of(context).textTheme.display1,
+          style: Theme.of(_context).textTheme.display1,
         )),
         DataCell(Text(analysis.codePointHex)),
         DataCell(Text(analysis.iosSupportString)),
@@ -227,4 +212,13 @@ class _CharacterTable extends StatelessWidget {
       ],
     );
   }
+
+  @override
+  bool get isRowCountApproximate => false;
+
+  @override
+  int get rowCount => _analysis.sortedCodePoints.length;
+
+  @override
+  int get selectedRowCount => 0;
 }
