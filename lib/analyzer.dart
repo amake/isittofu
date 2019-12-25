@@ -19,20 +19,17 @@ class Analyzer {
   }
 
   CodePointAnalysis analyzeCodePoint(int codePoint) {
-    print('Inspecting codepoint $codePoint');
+    logDebug('Inspecting codepoint $codePoint');
     final iosIndices = ios_data.supportingIndices(codePoint);
-    print('iOS indices: $iosIndices');
+    logDebug('iOS indices: $iosIndices');
     final iosRanges = iosIndices.ranges();
-    print('iOS ranges: $iosRanges');
-    final iosMessage = ios_data.supportedString(iosRanges);
-    print('iOS message: $iosMessage');
+    logDebug('iOS ranges: $iosRanges');
+
     final androidIndices = android_data.supportingIndices(codePoint);
-    print('Android indices: $androidIndices');
+    logDebug('Android indices: $androidIndices');
     final androidRanges = androidIndices.ranges();
-    print('Android ranges: $androidRanges');
-    final androidMessage = android_data.supportedString(androidRanges);
-    print('Android message: $androidMessage');
-    print('Done inspecting codepoint $codePoint');
+    logDebug('Android ranges: $androidRanges');
+    logDebug('Done inspecting codepoint $codePoint');
     return CodePointAnalysis(
       ios: CodePointPlatformAnalysis(codePoint, iosIndices, iosRanges),
       android:

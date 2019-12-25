@@ -1,3 +1,11 @@
+import 'package:flutter/foundation.dart';
+
+void logDebug(String message) {
+  if (!kReleaseMode) {
+    print(message);
+  }
+}
+
 extension IterUtils<T> on Iterable<T> {
   Iterable<T> unique() sync* {
     final seen = <T>{};
