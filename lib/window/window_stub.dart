@@ -1,7 +1,7 @@
 Window window = Window();
 
 class Window {
-  String get decodedQuery => null;
+  Map<String, String> get decodedQuery => {};
 
-  void setQuery(String _) {}
+  void setQuery(Map<String, String> _) {}
 }

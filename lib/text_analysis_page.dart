@@ -30,7 +30,7 @@ class TextAnalysisModel extends ChangeNotifier {
       _analysis = const Analyzer().analyzeText(text);
       notifyListeners();
       _characterTableSource.notifyListeners();
-      window.setQuery(text);
+      window.setQuery({'q': text});
     }
   }
 }
@@ -38,7 +38,7 @@ class TextAnalysisModel extends ChangeNotifier {
 class TextAnalysisPage extends StatelessWidget {
   const TextAnalysisPage({Key key}) : super(key: key);
 
-  String get initialText => window.decodedQuery;
+  String get initialText => window.decodedQuery['q'];
 
   @override
   Widget build(BuildContext context) {
