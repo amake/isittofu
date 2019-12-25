@@ -48,7 +48,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: dcbc02d593fe20b53092a69fdd3b870464b2c6c8
+      resolved-ref: "28703ff6c8220413d7575162918e3d62d4efbef4"
       url: "https://github.com/amake/bloom_filter.git"
     source: git
     version: "0.3.0"
