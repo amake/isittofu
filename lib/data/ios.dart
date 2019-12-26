@@ -83,5 +83,5 @@ String _toVersionString(int platformIdx) => IosPlatform.values[platformIdx]
 Iterable<int> supportingIndices(int codePoint) =>
     common.supportingIndices(codePoint, bloomFilters);
 
-String supportedString(List<List<int>> ranges) =>
-    common.supportedString(ranges, _toVersionString, 'iOS');
+String supportedString(List<int> platformIndices) =>
+    common.supportedString(platformIndices, _toVersionString, 'iOS');

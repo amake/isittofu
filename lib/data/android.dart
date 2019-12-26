@@ -74,5 +74,5 @@ String platformToVersionString(int platformIdx) =>
 Iterable<int> supportingIndices(int codePoint) =>
     common.supportingIndices(codePoint, bloomFilters);
 
-String supportedString(List<List<int>> ranges) =>
-    common.supportedString(ranges, platformToVersionString, 'Android');
+String supportedString(List<int> platformIndices) =>
+    common.supportedString(platformIndices, platformToVersionString, 'Android');

@@ -20,18 +20,12 @@ class Analyzer {
     logDebug('Inspecting codepoint $codePoint');
     final iosIndices = ios_data.supportingIndices(codePoint);
     logDebug('iOS indices: $iosIndices');
-    final iosRanges = iosIndices.ranges();
-    logDebug('iOS ranges: $iosRanges');
-
     final androidIndices = android_data.supportingIndices(codePoint);
     logDebug('Android indices: $androidIndices');
-    final androidRanges = androidIndices.ranges();
-    logDebug('Android ranges: $androidRanges');
     logDebug('Done inspecting codepoint $codePoint');
     return CodePointAnalysis(
-      ios: CodePointPlatformAnalysis(codePoint, iosIndices, iosRanges),
-      android:
-          CodePointPlatformAnalysis(codePoint, androidIndices, androidRanges),
+      ios: CodePointPlatformAnalysis(codePoint, iosIndices),
+      android: CodePointPlatformAnalysis(codePoint, androidIndices),
     );
   }
 }
@@ -72,11 +66,10 @@ class TextAnalysis {
               .toList()
         ..sort();
 
-  String get iosSupportString =>
-      ios_data.supportedString(iosSupportedIndices.ranges());
+  String get iosSupportString => ios_data.supportedString(iosSupportedIndices);
 
   String get androidSupportString =>
-      android_data.supportedString(androidSupportedIndices.ranges());
+      android_data.supportedString(androidSupportedIndices);
 }
 
 final _kRemoveChars = RegExp(r'[\n\r]');
@@ -101,10 +94,10 @@ class CodePointAnalysis implements Comparable {
 
   bool get partiallySupported => ios.supported || android.supported;
 
-  String get iosSupportString => ios_data.supportedString(ios.ranges);
+  String get iosSupportString => ios_data.supportedString(ios.platformIndices);
 
   String get androidSupportString =>
-      android_data.supportedString(android.ranges);
+      android_data.supportedString(android.platformIndices);
 
   @override
   int compareTo(Object other) {
@@ -128,19 +121,15 @@ class CodePointAnalysis implements Comparable {
 }
 
 class CodePointPlatformAnalysis implements Comparable {
-  CodePointPlatformAnalysis(
-      this.codePoint, Iterable<int> platformIndices, Iterable<List<int>> ranges)
+  CodePointPlatformAnalysis(this.codePoint, Iterable<int> platformIndices)
       : assert(codePoint != null),
         assert(platformIndices != null),
         assert(listEquals(
             platformIndices.toList(), List.of(platformIndices)..sort())),
-        assert(ranges != null),
-        platformIndices = List.unmodifiable(platformIndices),
-        ranges = List.unmodifiable(ranges);
+        platformIndices = List.unmodifiable(platformIndices);
 
   final int codePoint;
   final List<int> platformIndices;
-  final List<List<int>> ranges;
 
   bool get supported => platformIndices.isNotEmpty;
 
