@@ -93,5 +93,9 @@ String platformToVersionString(int platformIdx) =>
 Iterable<int> supportingIndices(int codePoint) =>
     common.supportingIndices(codePoint, bloomFilters);
 
-String supportedString(List<int> platformIndices) =>
-    common.supportedString(platformIndices, platformToVersionString, 'Android');
+String supportedString(List<int> platformIndices, double share) =>
+    common.supportedString(
+        platformIndices, platformToVersionString, 'Android', share);
+
+double supportedShare(List<int> platformIndices) =>
+    platformIndices.map((i) => distribution[i]).reduce((a, b) => a + b);

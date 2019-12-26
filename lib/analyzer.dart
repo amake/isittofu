@@ -66,10 +66,18 @@ class TextAnalysis {
               .toList()
         ..sort();
 
-  String get iosSupportString => ios_data.supportedString(iosSupportedIndices);
+  String get iosSupportString {
+    // Avoid calculating indices twice
+    final indices = iosSupportedIndices;
+    return ios_data.supportedString(indices, ios_data.supportedShare(indices));
+  }
 
-  String get androidSupportString =>
-      android_data.supportedString(androidSupportedIndices);
+  String get androidSupportString {
+    // Avoid calculating indices twice
+    final indices = androidSupportedIndices;
+    return android_data.supportedString(
+        indices, android_data.supportedShare(indices));
+  }
 }
 
 final _kRemoveChars = RegExp(r'[\n\r]');
@@ -94,10 +102,16 @@ class CodePointAnalysis implements Comparable {
 
   bool get partiallySupported => ios.supported || android.supported;
 
-  String get iosSupportString => ios_data.supportedString(ios.platformIndices);
+  String get iosSupportString =>
+      ios_data.supportedString(ios.platformIndices, iosSupportedShare);
 
-  String get androidSupportString =>
-      android_data.supportedString(android.platformIndices);
+  String get androidSupportString => android_data.supportedString(
+      android.platformIndices, androidSupportedShare);
+
+  double get iosSupportedShare => ios_data.supportedShare(ios.platformIndices);
+
+  double get androidSupportedShare =>
+      android_data.supportedShare(android.platformIndices);
 
   @override
   int compareTo(Object other) {

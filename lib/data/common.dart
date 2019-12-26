@@ -17,6 +17,7 @@ String supportedString(
   List<int> platformIndices,
   VersionConverter versionConverter,
   String osName,
+  double share,
 ) {
   if (platformIndices.isEmpty) {
     return '$osName unsupported';
@@ -31,5 +32,12 @@ String supportedString(
       return '$start–$end';
     }
   });
-  return '$osName ${rangeStrings.join(', ')}';
+  final withoutShare = '$osName ${rangeStrings.join(', ')}';
+
+  if (share == null) {
+    return withoutShare;
+  } else {
+    final sharePct = (share * 100).round();
+    return '$withoutShare ($sharePct%)';
+  }
 }

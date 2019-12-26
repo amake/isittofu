@@ -113,5 +113,8 @@ String _toVersionString(int platformIdx) => IosPlatform.values[platformIdx]
 Iterable<int> supportingIndices(int codePoint) =>
     common.supportingIndices(codePoint, bloomFilters);
 
-String supportedString(List<int> platformIndices) =>
-    common.supportedString(platformIndices, _toVersionString, 'iOS');
+String supportedString(List<int> platformIndices, double share) =>
+    common.supportedString(platformIndices, _toVersionString, 'iOS', share);
+
+double supportedShare(List<int> platformIndices) =>
+    platformIndices.map((i) => distribution[i]).reduce((a, b) => a + b);
