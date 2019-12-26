@@ -16,7 +16,7 @@ import 'package:isittofu/data/ios8.3-glyphs-decimal.g.dart';
 import 'package:isittofu/data/ios9.0-glyphs-decimal.g.dart';
 import 'package:isittofu/data/ios9.1-glyphs-decimal.g.dart';
 
-final List<BloomFilter> bloomFilters = [
+final List<BloomFilter> bloomFilters = List.unmodifiable([
   ios8_0GlyphsDecimalBloomFilter,
   ios8_0GlyphsDecimalBloomFilter, // iOS 8.1 is same as iOS 8.0
   ios8_2GlyphsDecimalBloomFilter,
@@ -43,7 +43,7 @@ final List<BloomFilter> bloomFilters = [
   ios13_0GlyphsDecimalBloomFilter, // iOS 13.1 is same as iOS 13.0
   ios13_2GlyphsDecimalBloomFilter,
   ios13_2GlyphsDecimalBloomFilter, // iOS 13.3 is same as iOS 13.2
-];
+]);
 
 enum IosPlatform {
   iOS8_0,

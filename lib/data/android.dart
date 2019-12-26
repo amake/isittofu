@@ -13,7 +13,7 @@ import 'package:isittofu/data/android28-glyphs-decimal.g.dart';
 import 'package:isittofu/data/android29-glyphs-decimal.g.dart';
 import 'package:isittofu/data/common.dart' as common;
 
-final List<BloomFilter> bloomFilters = [
+final List<BloomFilter> bloomFilters = List.unmodifiable([
   android10GlyphsDecimalBloomFilter,
   android15GlyphsDecimalBloomFilter,
   android16GlyphsDecimalBloomFilter,
@@ -29,7 +29,7 @@ final List<BloomFilter> bloomFilters = [
   android26GlyphsDecimalBloomFilter, // Android 27 is same as Android 26
   android28GlyphsDecimalBloomFilter,
   android29GlyphsDecimalBloomFilter,
-];
+]);
 
 enum AndroidPlatform {
   android10,
