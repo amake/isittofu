@@ -105,7 +105,7 @@ class _TextInputCardState extends State<_TextInputCard> {
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -113,7 +113,7 @@ class _TextInputCardState extends State<_TextInputCard> {
               'Is your text visible on mobile? Enter it here to see if any of it turns to "tofu".',
               style: Theme.of(context).textTheme.title,
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 24),
             TextField(
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
@@ -142,7 +142,7 @@ class _CompatibilitySummary extends StatelessWidget {
     final analysis = Provider.of<TextAnalysisModel>(context).analysis;
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -150,7 +150,7 @@ class _CompatibilitySummary extends StatelessWidget {
               'Overall Compatibility',
               style: Theme.of(context).textTheme.title,
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 24),
             Row(
               children: <Widget>[
                 Expanded(
