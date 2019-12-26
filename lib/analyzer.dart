@@ -58,12 +58,12 @@ class TextAnalysis {
   CodePointAnalysis analysisForIndex(int i) => analysis[uniqueCodePoints[i]];
 
   List<int> get iosSupportedIndices =>
-      supportedIndices(analysis.values.map((analysis) => analysis.ios));
+      _supportedIndices(analysis.values.map((analysis) => analysis.ios));
 
   List<int> get androidSupportedIndices =>
-      supportedIndices(analysis.values.map((analysis) => analysis.android));
+      _supportedIndices(analysis.values.map((analysis) => analysis.android));
 
-  List<int> supportedIndices(Iterable<CodePointPlatformAnalysis> analyses) =>
+  List<int> _supportedIndices(Iterable<CodePointPlatformAnalysis> analyses) =>
       analyses.isEmpty
           ? []
           : analyses
