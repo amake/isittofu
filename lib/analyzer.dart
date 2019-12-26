@@ -94,6 +94,22 @@ class TextAnalysis {
     return android_data.supportedString(
         indices, android_data.supportedShare(indices));
   }
+
+  SupportLevel get androidSupportLevel => isEmpty
+      ? null
+      : _supportLevel(
+          analysis.values.every((analysis) => analysis.android.supported),
+          analysis.values
+              .map((analysis) => analysis.androidSupportedShare)
+              .reduce(min));
+
+  SupportLevel get iosSupportLevel => isEmpty
+      ? null
+      : _supportLevel(
+          analysis.values.every((analysis) => analysis.ios.supported),
+          analysis.values
+              .map((analysis) => analysis.iosSupportedShare)
+              .reduce(min));
 }
 
 final _kRemoveChars = RegExp(r'[\n\r]');

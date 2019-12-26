@@ -139,6 +139,7 @@ class _CompatibilitySummary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final analysis = Provider.of<TextAnalysisModel>(context).analysis;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8),
@@ -155,22 +156,22 @@ class _CompatibilitySummary extends StatelessWidget {
                 Expanded(
                   child: Row(
                     children: <Widget>[
+                      _supportLevelIcon(analysis.androidSupportLevel),
+                      const SizedBox(width: 8),
                       const Icon(Icons.android),
                       const SizedBox(width: 8),
-                      Text(Provider.of<TextAnalysisModel>(context)
-                          .analysis
-                          .androidSupportString),
+                      Text(analysis.androidSupportString),
                     ],
                   ),
                 ),
                 Expanded(
                   child: Row(
                     children: <Widget>[
+                      _supportLevelIcon(analysis.iosSupportLevel),
+                      const SizedBox(width: 8),
                       const Icon(Icons.phone_iphone),
                       const SizedBox(width: 8),
-                      Text(Provider.of<TextAnalysisModel>(context)
-                          .analysis
-                          .iosSupportString)
+                      Text(analysis.iosSupportString)
                     ],
                   ),
                 ),
@@ -218,7 +219,7 @@ class CharacterTableSource extends DataTableSource {
     return DataRow(
       key: ValueKey(codePoint),
       cells: [
-        DataCell(_icon(analysis.supportLevel)),
+        DataCell(_supportLevelIcon(analysis.supportLevel)),
         DataCell(Text(
           analysis.codePointDisplayString,
           style: Theme.of(_context).textTheme.display1,
@@ -230,18 +231,6 @@ class CharacterTableSource extends DataTableSource {
     );
   }
 
-  Widget _icon(SupportLevel level) {
-    switch (level) {
-      case SupportLevel.fullySupported:
-        return const Icon(Icons.thumb_up, color: Colors.green);
-      case SupportLevel.limitedSupport:
-        return const Icon(Icons.warning, color: Colors.yellow);
-      case SupportLevel.unsupported:
-        return const Icon(Icons.not_interested, color: Colors.red);
-    }
-    throw Exception('Unkonwn level: $level');
-  }
-
   @override
   bool get isRowCountApproximate => false;
 
@@ -250,4 +239,16 @@ class CharacterTableSource extends DataTableSource {
 
   @override
   int get selectedRowCount => 0;
+}
+
+Widget _supportLevelIcon(SupportLevel level) {
+  switch (level) {
+    case SupportLevel.fullySupported:
+      return const Icon(Icons.thumb_up, color: Colors.green);
+    case SupportLevel.limitedSupport:
+      return const Icon(Icons.warning, color: Colors.yellow);
+    case SupportLevel.unsupported:
+      return const Icon(Icons.not_interested, color: Colors.red);
+  }
+  throw Exception('Unkonwn level: $level');
 }
