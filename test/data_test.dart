@@ -63,4 +63,9 @@ void main() {
       }
     }
   });
+
+  test('distributions', () {
+    expect(ios.distribution.reduce((a, b) => a + b), 1);
+    expect(android.distribution.reduce((a, b) => a + b), 1);
+  });
 }

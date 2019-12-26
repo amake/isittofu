@@ -68,6 +68,25 @@ const Map<AndroidPlatform, String> sdkToVersion = {
   AndroidPlatform.android29: '10',
 };
 
+// https://developer.android.com/about/dashboards
+const List<double> distribution = [
+  0.003,
+  0.003,
+  0.012,
+  0.015,
+  0.005,
+  0.069,
+  0.03,
+  0.115,
+  0.169,
+  0.114,
+  0.078,
+  0.129,
+  0.154,
+  0.104,
+  0,
+];
+
 String platformToVersionString(int platformIdx) =>
     sdkToVersion[AndroidPlatform.values[platformIdx]];
 

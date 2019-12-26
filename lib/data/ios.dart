@@ -74,6 +74,36 @@ enum IosPlatform {
   iOS13_3,
 }
 
+// https://developer.apple.com/support/app-store/
+const List<double> distribution = [
+  0.09 / 18,
+  0.09 / 18,
+  0.09 / 18,
+  0.09 / 18,
+  0.09 / 18,
+  0.09 / 18,
+  0.09 / 18,
+  0.09 / 18,
+  0.09 / 18,
+  0.09 / 18,
+  0.09 / 18,
+  0.09 / 18,
+  0.09 / 18,
+  0.09 / 18,
+  0.09 / 18,
+  0.09 / 18,
+  0.09 / 18,
+  0.09 / 18,
+  0.41 / 4,
+  0.41 / 4,
+  0.41 / 4,
+  0.41 / 4,
+  0.5 / 4,
+  0.5 / 4,
+  0.5 / 4,
+  0.5 / 4,
+];
+
 String _toVersionString(int platformIdx) => IosPlatform.values[platformIdx]
     .toString()
     .split('.')[1]
