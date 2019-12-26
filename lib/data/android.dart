@@ -50,44 +50,26 @@ enum AndroidPlatform {
 }
 
 // See https://source.android.com/setup/start/build-numbers
-const sdkToVersion = {
-  '2': '1.1',
-  '3': '1.5',
-  '4': '1.6',
-  '5': '2.0',
-  '6': '2.0.1',
-  '7': '2.1',
-  '8': '2.2',
-  '9': '2.3',
-  '10': '2.3.3',
-  '11': '3.0',
-  '12': '3.1',
-  '13': '3.2',
-  '14': '4.0.1',
-  '15': '4.0.3',
-  '16': '4.1',
-  '17': '4.2',
-  '18': '4.3',
-  '19': '4.4',
-  '20': '?',
-  '21': '5.0',
-  '22': '5.1',
-  '23': '6.0',
-  '24': '7.0',
-  '25': '7.1',
-  '26': '8.0',
-  '27': '8.1',
-  '28': '9',
-  '29': '10',
+const Map<AndroidPlatform, String> sdkToVersion = {
+  AndroidPlatform.android10: '2.3.3',
+  AndroidPlatform.android15: '4.0.3',
+  AndroidPlatform.android16: '4.1',
+  AndroidPlatform.android17: '4.2',
+  AndroidPlatform.android18: '4.3',
+  AndroidPlatform.android19: '4.4',
+  AndroidPlatform.android21: '5.0',
+  AndroidPlatform.android22: '5.1',
+  AndroidPlatform.android23: '6.0',
+  AndroidPlatform.android24: '7.0',
+  AndroidPlatform.android25: '7.1',
+  AndroidPlatform.android26: '8.0',
+  AndroidPlatform.android27: '8.1',
+  AndroidPlatform.android28: '9',
+  AndroidPlatform.android29: '10',
 };
 
-String platformToVersionString(int platformIdx) {
-  final sdk = AndroidPlatform.values[platformIdx]
-      .toString()
-      .split('.')[1]
-      .replaceFirst('android', '');
-  return sdkToVersion[sdk];
-}
+String platformToVersionString(int platformIdx) =>
+    sdkToVersion[AndroidPlatform.values[platformIdx]];
 
 Iterable<int> supportingIndices(int codePoint) =>
     common.supportingIndices(codePoint, bloomFilters);
