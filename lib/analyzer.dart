@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:isittofu/data/android.dart' as android_data;
 import 'package:isittofu/data/ios.dart' as ios_data;
@@ -112,6 +114,8 @@ class CodePointAnalysis implements Comparable {
 
   double get androidSupportedShare =>
       android_data.supportedShare(android.platformIndices);
+
+  double get minSupportShare => min(iosSupportedShare, androidSupportedShare);
 
   @override
   int compareTo(Object other) {

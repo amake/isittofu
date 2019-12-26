@@ -4,6 +4,8 @@ import 'package:isittofu/analyzer.dart';
 import 'package:isittofu/window/window.dart';
 import 'package:provider/provider.dart';
 
+const _kSupportShareWarningThreshold = 0.7;
+
 class TextAnalysisModel extends ChangeNotifier {
   TextAnalysisModel(this.context, {String initialText}) {
     _characterTableSource = CharacterTableSource(this);
@@ -215,9 +217,11 @@ class CharacterTableSource extends DataTableSource {
   DataRow getRow(int index) {
     final codePoint = _analysis.sortedCodePoints[index];
     final analysis = _analysis.analysis[codePoint];
-    final icon = analysis.fullySupported
-        ? const Icon(Icons.thumb_up, color: Colors.green)
-        : const Icon(Icons.not_interested, color: Colors.red);
+    final icon = analysis.minSupportShare < _kSupportShareWarningThreshold
+        ? const Icon(Icons.warning, color: Colors.yellow)
+        : analysis.fullySupported
+            ? const Icon(Icons.thumb_up, color: Colors.green)
+            : const Icon(Icons.not_interested, color: Colors.red);
     return DataRow(
       key: ValueKey(codePoint),
       cells: [
