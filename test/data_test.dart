@@ -8,7 +8,7 @@ import 'package:isittofu/data/ios.dart' as ios;
 
 void main() {
   test('false positive rates', () {
-    final file = File('lib/data/android10.txt');
+    final file = File('lib/data/android10-glyphs-decimal.txt');
     final lines = file.readAsLinesSync().where((line) => line.isNotEmpty);
     for (final p in [0.1, 0.01]) {
       final b = BloomFilter.withProbability(p, lines.length)..addAll(lines);
@@ -34,7 +34,7 @@ void main() {
   test('serialized bloom filter', () {
     for (var i = 0; i < android.AndroidPlatform.values.length; i++) {
       final sdk = android.AndroidPlatform.values[i].toString().split('.')[1];
-      final file = File('lib/data/$sdk.txt');
+      final file = File('lib/data/$sdk-glyphs-decimal.txt');
       print('Checking $sdk');
       final lines = file.readAsLinesSync().where((line) => line.isNotEmpty);
       final serializedFilter = android.bloomFilters[i];
