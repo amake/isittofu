@@ -9,6 +9,16 @@ const _kLimitedSupportThreshold = 0.7;
 
 enum SupportLevel { fullySupported, limitedSupport, unsupported }
 
+SupportLevel _supportLevel(bool overallSupport, double share) {
+  if (overallSupport) {
+    return share < _kLimitedSupportThreshold
+        ? SupportLevel.limitedSupport
+        : SupportLevel.fullySupported;
+  } else {
+    return SupportLevel.unsupported;
+  }
+}
+
 class Analyzer {
   const Analyzer();
 
@@ -104,15 +114,8 @@ class CodePointAnalysis implements Comparable {
 
   String get codePointHex => 'U+${codePoint.toRadixString(16).padLeft(4, '0')}';
 
-  SupportLevel get supportLevel {
-    if (fullySupported) {
-      return minSupportShare < _kLimitedSupportThreshold
-          ? SupportLevel.limitedSupport
-          : SupportLevel.fullySupported;
-    } else {
-      return SupportLevel.unsupported;
-    }
-  }
+  SupportLevel get supportLevel =>
+      _supportLevel(fullySupported, minSupportShare);
 
   bool get fullySupported => ios.supported && android.supported;
 
