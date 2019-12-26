@@ -41,3 +41,8 @@ String supportedString(
     return '$withoutShare ($sharePct%)';
   }
 }
+
+double supportedShare(List<int> platformIndices, List<double> distribution) =>
+    platformIndices.isEmpty
+        ? 0
+        : platformIndices.map((i) => distribution[i]).reduce((a, b) => a + b);
