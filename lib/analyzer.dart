@@ -5,6 +5,10 @@ import 'package:isittofu/data/android.dart' as android_data;
 import 'package:isittofu/data/ios.dart' as ios_data;
 import 'package:isittofu/util.dart';
 
+const _kLimitedSupportThreshold = 0.7;
+
+enum SupportLevel { fullySupported, limitedSupport, unsupported }
+
 class Analyzer {
   const Analyzer();
 
@@ -99,6 +103,16 @@ class CodePointAnalysis implements Comparable {
       String.fromCharCode(codePoint).replaceAll(_kRemoveChars, '');
 
   String get codePointHex => 'U+${codePoint.toRadixString(16).padLeft(4, '0')}';
+
+  SupportLevel get supportLevel {
+    if (fullySupported) {
+      return minSupportShare < _kLimitedSupportThreshold
+          ? SupportLevel.limitedSupport
+          : SupportLevel.fullySupported;
+    } else {
+      return SupportLevel.unsupported;
+    }
+  }
 
   bool get fullySupported => ios.supported && android.supported;
 

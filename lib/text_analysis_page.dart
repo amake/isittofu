@@ -4,8 +4,6 @@ import 'package:isittofu/analyzer.dart';
 import 'package:isittofu/window/window.dart';
 import 'package:provider/provider.dart';
 
-const _kSupportShareWarningThreshold = 0.7;
-
 class TextAnalysisModel extends ChangeNotifier {
   TextAnalysisModel(this.context, {String initialText}) {
     _characterTableSource = CharacterTableSource(this);
@@ -217,15 +215,10 @@ class CharacterTableSource extends DataTableSource {
   DataRow getRow(int index) {
     final codePoint = _analysis.sortedCodePoints[index];
     final analysis = _analysis.analysis[codePoint];
-    final icon = analysis.minSupportShare < _kSupportShareWarningThreshold
-        ? const Icon(Icons.warning, color: Colors.yellow)
-        : analysis.fullySupported
-            ? const Icon(Icons.thumb_up, color: Colors.green)
-            : const Icon(Icons.not_interested, color: Colors.red);
     return DataRow(
       key: ValueKey(codePoint),
       cells: [
-        DataCell(icon),
+        DataCell(_icon(analysis.supportLevel)),
         DataCell(Text(
           analysis.codePointDisplayString,
           style: Theme.of(_context).textTheme.display1,
@@ -235,6 +228,18 @@ class CharacterTableSource extends DataTableSource {
         DataCell(Text(analysis.androidSupportString))
       ],
     );
+  }
+
+  Widget _icon(SupportLevel level) {
+    switch (level) {
+      case SupportLevel.fullySupported:
+        return const Icon(Icons.thumb_up, color: Colors.green);
+      case SupportLevel.limitedSupport:
+        return const Icon(Icons.warning, color: Colors.yellow);
+      case SupportLevel.unsupported:
+        return const Icon(Icons.not_interested, color: Colors.red);
+    }
+    throw Exception('Unkonwn level: $level');
   }
 
   @override
