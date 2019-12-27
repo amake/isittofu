@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
-import 'package:isittofu/data/android.dart' as android_data;
-import 'package:isittofu/data/ios.dart' as ios_data;
+import 'package:isittofu/data/android.dart' deferred as android_data;
+import 'package:isittofu/data/ios.dart' deferred as ios_data;
 import 'package:isittofu/util.dart';
 
 const _kLimitedSupportThreshold = 0.7;
@@ -22,17 +22,17 @@ SupportLevel _supportLevel(bool overallSupport, double share) {
 class Analyzer {
   const Analyzer();
 
-  TextAnalysis analyzeText(String text) {
+  Future<TextAnalysis> analyzeText(String text) async {
     final uniqueCodePoints = text.runes.unique();
-    final codePointAnalyses = uniqueCodePoints
-        .fold<Map<int, CodePointAnalysis>>({}, (acc, codePoint) {
-      acc[codePoint] = analyzeCodePoint(codePoint);
-      return acc;
-    });
+    final codePointAnalyses = <int, CodePointAnalysis>{};
+    for (final codePoint in uniqueCodePoints) {
+      codePointAnalyses[codePoint] = await analyzeCodePoint(codePoint);
+    }
     return TextAnalysis(text, uniqueCodePoints, codePointAnalyses);
   }
 
-  CodePointAnalysis analyzeCodePoint(int codePoint) {
+  Future<CodePointAnalysis> analyzeCodePoint(int codePoint) async {
+    await Future.wait([ios_data.loadLibrary(), android_data.loadLibrary()]);
     logDebug('Inspecting codepoint $codePoint');
     final iosIndices = ios_data.supportingIndices(codePoint);
     logDebug('iOS indices: $iosIndices');

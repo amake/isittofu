@@ -24,10 +24,10 @@ class TextAnalysisModel extends ChangeNotifier {
 
   CharacterTableSource get characterTableSource => _characterTableSource;
 
-  void setText(String text) {
+  Future<void> setText(String text) async {
     if (_text != text) {
       _text = text;
-      _analysis = const Analyzer().analyzeText(text);
+      _analysis = await const Analyzer().analyzeText(text);
       notifyListeners();
       _characterTableSource.notifyListeners();
       window.setQuery({'q': text});
