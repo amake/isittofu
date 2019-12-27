@@ -176,10 +176,15 @@ class _CompatibilitySummary extends StatelessWidget {
               style: Theme.of(context).textTheme.title,
             ),
             const SizedBox(height: 24),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: Row(
+            Container(
+              width: double.infinity,
+              child: Wrap(
+                runSpacing: 16,
+                spacing: 16,
+                alignment: WrapAlignment.spaceBetween,
+                children: <Widget>[
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       _supportLevelIcon(analysis.androidSupportLevel),
                       const SizedBox(width: 8),
@@ -188,9 +193,8 @@ class _CompatibilitySummary extends StatelessWidget {
                       Text(analysis.androidSupportString),
                     ],
                   ),
-                ),
-                Expanded(
-                  child: Row(
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       _supportLevelIcon(analysis.iosSupportLevel),
                       const SizedBox(width: 8),
@@ -199,8 +203,8 @@ class _CompatibilitySummary extends StatelessWidget {
                       Text(analysis.iosSupportString)
                     ],
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),
