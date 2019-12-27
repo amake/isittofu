@@ -8,6 +8,8 @@ class TextAnalysisModel extends ChangeNotifier {
   TextAnalysisModel(this.context, {String initialText}) {
     _characterTableSource = CharacterTableSource(this);
     setText(initialText ?? '');
+    // Run analysis once to force load deferred imports
+    const Analyzer().analyzeText('a');
   }
 
   final BuildContext context;
