@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:isittofu/analyzer.dart';
 import 'package:isittofu/window/window.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TextAnalysisModel extends ChangeNotifier with CharacterTableSource {
   TextAnalysisModel(this.context, {String initialText}) {
@@ -47,6 +48,12 @@ class TextAnalysisPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Is it tofu?'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.info_outline),
+            onPressed: () => launch('https://github.com/amake/isittofu'),
+          )
+        ],
       ),
       body: ChangeNotifierProvider(
         create: (context) =>
