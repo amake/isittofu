@@ -24,10 +24,14 @@ class TextAnalysisModel extends ChangeNotifier {
 
   CharacterTableSource get characterTableSource => _characterTableSource;
 
+  final ValueNotifier<bool> busy = ValueNotifier(false);
+
   Future<void> setText(String text) async {
     if (_text != text) {
       _text = text;
+      busy.value = true;
       _analysis = await const Analyzer().analyzeText(text);
+      busy.value = false;
       notifyListeners();
       _characterTableSource.notifyListeners();
       window.setQuery({'q': text});
@@ -62,13 +66,32 @@ class TextAnalysisPage extends StatelessWidget {
                       .isEmpty) ...[
                     const _CompatibilitySummary(),
                     const _CharacterBreakdown(),
-                  ]
+                  ] else
+                    const _LoadingProgress(),
                 ],
               ),
             ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class _LoadingProgress extends StatelessWidget {
+  const _LoadingProgress({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<bool>(
+      valueListenable:
+          Provider.of<TextAnalysisModel>(context, listen: false).busy,
+      child: const Padding(
+        padding: EdgeInsets.all(16),
+        child: Center(child: CircularProgressIndicator()),
+      ),
+      builder: (context, value, child) =>
+          value ? child : const SizedBox.shrink(),
     );
   }
 }
