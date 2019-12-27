@@ -87,11 +87,17 @@ const List<double> distribution = [
   0,
 ];
 
+final Map<int, List<int>> overrides = {
+  // VARIATION SELECTOR-16 does not have a glyph in Android fonts (it happens to
+  // have one in Apple Color Emoji) but is supported
+  0xfe0f: List.generate(AndroidPlatform.values.length, (i) => i),
+};
+
 String platformToVersionString(int platformIdx) =>
     sdkToVersion[AndroidPlatform.values[platformIdx]];
 
 Iterable<int> supportingIndices(int codePoint) =>
-    common.supportingIndices(codePoint, bloomFilters);
+    overrides[codePoint] ?? common.supportingIndices(codePoint, bloomFilters);
 
 String supportedString(List<int> platformIndices, double share) =>
     common.supportedString(
