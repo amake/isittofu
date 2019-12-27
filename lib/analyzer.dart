@@ -57,21 +57,22 @@ class TextAnalysis {
         uniqueCodePoints = List.unmodifiable(uniqueCodePoints),
         sortedCodePoints = List.unmodifiable(List.of(uniqueCodePoints)
           ..sort((a, b) => analysis[a].compareTo(analysis[b]))),
-        analysis = Map.unmodifiable(analysis);
+        codePointAnalyses = Map.unmodifiable(analysis);
   final String text;
   final List<int> uniqueCodePoints;
-  final Map<int, CodePointAnalysis> analysis;
+  final Map<int, CodePointAnalysis> codePointAnalyses;
   final List<int> sortedCodePoints;
 
   bool get isEmpty => text.isEmpty;
 
-  CodePointAnalysis analysisForIndex(int i) => analysis[uniqueCodePoints[i]];
+  CodePointAnalysis analysisForIndex(int i) =>
+      codePointAnalyses[uniqueCodePoints[i]];
 
-  List<int> get iosSupportedIndices =>
-      _supportedIndices(analysis.values.map((analysis) => analysis.ios));
+  List<int> get iosSupportedIndices => _supportedIndices(
+      codePointAnalyses.values.map((analysis) => analysis.ios));
 
-  List<int> get androidSupportedIndices =>
-      _supportedIndices(analysis.values.map((analysis) => analysis.android));
+  List<int> get androidSupportedIndices => _supportedIndices(
+      codePointAnalyses.values.map((analysis) => analysis.android));
 
   List<int> _supportedIndices(Iterable<CodePointPlatformAnalysis> analyses) =>
       analyses.isEmpty
@@ -98,16 +99,17 @@ class TextAnalysis {
   SupportLevel get androidSupportLevel => isEmpty
       ? null
       : _supportLevel(
-          analysis.values.every((analysis) => analysis.android.supported),
-          analysis.values
+          codePointAnalyses.values
+              .every((analysis) => analysis.android.supported),
+          codePointAnalyses.values
               .map((analysis) => analysis.androidSupportedShare)
               .reduce(min));
 
   SupportLevel get iosSupportLevel => isEmpty
       ? null
       : _supportLevel(
-          analysis.values.every((analysis) => analysis.ios.supported),
-          analysis.values
+          codePointAnalyses.values.every((analysis) => analysis.ios.supported),
+          codePointAnalyses.values
               .map((analysis) => analysis.iosSupportedShare)
               .reduce(min));
 }

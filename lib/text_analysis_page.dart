@@ -4,14 +4,14 @@ import 'package:isittofu/analyzer.dart';
 import 'package:isittofu/window/window.dart';
 import 'package:provider/provider.dart';
 
-class TextAnalysisModel extends ChangeNotifier {
+class TextAnalysisModel extends ChangeNotifier with CharacterTableSource {
   TextAnalysisModel(this.context, {String initialText}) {
-    _characterTableSource = CharacterTableSource(this);
     setText(initialText ?? '');
     // Run analysis once to force load deferred imports
     const Analyzer().analyzeText('a');
   }
 
+  @override
   final BuildContext context;
 
   String _text;
@@ -20,11 +20,8 @@ class TextAnalysisModel extends ChangeNotifier {
 
   TextAnalysis _analysis = TextAnalysis.empty();
 
+  @override
   TextAnalysis get analysis => _analysis;
-
-  CharacterTableSource _characterTableSource;
-
-  CharacterTableSource get characterTableSource => _characterTableSource;
 
   final ValueNotifier<bool> busy = ValueNotifier(false);
 
@@ -35,7 +32,6 @@ class TextAnalysisModel extends ChangeNotifier {
       _analysis = await const Analyzer().analyzeText(text);
       busy.value = false;
       notifyListeners();
-      _characterTableSource.notifyListeners();
       window.setQuery({'q': text});
     }
   }
@@ -227,38 +223,34 @@ class _CharacterBreakdown extends StatelessWidget {
         DataColumn(label: Text('iOS Support')),
         DataColumn(label: Text('Android Support')),
       ],
-      source: Provider.of<TextAnalysisModel>(context).characterTableSource,
+      source: Provider.of<TextAnalysisModel>(context, listen: false),
     );
   }
 }
 
-class CharacterTableSource extends DataTableSource {
-  CharacterTableSource(this._model) : assert(_model != null);
+mixin CharacterTableSource implements DataTableSource {
+  BuildContext get context;
 
-  final TextAnalysisModel _model;
-
-  BuildContext get _context => _model.context;
-
-  TextAnalysis get _analysis => _model.analysis;
+  TextAnalysis get analysis;
 
   @override
   DataRow getRow(int index) {
-    final codePoint = _analysis.sortedCodePoints[index];
-    final analysis = _analysis.analysis[codePoint];
+    final codePoint = analysis.sortedCodePoints[index];
+    final codePointAnalysis = analysis.codePointAnalyses[codePoint];
     return DataRow(
       key: ValueKey(codePoint),
       cells: [
-        DataCell(_supportLevelIcon(analysis.supportLevel)),
+        DataCell(_supportLevelIcon(codePointAnalysis.supportLevel)),
         DataCell(Text(
-          analysis.codePointDisplayString,
-          style: Theme.of(_context)
+          codePointAnalysis.codePointDisplayString,
+          style: Theme.of(context)
               .textTheme
               .display1
-              .copyWith(fontSize: IconTheme.of(_context).size),
+              .copyWith(fontSize: IconTheme.of(context).size),
         )),
-        DataCell(Text(analysis.codePointHex)),
-        DataCell(Text(analysis.iosSupportString)),
-        DataCell(Text(analysis.androidSupportString))
+        DataCell(Text(codePointAnalysis.codePointHex)),
+        DataCell(Text(codePointAnalysis.iosSupportString)),
+        DataCell(Text(codePointAnalysis.androidSupportString))
       ],
     );
   }
@@ -267,7 +259,7 @@ class CharacterTableSource extends DataTableSource {
   bool get isRowCountApproximate => false;
 
   @override
-  int get rowCount => _analysis.sortedCodePoints.length;
+  int get rowCount => analysis.sortedCodePoints.length;
 
   @override
   int get selectedRowCount => 0;
