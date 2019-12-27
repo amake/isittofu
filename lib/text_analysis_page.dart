@@ -251,7 +251,10 @@ class CharacterTableSource extends DataTableSource {
         DataCell(_supportLevelIcon(analysis.supportLevel)),
         DataCell(Text(
           analysis.codePointDisplayString,
-          style: Theme.of(_context).textTheme.display1,
+          style: Theme.of(_context)
+              .textTheme
+              .display1
+              .copyWith(fontSize: IconTheme.of(_context).size),
         )),
         DataCell(Text(analysis.codePointHex)),
         DataCell(Text(analysis.iosSupportString)),
