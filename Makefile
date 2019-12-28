@@ -25,6 +25,7 @@ pub: pubspec.lock .dart_tool/package_config.json
 .PHONY: web-release-serve
 web-release-serve: ## Serve the web release locally over HTTP
 web-release-serve:
+	flutter build web
 	cd build/web; python3 -m http.server
 
 .PHONY: help
