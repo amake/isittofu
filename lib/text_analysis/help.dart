@@ -72,37 +72,36 @@ class ExpandableHelpText extends StatelessWidget {
 class _Legend extends StatelessWidget {
   const _Legend({Key key}) : super(key: key);
 
-  double get _scaleFactor => 0.6;
-
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final iconTheme = IconTheme.of(context);
     final thresholdPct = (kLimitedSupportThreshold * 100).round();
-    return Theme(
-      data: theme.copyWith(
-        iconTheme: iconTheme.copyWith(size: iconTheme.size * _scaleFactor),
-        textTheme: theme.textTheme.apply(fontSizeFactor: _scaleFactor),
-      ),
-      child: Column(
-        children: <Widget>[
-          Row(children: <Widget>[
-            kIconFullySupported,
-            const SizedBox(width: 8),
-            Text('Supported by ≥$thresholdPct% of both iOS and Android devices')
-          ]),
-          Row(children: <Widget>[
-            kIconLimitedSupport,
-            const SizedBox(width: 8),
-            Text(
-                'Supported by <$thresholdPct% of either iOS or Android devices')
-          ]),
-          Row(children: const <Widget>[
-            kIconUnsupported,
-            SizedBox(width: 8),
-            Text('Unsupported on iOS and/or Android')
-          ]),
-        ],
+    return IconTheme.merge(
+      data: IconThemeData(size: IconTheme.of(context).size * 0.7),
+      child: DefaultTextStyle.merge(
+        style: TextStyle(
+          fontSize: Theme.of(context).textTheme.body1.fontSize * 0.9,
+        ),
+        child: Column(
+          children: <Widget>[
+            Row(children: <Widget>[
+              kIconFullySupported,
+              const SizedBox(width: 8),
+              Text(
+                  'Supported by ≥$thresholdPct% of both iOS and Android devices')
+            ]),
+            Row(children: <Widget>[
+              kIconLimitedSupport,
+              const SizedBox(width: 8),
+              Text(
+                  'Supported by <$thresholdPct% of either iOS or Android devices')
+            ]),
+            Row(children: const <Widget>[
+              kIconUnsupported,
+              SizedBox(width: 8),
+              Text('Unsupported on iOS and/or Android')
+            ]),
+          ],
+        ),
       ),
     );
   }
