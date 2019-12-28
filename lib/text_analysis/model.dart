@@ -50,12 +50,10 @@ mixin CharacterTableSource implements DataTableSource {
       key: ValueKey(codePoint),
       cells: [
         DataCell(supportLevelIcon(codePointAnalysis.supportLevel)),
-        DataCell(Text(
-          codePointAnalysis.codePointDisplayString,
-          style: Theme.of(context)
-              .textTheme
-              .display1
-              .copyWith(fontSize: IconTheme.of(context).size),
+        DataCell(DefaultTextStyle.merge(
+          style: TextStyle(
+              fontSize: Theme.of(context).textTheme.display1.fontSize),
+          child: Text(codePointAnalysis.codePointDisplayString),
         )),
         DataCell(Text(codePointAnalysis.codePointHex)),
         DataCell(Text(codePointAnalysis.iosSupportString)),
