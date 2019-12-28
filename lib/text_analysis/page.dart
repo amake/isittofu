@@ -92,7 +92,7 @@ class _TextInputCardState extends State<_TextInputCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              'Is your text visible on mobile? Enter it here to see if any of it turns to "tofu".',
+              'Is your text visible on mobile? Enter it here to see if any of it turns to “tofu”.',
               style: Theme.of(context).textTheme.title,
             ),
             const SizedBox(height: 24),
