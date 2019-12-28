@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:isittofu/text_analysis_page.dart';
+import 'package:isittofu/text_analysis/page.dart';
 
 void main() => runApp(MyApp());
 
