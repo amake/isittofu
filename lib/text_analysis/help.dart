@@ -86,19 +86,23 @@ class _Legend extends StatelessWidget {
             Row(children: <Widget>[
               kIconFullySupported,
               const SizedBox(width: 8),
-              Text(
-                  'Supported by ≥$thresholdPct% of both iOS and Android devices')
+              Expanded(
+                child: Text(
+                    'Supported by ≥$thresholdPct% of both iOS and Android devices'),
+              )
             ]),
             Row(children: <Widget>[
               kIconLimitedSupport,
               const SizedBox(width: 8),
-              Text(
-                  'Supported by <$thresholdPct% of either iOS or Android devices')
+              Expanded(
+                child: Text(
+                    'Supported by <$thresholdPct% of either iOS or Android devices'),
+              )
             ]),
             Row(children: const <Widget>[
               kIconUnsupported,
               SizedBox(width: 8),
-              Text('Unsupported on iOS and/or Android')
+              Expanded(child: Text('Unsupported on iOS and/or Android'))
             ]),
           ],
         ),
