@@ -99,9 +99,17 @@ String platformToVersionString(int platformIdx) =>
 Iterable<int> supportingIndices(int codePoint) =>
     overrides[codePoint] ?? common.supportingIndices(codePoint, bloomFilters);
 
-String supportedString(List<int> platformIndices, double share) =>
+String supportedString(
+  List<int> platformIndices, {
+  bool os = false,
+  bool share = true,
+}) =>
     common.supportedString(
-        platformIndices, platformToVersionString, 'Android', share);
+      platformIndices,
+      platformToVersionString,
+      osName: os ? 'Android' : null,
+      share: share ? supportedShare(platformIndices) : null,
+    );
 
 double supportedShare(List<int> platformIndices) =>
     common.supportedShare(platformIndices, distribution);

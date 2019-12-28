@@ -83,18 +83,11 @@ class TextAnalysis {
               .toList()
         ..sort();
 
-  String get iosSupportString {
-    // Avoid calculating indices twice
-    final indices = iosSupportedIndices;
-    return ios_data.supportedString(indices, ios_data.supportedShare(indices));
-  }
+  String get iosSupportString =>
+      ios_data.supportedString(iosSupportedIndices, os: true);
 
-  String get androidSupportString {
-    // Avoid calculating indices twice
-    final indices = androidSupportedIndices;
-    return android_data.supportedString(
-        indices, android_data.supportedShare(indices));
-  }
+  String get androidSupportString =>
+      android_data.supportedString(androidSupportedIndices, os: true);
 
   SupportLevel get androidSupportLevel => isEmpty
       ? null
@@ -139,11 +132,10 @@ class CodePointAnalysis implements Comparable {
 
   bool get partiallySupported => ios.supported || android.supported;
 
-  String get iosSupportString =>
-      ios_data.supportedString(ios.platformIndices, iosSupportedShare);
+  String get iosSupportString => ios_data.supportedString(ios.platformIndices);
 
-  String get androidSupportString => android_data.supportedString(
-      android.platformIndices, androidSupportedShare);
+  String get androidSupportString =>
+      android_data.supportedString(android.platformIndices);
 
   double get iosSupportedShare => ios_data.supportedShare(ios.platformIndices);
 

@@ -15,12 +15,12 @@ typedef VersionConverter = String Function(int);
 
 String supportedString(
   List<int> platformIndices,
-  VersionConverter versionConverter,
+  VersionConverter versionConverter, {
   String osName,
   double share,
-) {
+}) {
   if (platformIndices.isEmpty) {
-    return '$osName unsupported';
+    return osName == null ? 'Unsupported' : '$osName unsupported';
   }
   final rangeStrings = platformIndices.ranges().map((range) {
     assert(range.length == 2, 'Range list must have two members; was $range');
@@ -32,7 +32,8 @@ String supportedString(
       return '$start–$end';
     }
   });
-  final withoutShare = '$osName ${rangeStrings.join(', ')}';
+  final range = rangeStrings.join(', ');
+  final withoutShare = osName == null ? range : '$osName $range';
 
   if (share == null) {
     return withoutShare;
