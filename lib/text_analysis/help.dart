@@ -91,6 +91,7 @@ class _Legend extends StatelessWidget {
                     'Supported by ≥$thresholdPct% of both iOS and Android devices'),
               )
             ]),
+            const SizedBox(height: 4),
             Row(children: <Widget>[
               kIconLimitedSupport,
               const SizedBox(width: 8),
@@ -99,6 +100,7 @@ class _Legend extends StatelessWidget {
                     'Supported by <$thresholdPct% of either iOS or Android devices'),
               )
             ]),
+            const SizedBox(height: 4),
             Row(children: const <Widget>[
               kIconUnsupported,
               SizedBox(width: 8),
