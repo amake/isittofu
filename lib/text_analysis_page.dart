@@ -224,7 +224,7 @@ class _CharacterBreakdown extends StatelessWidget {
     return PaginatedDataTable(
       header: const Text('Character Breakdown'),
       columns: const [
-        DataColumn(label: Text('Supported?')),
+        DataColumn(label: Text('')),
         DataColumn(label: Text('Character')),
         DataColumn(label: Text('Code Point')),
         DataColumn(label: Text('iOS Support')),
