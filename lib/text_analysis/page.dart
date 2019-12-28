@@ -6,6 +6,10 @@ import 'package:isittofu/window/window.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+const Icon kIconFullySupported = Icon(Icons.thumb_up, color: Colors.green);
+const Icon kIconLimitedSupport = Icon(Icons.warning, color: Colors.yellow);
+const Icon kIconUnsupported = Icon(Icons.not_interested, color: Colors.red);
+
 class TextAnalysisPage extends StatelessWidget {
   const TextAnalysisPage({Key key}) : super(key: key);
 

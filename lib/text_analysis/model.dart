@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:isittofu/text_analysis/analyzer.dart';
+import 'package:isittofu/text_analysis/page.dart';
 import 'package:isittofu/window/window.dart';
 
 class TextAnalysisModel extends ChangeNotifier with CharacterTableSource {
@@ -76,11 +77,11 @@ mixin CharacterTableSource implements DataTableSource {
 Widget supportLevelIcon(SupportLevel level) {
   switch (level) {
     case SupportLevel.fullySupported:
-      return const Icon(Icons.thumb_up, color: Colors.green);
+      return kIconFullySupported;
     case SupportLevel.limitedSupport:
-      return const Icon(Icons.warning, color: Colors.yellow);
+      return kIconLimitedSupport;
     case SupportLevel.unsupported:
-      return const Icon(Icons.not_interested, color: Colors.red);
+      return kIconUnsupported;
   }
   throw Exception('Unkonwn level: $level');
 }

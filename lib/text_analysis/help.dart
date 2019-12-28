@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:isittofu/text_analysis/page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HelpToggleButton extends StatelessWidget {
@@ -84,17 +85,17 @@ class _Legend extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Row(children: const <Widget>[
-            Icon(Icons.thumb_up, color: Colors.green),
+            kIconFullySupported,
             SizedBox(width: 4),
             Text('Supported by ≥70% of both iOS and Android devices')
           ]),
           Row(children: const <Widget>[
-            Icon(Icons.warning, color: Colors.yellow),
+            kIconLimitedSupport,
             SizedBox(width: 4),
             Text('Supported by <70% of either iOS or Android devices')
           ]),
           Row(children: const <Widget>[
-            Icon(Icons.not_interested, color: Colors.red),
+            kIconUnsupported,
             SizedBox(width: 4),
             Text('Unsupported on iOS and/or Android')
           ]),
