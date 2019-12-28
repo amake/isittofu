@@ -22,9 +22,13 @@ class TextAnalysisPage extends StatelessWidget {
         title: const Text('Is it tofu?'),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.info_outline),
+            icon: const Icon(Icons.favorite),
+            onPressed: () => launch('https://github.com/sponsors/amake'),
+          ),
+          IconButton(
+            icon: const Icon(Icons.info_outline),
             onPressed: () => launch('https://github.com/amake/isittofu'),
-          )
+          ),
         ],
       ),
       body: ChangeNotifierProvider(
