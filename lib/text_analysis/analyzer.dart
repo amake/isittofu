@@ -5,13 +5,13 @@ import 'package:isittofu/data/android.dart' deferred as android_data;
 import 'package:isittofu/data/ios.dart' deferred as ios_data;
 import 'package:isittofu/util.dart';
 
-const _kLimitedSupportThreshold = 0.7;
+const double kLimitedSupportThreshold = 0.7;
 
 enum SupportLevel { fullySupported, limitedSupport, unsupported }
 
 SupportLevel _supportLevel(bool overallSupport, double share) {
   if (overallSupport) {
-    return share < _kLimitedSupportThreshold
+    return share < kLimitedSupportThreshold
         ? SupportLevel.limitedSupport
         : SupportLevel.fullySupported;
   } else {

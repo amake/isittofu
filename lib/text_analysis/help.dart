@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:isittofu/text_analysis/analyzer.dart';
 import 'package:isittofu/text_analysis/page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -77,6 +78,7 @@ class _Legend extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final iconTheme = IconTheme.of(context);
+    final thresholdPct = (kLimitedSupportThreshold * 100).round();
     return Theme(
       data: theme.copyWith(
         iconTheme: iconTheme.copyWith(size: iconTheme.size * _scaleFactor),
@@ -84,15 +86,16 @@ class _Legend extends StatelessWidget {
       ),
       child: Column(
         children: <Widget>[
-          Row(children: const <Widget>[
+          Row(children: <Widget>[
             kIconFullySupported,
-            SizedBox(width: 8),
-            Text('Supported by ≥70% of both iOS and Android devices')
+            const SizedBox(width: 8),
+            Text('Supported by ≥$thresholdPct% of both iOS and Android devices')
           ]),
-          Row(children: const <Widget>[
+          Row(children: <Widget>[
             kIconLimitedSupport,
-            SizedBox(width: 8),
-            Text('Supported by <70% of either iOS or Android devices')
+            const SizedBox(width: 8),
+            Text(
+                'Supported by <$thresholdPct% of either iOS or Android devices')
           ]),
           Row(children: const <Widget>[
             kIconUnsupported,
