@@ -147,12 +147,12 @@ class CodePointAnalysis implements Comparable {
   @override
   int compareTo(Object other) {
     if (other is CodePointAnalysis) {
-      if (!partiallySupported && !other.partiallySupported) {
-        return 0;
-      } else if (partiallySupported && !other.partiallySupported) {
-        return 1;
-      } else if (!partiallySupported && other.partiallySupported) {
-        return -1;
+      final thisSupport = supportLevel;
+      final otherSupport = other.supportLevel;
+      if (thisSupport != otherSupport) {
+        final thisSupportIdx = SupportLevel.values.indexOf(thisSupport);
+        final otherSupportIdx = SupportLevel.values.indexOf(otherSupport);
+        return -thisSupportIdx.compareTo(otherSupportIdx);
       }
       // Checking Android first here is arbitrary
       final androidComp = android.compareTo(other.android);
