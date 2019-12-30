@@ -1,34 +1,33 @@
-import 'package:bloom_filter/bloom_filter.dart';
-import 'package:isittofu/data/android10-glyphs-decimal.g.dart';
-import 'package:isittofu/data/android15-glyphs-decimal.g.dart';
-import 'package:isittofu/data/android16-glyphs-decimal.g.dart';
-import 'package:isittofu/data/android17-glyphs-decimal.g.dart';
-import 'package:isittofu/data/android18-glyphs-decimal.g.dart';
-import 'package:isittofu/data/android19-glyphs-decimal.g.dart';
-import 'package:isittofu/data/android21-glyphs-decimal.g.dart';
-import 'package:isittofu/data/android23-glyphs-decimal.g.dart';
-import 'package:isittofu/data/android24-glyphs-decimal.g.dart';
-import 'package:isittofu/data/android26-glyphs-decimal.g.dart';
-import 'package:isittofu/data/android28-glyphs-decimal.g.dart';
-import 'package:isittofu/data/android29-glyphs-decimal.g.dart';
+import 'package:isittofu/data/android10.g.dart';
+import 'package:isittofu/data/android15.g.dart';
+import 'package:isittofu/data/android16.g.dart';
+import 'package:isittofu/data/android17.g.dart';
+import 'package:isittofu/data/android18.g.dart';
+import 'package:isittofu/data/android19.g.dart';
+import 'package:isittofu/data/android21.g.dart';
+import 'package:isittofu/data/android23.g.dart';
+import 'package:isittofu/data/android24.g.dart';
+import 'package:isittofu/data/android26.g.dart';
+import 'package:isittofu/data/android28.g.dart';
+import 'package:isittofu/data/android29.g.dart';
 import 'package:isittofu/data/common.dart' as common;
 
-final List<BloomFilter> bloomFilters = List.unmodifiable([
-  android10GlyphsDecimalBloomFilter,
-  android15GlyphsDecimalBloomFilter,
-  android16GlyphsDecimalBloomFilter,
-  android17GlyphsDecimalBloomFilter,
-  android18GlyphsDecimalBloomFilter,
-  android19GlyphsDecimalBloomFilter,
-  android21GlyphsDecimalBloomFilter,
-  android21GlyphsDecimalBloomFilter, // Android 22 is same as Android 21
-  android23GlyphsDecimalBloomFilter,
-  android24GlyphsDecimalBloomFilter,
-  android24GlyphsDecimalBloomFilter, // Android 25 is same as Android 24
-  android26GlyphsDecimalBloomFilter,
-  android26GlyphsDecimalBloomFilter, // Android 27 is same as Android 26
-  android28GlyphsDecimalBloomFilter,
-  android29GlyphsDecimalBloomFilter,
+final List<RegExp> patterns = List.unmodifiable([
+  android10Pattern,
+  android15Pattern,
+  android16Pattern,
+  android17Pattern,
+  android18Pattern,
+  android19Pattern,
+  android21Pattern,
+  android21Pattern, // Android 22 is same as Android 21
+  android23Pattern,
+  android24Pattern,
+  android24Pattern, // Android 25 is same as Android 24
+  android26Pattern,
+  android26Pattern, // Android 27 is same as Android 26
+  android28Pattern,
+  android29Pattern,
 ]);
 
 enum AndroidPlatform {
@@ -97,7 +96,7 @@ String platformToVersionString(int platformIdx) =>
     sdkToVersion[AndroidPlatform.values[platformIdx]];
 
 Iterable<int> supportingIndices(int codePoint) =>
-    overrides[codePoint] ?? common.supportingIndices(codePoint, bloomFilters);
+    overrides[codePoint] ?? common.supportingIndices(codePoint, patterns);
 
 String supportedString(
   List<int> platformIndices, {

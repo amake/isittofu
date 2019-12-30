@@ -1,11 +1,9 @@
-import 'package:bloom_filter/bloom_filter.dart';
 import 'package:isittofu/util.dart';
 
-Iterable<int> supportingIndices(
-    int codePoint, List<BloomFilter> bloomFilters) sync* {
-  for (var i = 0; i < bloomFilters.length; i++) {
-    final b = bloomFilters[i];
-    if (b.mightContain(codePoint)) {
+Iterable<int> supportingIndices(int codePoint, List<RegExp> patterns) sync* {
+  for (var i = 0; i < patterns.length; i++) {
+    final b = patterns[i];
+    if (b.hasMatch(String.fromCharCode(codePoint))) {
       yield i;
     }
   }

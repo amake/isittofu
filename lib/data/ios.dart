@@ -1,48 +1,47 @@
-import 'package:bloom_filter/bloom_filter.dart';
 import 'package:isittofu/data/common.dart' as common;
-import 'package:isittofu/data/ios10.0-glyphs-decimal.g.dart';
-import 'package:isittofu/data/ios10.2-glyphs-decimal.g.dart';
-import 'package:isittofu/data/ios11.0-glyphs-decimal.g.dart';
-import 'package:isittofu/data/ios11.1-glyphs-decimal.g.dart';
-import 'package:isittofu/data/ios11.3-glyphs-decimal.g.dart';
-import 'package:isittofu/data/ios12.0-glyphs-decimal.g.dart';
-import 'package:isittofu/data/ios12.1-glyphs-decimal.g.dart';
-import 'package:isittofu/data/ios12.4-glyphs-decimal.g.dart';
-import 'package:isittofu/data/ios13.0-glyphs-decimal.g.dart';
-import 'package:isittofu/data/ios13.2-glyphs-decimal.g.dart';
-import 'package:isittofu/data/ios8.0-glyphs-decimal.g.dart';
-import 'package:isittofu/data/ios8.2-glyphs-decimal.g.dart';
-import 'package:isittofu/data/ios8.3-glyphs-decimal.g.dart';
-import 'package:isittofu/data/ios9.0-glyphs-decimal.g.dart';
-import 'package:isittofu/data/ios9.1-glyphs-decimal.g.dart';
+import 'package:isittofu/data/ios10.0.g.dart';
+import 'package:isittofu/data/ios10.2.g.dart';
+import 'package:isittofu/data/ios11.0.g.dart';
+import 'package:isittofu/data/ios11.1.g.dart';
+import 'package:isittofu/data/ios11.3.g.dart';
+import 'package:isittofu/data/ios12.0.g.dart';
+import 'package:isittofu/data/ios12.1.g.dart';
+import 'package:isittofu/data/ios12.4.g.dart';
+import 'package:isittofu/data/ios13.0.g.dart';
+import 'package:isittofu/data/ios13.2.g.dart';
+import 'package:isittofu/data/ios8.0.g.dart';
+import 'package:isittofu/data/ios8.2.g.dart';
+import 'package:isittofu/data/ios8.3.g.dart';
+import 'package:isittofu/data/ios9.0.g.dart';
+import 'package:isittofu/data/ios9.1.g.dart';
 
-final List<BloomFilter> bloomFilters = List.unmodifiable([
-  ios8_0GlyphsDecimalBloomFilter,
-  ios8_0GlyphsDecimalBloomFilter, // iOS 8.1 is same as iOS 8.0
-  ios8_2GlyphsDecimalBloomFilter,
-  ios8_3GlyphsDecimalBloomFilter,
-  ios8_3GlyphsDecimalBloomFilter, // iOS 8.4 is same as iOS 8.3
-  ios9_0GlyphsDecimalBloomFilter,
-  ios9_1GlyphsDecimalBloomFilter,
-  ios9_1GlyphsDecimalBloomFilter, // iOS 9.2 is same as iOS 9.1
-  ios9_1GlyphsDecimalBloomFilter, // iOS 9.3 is same as iOS 9.1
-  ios10_0GlyphsDecimalBloomFilter,
-  ios10_0GlyphsDecimalBloomFilter, // iOS 10.1 is same as iOS 10.0
-  ios10_2GlyphsDecimalBloomFilter,
-  ios10_2GlyphsDecimalBloomFilter, // iOS 10.3 is same as iOS 10.2
-  ios11_0GlyphsDecimalBloomFilter,
-  ios11_1GlyphsDecimalBloomFilter,
-  ios11_1GlyphsDecimalBloomFilter, // iOS 11.2 is same as iOS 11.1
-  ios11_3GlyphsDecimalBloomFilter,
-  ios11_3GlyphsDecimalBloomFilter, // iOS 11.4 is same as iOS 11.3
-  ios12_0GlyphsDecimalBloomFilter,
-  ios12_1GlyphsDecimalBloomFilter,
-  ios12_1GlyphsDecimalBloomFilter, // iOS 12.2 is same as iOS 12.1
-  ios12_4GlyphsDecimalBloomFilter,
-  ios13_0GlyphsDecimalBloomFilter,
-  ios13_0GlyphsDecimalBloomFilter, // iOS 13.1 is same as iOS 13.0
-  ios13_2GlyphsDecimalBloomFilter,
-  ios13_2GlyphsDecimalBloomFilter, // iOS 13.3 is same as iOS 13.2
+final List<RegExp> patterns = List.unmodifiable([
+  ios8_0Pattern,
+  ios8_0Pattern, // iOS 8.1 is same as iOS 8.0
+  ios8_2Pattern,
+  ios8_3Pattern,
+  ios8_3Pattern, // iOS 8.4 is same as iOS 8.3
+  ios9_0Pattern,
+  ios9_1Pattern,
+  ios9_1Pattern, // iOS 9.2 is same as iOS 9.1
+  ios9_1Pattern, // iOS 9.3 is same as iOS 9.1
+  ios10_0Pattern,
+  ios10_0Pattern, // iOS 10.1 is same as iOS 10.0
+  ios10_2Pattern,
+  ios10_2Pattern, // iOS 10.3 is same as iOS 10.2
+  ios11_0Pattern,
+  ios11_1Pattern,
+  ios11_1Pattern, // iOS 11.2 is same as iOS 11.1
+  ios11_3Pattern,
+  ios11_3Pattern, // iOS 11.4 is same as iOS 11.3
+  ios12_0Pattern,
+  ios12_1Pattern,
+  ios12_1Pattern, // iOS 12.2 is same as iOS 12.1
+  ios12_4Pattern,
+  ios13_0Pattern,
+  ios13_0Pattern, // iOS 13.1 is same as iOS 13.0
+  ios13_2Pattern,
+  ios13_2Pattern, // iOS 13.3 is same as iOS 13.2
 ]);
 
 enum IosPlatform {
@@ -111,7 +110,7 @@ String _toVersionString(int platformIdx) => IosPlatform.values[platformIdx]
     .replaceFirst('_', '.');
 
 Iterable<int> supportingIndices(int codePoint) =>
-    common.supportingIndices(codePoint, bloomFilters);
+    common.supportingIndices(codePoint, patterns);
 
 String supportedString(
   List<int> platformIndices, {
