@@ -45,7 +45,8 @@ ThemeData _buildTheme() {
       ),
     ),
     iconTheme: base.iconTheme.copyWith(size: 27),
-    textTheme: base.textTheme.apply(fontFamily: 'Poppins').copyWith(
+    textTheme: base.textTheme
+        .copyWith(
           display1: base.textTheme.display1.copyWith(
             fontWeight: FontWeight.w900,
             fontSize: 54,
@@ -62,7 +63,8 @@ ThemeData _buildTheme() {
             fontWeight: FontWeight.w600,
             fontSize: 18,
           ),
-        ),
+        )
+        .apply(fontFamily: 'Poppins'),
     cardTheme: base.cardTheme.copyWith(
       margin: EdgeInsets.symmetric(
         horizontal: base.cardTheme.margin?.horizontal ?? 8,
