@@ -1,14 +1,14 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:html/dom.dart' as dom;
 import 'package:isittofu/text_analysis/help.dart';
 import 'package:isittofu/text_analysis/model.dart';
+import 'package:isittofu/theme.dart';
 import 'package:isittofu/window/window.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-const Icon kIconFullySupported = Icon(Icons.thumb_up, color: Colors.green);
-const Icon kIconLimitedSupport = Icon(Icons.warning, color: Colors.yellow);
-const Icon kIconUnsupported = Icon(Icons.not_interested, color: Colors.red);
 
 class TextAnalysisPage extends StatelessWidget {
   const TextAnalysisPage({Key key}) : super(key: key);
@@ -19,14 +19,13 @@ class TextAnalysisPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Is it tofu?'),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.favorite),
             onPressed: () => launch('https://github.com/sponsors/amake'),
           ),
           IconButton(
-            icon: const Icon(Icons.info_outline),
+            icon: const Icon(Icons.info),
             onPressed: () => launch('https://github.com/amake/isittofu'),
           ),
         ],
@@ -38,19 +37,25 @@ class TextAnalysisPage extends StatelessWidget {
           child: Container(
             constraints: const BoxConstraints(maxWidth: 800),
             child: Builder(
-              builder: (context) => ListView(
-                children: <Widget>[
-                  const _TextInputCard(),
-                  //const SizedBox(height: 32),
-                  if (!Provider.of<TextAnalysisModel>(context)
-                      .analysis
-                      .isEmpty) ...[
-                    const _CompatibilitySummary(),
-                    const _CharacterBreakdown(),
-                  ] else
-                    const _LoadingProgress(),
-                ],
-              ),
+              builder: (context) {
+                return ListView(
+                  shrinkWrap: true,
+                  children: <Widget>[
+                    const _TextInputCard(),
+                    const SizedBox(height: 24),
+                    AnimatedShowHide(
+                      Provider.of<TextAnalysisModel>(context).isNotEmpty,
+                      shownChild: Column(
+                        children: const <Widget>[
+                          _CompatibilitySummary(),
+                          _CharacterBreakdown(),
+                        ],
+                      ),
+                      hiddenChild: const _LoadingProgress(),
+                    ),
+                  ],
+                );
+              },
             ),
           ),
         ),
@@ -89,33 +94,78 @@ class _TextInputCardState extends State<_TextInputCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              'Is your text visible on mobile? Enter it here to see if any of it turns to “tofu”.',
-              style: Theme.of(context).textTheme.title,
-            ),
-            const SizedBox(height: 24),
-            TextField(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Input text to check here...',
+    return Padding(
+      padding: const EdgeInsets.all(4),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          const _Logo(),
+          Text(
+            'Is your text visible on mobile? Check it out now!',
+            style: Theme.of(context).textTheme.title,
+          ),
+          const SizedBox(height: 26),
+          Material(
+            elevation: 10,
+            shadowColor: kShadowColor,
+            child: TextField(
+              decoration: InputDecoration(
+                hintText:
+                    'Enter it here to see if any of it turns to “tofu”...',
+                suffixIcon: _ClearTextButton(_controller),
               ),
+              minLines: 1,
               maxLines: 10,
-              minLines: 5,
               controller: _controller,
               // This doesn't work right in Flutter Web: on mobile the
               // keyboard won't show up, but the field has focus and can't
               // be refocused so you can't force it to appear either.
               //autofocus: true,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
+    );
+  }
+}
+
+class _ClearTextButton extends StatelessWidget {
+  const _ClearTextButton(this.controller, {Key key})
+      : assert(controller != null),
+        super(key: key);
+
+  final TextEditingController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return ValueListenableBuilder<TextEditingValue>(
+      valueListenable: controller,
+      builder: (context, value, child) =>
+          value.text.isNotEmpty ? child : const SizedBox.shrink(),
+      child: IconButton(
+        icon: const CushionIcon(child: Icon(Icons.clear)),
+        onPressed: controller.clear,
+      ),
+    );
+  }
+}
+
+class _Logo extends StatelessWidget {
+  const _Logo({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Html(
+      data: 'Is it <span>tofu?</span>'.toUpperCase(),
+      shrinkToFit: true,
+      defaultTextStyle: Theme.of(context).textTheme.display1,
+      customTextStyle: (node, style) {
+        if (node is dom.Element && node.localName == 'span') {
+          return style.copyWith(color: Theme.of(context).accentColor);
+        } else {
+          return style;
+        }
+      },
     );
   }
 }
@@ -129,11 +179,12 @@ class _CompatibilitySummary extends StatelessWidget {
     final expanded = ValueNotifier(false);
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.fromLTRB(24, 8, 24, 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
                   'Overall Compatibility',
@@ -143,7 +194,7 @@ class _CompatibilitySummary extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 8, bottom: 16),
+              padding: const EdgeInsets.only(top: 6, bottom: 14),
               child: ExpandableHelpText(expanded),
             ),
             Container(
@@ -189,17 +240,27 @@ class _CharacterBreakdown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PaginatedDataTable(
-      header: const Text('Character Breakdown'),
-      columns: const [
-        DataColumn(label: Text('')),
-        DataColumn(label: Text('Character')),
-        DataColumn(label: Text('Code Point')),
-        DataColumn(label: Text('iOS Support')),
-        DataColumn(label: Text('Android Support')),
+      // Work around inflexibility of PaginatedDataTable by manually
+      // re-applying app text theme
+      header: DefaultTextStyle.merge(
+        style: appTheme.textTheme.title,
+        child: const Text('Character Breakdown'),
+      ),
+      columns: [
+        const DataColumn(label: SizedBox.shrink()),
+        DataColumn(label: _fixFontFamily(Text('Character'.toUpperCase()))),
+        DataColumn(label: _fixFontFamily(Text('Code Point'.toUpperCase()))),
+        DataColumn(label: _fixFontFamily(Text('iOS Support'.toUpperCase()))),
+        DataColumn(
+            label: _fixFontFamily(Text('Android Support'.toUpperCase()))),
       ],
       source: Provider.of<TextAnalysisModel>(context, listen: false),
     );
   }
+
+  Widget _fixFontFamily(Widget child) => DefaultTextStyle.merge(
+      style: TextStyle(fontFamily: appTheme.textTheme.body1.fontFamily),
+      child: child);
 }
 
 class _LoadingProgress extends StatelessWidget {

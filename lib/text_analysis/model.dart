@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:isittofu/text_analysis/analyzer.dart';
-import 'package:isittofu/text_analysis/page.dart';
+import 'package:isittofu/theme.dart';
 import 'package:isittofu/window/window.dart';
 
 class TextAnalysisModel extends ChangeNotifier with CharacterTableSource {
@@ -24,12 +24,14 @@ class TextAnalysisModel extends ChangeNotifier with CharacterTableSource {
   TextAnalysis get analysis => _analysis;
 
   final ValueNotifier<bool> busy = ValueNotifier(false);
+  final ValueNotifier<bool> isNotEmpty = ValueNotifier(false);
 
   Future<void> setText(String text) async {
     if (_text != text) {
       _text = text;
       busy.value = true;
       _analysis = await const Analyzer().analyzeText(text);
+      isNotEmpty.value = !_analysis.isEmpty;
       busy.value = false;
       notifyListeners();
       window.setQuery({'q': text});
@@ -51,16 +53,20 @@ mixin CharacterTableSource implements DataTableSource {
       cells: [
         DataCell(supportLevelIcon(codePointAnalysis.supportLevel)),
         DataCell(DefaultTextStyle.merge(
-          style: TextStyle(
-              fontSize: Theme.of(context).textTheme.display1.fontSize),
+          style: const TextStyle(fontSize: 24),
           child: Text(codePointAnalysis.codePointDisplayString),
         )),
-        DataCell(Text(codePointAnalysis.codePointHex)),
-        DataCell(Text(codePointAnalysis.iosSupportString)),
-        DataCell(Text(codePointAnalysis.androidSupportString))
+        // Work around inflexibility of PaginatedDataTable by manually
+        // re-applying app text theme
+        DataCell(_fixBodyText(Text(codePointAnalysis.codePointHex))),
+        DataCell(_fixBodyText(Text(codePointAnalysis.iosSupportString))),
+        DataCell(_fixBodyText(Text(codePointAnalysis.androidSupportString)))
       ],
     );
   }
+
+  Widget _fixBodyText(Widget child) =>
+      DefaultTextStyle.merge(style: appTheme.textTheme.body1, child: child);
 
   @override
   bool get isRowCountApproximate => false;
@@ -81,5 +87,6 @@ Widget supportLevelIcon(SupportLevel level) {
     case SupportLevel.unsupported:
       return kIconUnsupported;
   }
-  throw Exception('Unkonwn level: $level');
+  // Can happen during animated hiding/showing
+  return const SizedBox.shrink();
 }
