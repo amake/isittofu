@@ -41,6 +41,7 @@ class TextAnalysisPage extends StatelessWidget {
               builder: (context) {
                 return ListView(
                   shrinkWrap: true,
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   children: <Widget>[
                     const _TextInputCard(),
                     const SizedBox(height: 24),
