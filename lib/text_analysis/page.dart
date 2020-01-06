@@ -230,13 +230,12 @@ class _CompatibilitySummary extends StatelessWidget {
 }
 
 class _PlatformSummary extends StatelessWidget {
-  const _PlatformSummary(
-      {@required this.supportLevel,
-      @required this.text,
-      @required this.icon,
-      Key key})
-      : assert(supportLevel != null),
-        assert(text != null),
+  const _PlatformSummary({
+    @required this.supportLevel,
+    @required this.text,
+    @required this.icon,
+    Key key,
+  })  : assert(text != null),
         assert(icon != null),
         super(key: key);
   final SupportLevel supportLevel;
