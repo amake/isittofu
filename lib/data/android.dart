@@ -86,10 +86,13 @@ const List<double> distribution = [
   0,
 ];
 
+final _allPlatformIndices =
+    List.generate(AndroidPlatform.values.length, (i) => i);
+
 final Map<int, List<int>> overrides = Map.unmodifiable({
-  // VARIATION SELECTOR-16 does not have a glyph in Android fonts (it happens to
-  // have one in Apple Color Emoji) but is supported
-  0xfe0f: List.generate(AndroidPlatform.values.length, (i) => i),
+  // VARIATION SELECTORs do not have a glyph in Android fonts (it happens to
+  // have one in some versions of Apple Color Emoji) but is supported
+  for (var i = 0xfe00; i <= 0xfe0f; i++) i: _allPlatformIndices,
 });
 
 String platformToVersionString(int platformIdx) =>

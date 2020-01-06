@@ -103,6 +103,13 @@ const List<double> distribution = [
   0.5 / 4,
 ];
 
+final _allPlatformIndices = List.generate(IosPlatform.values.length, (i) => i);
+
+final Map<int, List<int>> overrides = Map.unmodifiable({
+  // VARIATION SELECTORs do not have glyphs in all versions but are supported
+  for (var i = 0xfe00; i <= 0xfe0f; i++) i: _allPlatformIndices,
+});
+
 String _toVersionString(int platformIdx) => IosPlatform.values[platformIdx]
     .toString()
     .split('.')[1]
@@ -110,7 +117,7 @@ String _toVersionString(int platformIdx) => IosPlatform.values[platformIdx]
     .replaceFirst('_', '.');
 
 Iterable<int> supportingIndices(int codePoint) =>
-    common.supportingIndices(codePoint, patterns);
+    overrides[codePoint] ?? common.supportingIndices(codePoint, patterns);
 
 String supportedString(
   List<int> platformIndices, {
