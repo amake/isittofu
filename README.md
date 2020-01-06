@@ -25,7 +25,9 @@ Note that this methodology is not completely accurate. Known issues:
 
 - Codepoints may be supported but not have glyphs (especially e.g. [variation
   selectors](https://en.wikipedia.org/wiki/Variation_Selectors_(Unicode_block)))
-- Especially on Android, vendors may bundle different fonts
+- Especially on Android, vendors may bundle different fonts. Even "vanilla"
+  Android may have different fonts from the SDK
+  ([example](https://github.com/amake/isittofu/issues/1))
 
 If you find any inaccuracies, please feel free to [open an
 issue](https://github.com/amake/isittofu/issues).
