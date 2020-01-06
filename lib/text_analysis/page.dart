@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:html/dom.dart' as dom;
+import 'package:isittofu/text_analysis/analyzer.dart';
 import 'package:isittofu/text_analysis/help.dart';
 import 'package:isittofu/text_analysis/model.dart';
 import 'package:isittofu/theme.dart';
@@ -208,25 +209,15 @@ class _CompatibilitySummary extends StatelessWidget {
                 spacing: 16,
                 alignment: WrapAlignment.spaceBetween,
                 children: <Widget>[
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      supportLevelIcon(analysis.androidSupportLevel),
-                      const SizedBox(width: 8),
-                      const Icon(Icons.android),
-                      const SizedBox(width: 8),
-                      Text(analysis.androidSupportString),
-                    ],
+                  _PlatformSummary(
+                    supportLevel: analysis.androidSupportLevel,
+                    text: analysis.androidSupportString,
+                    icon: const Icon(Icons.android),
                   ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      supportLevelIcon(analysis.iosSupportLevel),
-                      const SizedBox(width: 8),
-                      const Icon(Icons.phone_iphone),
-                      const SizedBox(width: 8),
-                      Text(analysis.iosSupportString)
-                    ],
+                  _PlatformSummary(
+                    supportLevel: analysis.iosSupportLevel,
+                    text: analysis.iosSupportString,
+                    icon: const Icon(Icons.phone_iphone),
                   ),
                 ],
               ),
@@ -234,6 +225,38 @@ class _CompatibilitySummary extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _PlatformSummary extends StatelessWidget {
+  const _PlatformSummary(
+      {@required this.supportLevel,
+      @required this.text,
+      @required this.icon,
+      Key key})
+      : assert(supportLevel != null),
+        assert(text != null),
+        assert(icon != null),
+        super(key: key);
+  final SupportLevel supportLevel;
+  final String text;
+  final Widget icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        supportLevelIcon(supportLevel),
+        const SizedBox(width: 8),
+        Transform.scale(
+          child: icon,
+          scale: 0.8,
+        ),
+        const SizedBox(width: 8),
+        Text(text)
+      ],
     );
   }
 }
