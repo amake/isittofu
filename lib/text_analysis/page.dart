@@ -55,6 +55,9 @@ class TextAnalysisPage extends StatelessWidget {
                       ),
                       hiddenChild: const _LoadingProgress(),
                     ),
+                    // Offset the size of the appbar to make the content appear
+                    // vertically centered when collapsed
+                    const SizedBox(height: kToolbarHeight),
                   ],
                 );
               },
