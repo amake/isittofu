@@ -1,5 +1,5 @@
 name: isittofu
-description: A new Flutter project.
+description: A tool for analyzing mobile OS codepoint coverage
 version: 1.0.0+1
 
 environment:

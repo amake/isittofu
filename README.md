@@ -1,16 +1,31 @@
-# isittofu
+# Is It Tofu?
 
-A new Flutter project.
+This is a tool for figuring out if a given piece of text contains characters
+that will become "tofu" on mobile platforms (specifically iOS and Android).
 
-## Getting Started
+"Tofu" refers to the blank white square (□) sometimes shown in place of an
+unsupported character.
 
-This project is a starting point for a Flutter application.
+## Methodology
 
-A few resources to get you started if this is your first Flutter project:
+The input text is split up into UTF-16 Unicode codepoints, and is compared
+against data compiled by the
+[CodePointCoverage](https://github.com/amake/CodePointCoverage) project.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Coverage is determined by inspecting the font files that are bundled with the
+OS. If there is at least one font providing a glyph (more specifically, with an
+entry in the `cmap` table) for a given codepoint, that codepoint is considered
+"covered".
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+For iOS, the fonts are taken from the iOS Simulator runtimes bundled with
+various versions of Xcode. For Android, the fonts are taken from the Android
+Emulator system images downloadable with the Android SDK.
+
+Note that this methodology is not completely accurate. Known issues:
+
+- Codepoints may be supported but not have glyphs (especially e.g. [variation
+  selectors](https://en.wikipedia.org/wiki/Variation_Selectors_(Unicode_block)))
+- Especially on Android, vendors may bundle different fonts
+
+If you find any inaccuracies, please feel free to [open an
+issue](https://github.com/amake/isittofu/issues).
