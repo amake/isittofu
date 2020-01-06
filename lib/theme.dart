@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 const Color kAccentColor = Color(0xff3eb3f8);
 const Color kShadowColor = Color(0xffcccccc);
+const Color kTextColor = Color(0xcc000000);
+const Color kIconColor = Color(0xaa000000);
 
 final Widget kIconFullySupported = CushionIcon(
   child: Transform.scale(
@@ -44,7 +46,7 @@ ThemeData _buildTheme() {
         opacity: 0.3,
       ),
     ),
-    iconTheme: base.iconTheme.copyWith(size: 27),
+    iconTheme: base.iconTheme.copyWith(size: 27, color: kIconColor),
     textTheme: base.textTheme
         .copyWith(
           display1: base.textTheme.display1.copyWith(
@@ -64,7 +66,11 @@ ThemeData _buildTheme() {
             fontSize: 18,
           ),
         )
-        .apply(fontFamily: 'Poppins'),
+        .apply(
+          fontFamily: 'Poppins',
+          bodyColor: kTextColor,
+          displayColor: kTextColor,
+        ),
     cardTheme: base.cardTheme.copyWith(
       margin: EdgeInsets.symmetric(
         horizontal: base.cardTheme.margin?.horizontal ?? 8,
