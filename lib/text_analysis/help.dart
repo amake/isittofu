@@ -26,6 +26,7 @@ class HelpToggleButton extends StatelessWidget {
         ),
       ),
       onPressed: () => enabled.value = !enabled.value,
+      tooltip: 'Learn More',
     );
   }
 }

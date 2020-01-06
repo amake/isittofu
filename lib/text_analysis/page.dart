@@ -23,10 +23,12 @@ class TextAnalysisPage extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.favorite),
+            tooltip: 'Support the Author',
             onPressed: () => launch('https://github.com/sponsors/amake'),
           ),
           IconButton(
             icon: const Icon(Icons.info),
+            tooltip: 'About & Source Code',
             onPressed: () => launch('https://github.com/amake/isittofu'),
           ),
         ],
