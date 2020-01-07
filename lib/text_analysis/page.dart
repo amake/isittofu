@@ -190,7 +190,9 @@ class _CompatibilitySummary extends StatelessWidget {
     final expanded = ValueNotifier(false);
     return Card(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(24, 8, 24, 24),
+        // Right padding is small to allow the help button to get closer to the
+        // right edge
+        padding: const EdgeInsets.fromLTRB(24, 8, 8, 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -211,6 +213,8 @@ class _CompatibilitySummary extends StatelessWidget {
             ),
             Container(
               width: double.infinity,
+              // Compensate for small right-side padding
+              padding: const EdgeInsets.only(right: 16),
               child: Wrap(
                 runSpacing: 16,
                 spacing: 16,
