@@ -43,7 +43,7 @@ class TextAnalysisPage extends StatelessWidget {
               builder: (context) {
                 return ListView(
                   shrinkWrap: true,
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
                   children: <Widget>[
                     const _TextInputCard(),
                     const SizedBox(height: 24),
@@ -167,7 +167,7 @@ class _Logo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Html(
-      data: 'Is it <span>tofu?</span>'.toUpperCase(),
+      data: '<center>Is it <span>tofu?</span></center>'.toUpperCase(),
       shrinkToFit: true,
       defaultTextStyle: Theme.of(context).textTheme.display1,
       customTextStyle: (node, style) {
@@ -195,11 +195,12 @@ class _CompatibilitySummary extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(
-                  'Overall Compatibility',
-                  style: Theme.of(context).textTheme.title,
+                Expanded(
+                  child: Text(
+                    'Overall Compatibility',
+                    style: Theme.of(context).textTheme.title,
+                  ),
                 ),
                 HelpToggleButton(expanded),
               ],
@@ -260,7 +261,7 @@ class _PlatformSummary extends StatelessWidget {
           scale: 0.8,
         ),
         const SizedBox(width: 8),
-        Text(text)
+        Expanded(child: Text(text))
       ],
     );
   }
