@@ -37,7 +37,7 @@ class TextAnalysisPage extends StatelessWidget {
         create: (context) =>
             TextAnalysisModel(context, initialText: initialText),
         child: Center(
-          child: Container(
+          child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 800),
             child: Builder(
               builder: (context) {
