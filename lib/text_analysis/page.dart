@@ -319,9 +319,9 @@ String _issueTitle(Issue issue) {
 String _issueText(Issue issue) {
   switch (issue.type) {
     case IssueType.mathA11y:
-      return 'Mathematical alphanumerical symbols (${issue.codePointsAsCSV}) '
-          'are not recommended for use as stylzed text, and can cause problems '
-          'with accessibility tools like screen readers';
+      return 'Mathematical alphanumeric symbols (${issue.codePointsAsCSV}) are '
+          'not recommended for use as stylzed text, and can cause problems with '
+          'accessibility tools like screen readers';
   }
   throw Exception('Unknown issue type: ${issue.type}');
 }
