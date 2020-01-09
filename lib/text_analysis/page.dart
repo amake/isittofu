@@ -265,7 +265,7 @@ class _PlatformSummary extends StatelessWidget {
           scale: 0.8,
         ),
         const SizedBox(width: 8),
-        Expanded(child: Text(text))
+        Flexible(child: Text(text)),
       ],
     );
   }
