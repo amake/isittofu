@@ -41,6 +41,7 @@ class TextAnalysisPage extends StatelessWidget {
             constraints: const BoxConstraints(maxWidth: 800),
             child: Builder(
               builder: (context) {
+                final model = Provider.of<TextAnalysisModel>(context);
                 return ListView(
                   shrinkWrap: true,
                   padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -48,11 +49,12 @@ class TextAnalysisPage extends StatelessWidget {
                     const _TextInputCard(),
                     const SizedBox(height: 24),
                     AnimatedShowHide(
-                      Provider.of<TextAnalysisModel>(context).isNotEmpty,
+                      model.isNotEmpty,
                       shownChild: Column(
-                        children: const <Widget>[
-                          _CompatibilitySummary(),
-                          _CharacterBreakdown(),
+                        children: <Widget>[
+                          const _CompatibilitySummary(),
+                          if (model.analysis.hasIssues) const _IssuesList(),
+                          const _CharacterBreakdown(),
                         ],
                       ),
                       hiddenChild: const _LoadingProgress(),
@@ -269,6 +271,59 @@ class _PlatformSummary extends StatelessWidget {
       ],
     );
   }
+}
+
+class _IssuesList extends StatelessWidget {
+  const _IssuesList({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final analysis = Provider.of<TextAnalysisModel>(context).analysis;
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              'Issues',
+              style: Theme.of(context).textTheme.title,
+            ),
+            const SizedBox(height: 32),
+            for (final issue in analysis.issues)
+              Row(
+                children: <Widget>[
+                  Tooltip(
+                    child: kIconIssueA11y,
+                    message: _issueTitle(issue),
+                  ),
+                  const SizedBox(width: 24),
+                  Expanded(child: Text(_issueText(issue))),
+                ],
+              )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+String _issueTitle(Issue issue) {
+  switch (issue.type) {
+    case IssueType.mathA11y:
+      return 'Accessibility';
+  }
+  throw Exception('Unknown issue type: ${issue.type}');
+}
+
+String _issueText(Issue issue) {
+  switch (issue.type) {
+    case IssueType.mathA11y:
+      return 'Mathematical alphanumerical symbols (${issue.codePointsAsCSV}) '
+          'are not recommended for use as stylzed text, and can cause problems '
+          'with accessibility tools like screen readers';
+  }
+  throw Exception('Unknown issue type: ${issue.type}');
 }
 
 class _CharacterBreakdown extends StatelessWidget {

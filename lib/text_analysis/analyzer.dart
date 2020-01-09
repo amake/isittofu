@@ -19,6 +19,19 @@ SupportLevel _supportLevel(bool overallSupport, double share) {
   }
 }
 
+enum IssueType { mathA11y }
+
+class Issue {
+  Issue(this.type, Iterable<int> codePoints)
+      : codePoints = List.unmodifiable(codePoints);
+
+  final IssueType type;
+  final List<int> codePoints;
+
+  String get codePointsAsCSV =>
+      codePoints.map((cp) => String.fromCharCode(cp)).join(', ');
+}
+
 class Analyzer {
   const Analyzer();
 
@@ -28,7 +41,8 @@ class Analyzer {
     for (final codePoint in uniqueCodePoints) {
       codePointAnalyses[codePoint] = await analyzeCodePoint(codePoint);
     }
-    return TextAnalysis(text, uniqueCodePoints, codePointAnalyses);
+    final issues = findIssues(text);
+    return TextAnalysis(text, uniqueCodePoints, codePointAnalyses, issues);
   }
 
   Future<CodePointAnalysis> analyzeCodePoint(int codePoint) async {
@@ -44,26 +58,43 @@ class Analyzer {
       android: CodePointPlatformAnalysis(codePoint, androidIndices),
     );
   }
+
+  Iterable<Issue> findIssues(String text) sync* {
+    final mathAlphanumerics = text.runes.where(_isMathematicalAlphanumeric);
+    if (mathAlphanumerics.isNotEmpty) {
+      yield Issue(IssueType.mathA11y, mathAlphanumerics.unique());
+    }
+  }
 }
 
-class TextAnalysis {
-  TextAnalysis.empty() : this('', [], {});
+bool _isMathematicalAlphanumeric(int codePoint) =>
+    0x1d400 <= codePoint && codePoint <= 0x1d7ff;
 
-  TextAnalysis(this.text, Iterable<int> uniqueCodePoints,
-      Map<int, CodePointAnalysis> analysis)
-      : assert(text != null),
+class TextAnalysis {
+  TextAnalysis.empty() : this('', [], {}, []);
+
+  TextAnalysis(
+    this.text,
+    Iterable<int> uniqueCodePoints,
+    Map<int, CodePointAnalysis> analysis,
+    Iterable<Issue> issues,
+  )   : assert(text != null),
         assert(uniqueCodePoints != null),
         assert(analysis != null),
         uniqueCodePoints = List.unmodifiable(uniqueCodePoints),
         sortedCodePoints = List.unmodifiable(List.of(uniqueCodePoints)
           ..sort((a, b) => analysis[a].compareTo(analysis[b]))),
-        codePointAnalyses = Map.unmodifiable(analysis);
+        codePointAnalyses = Map.unmodifiable(analysis),
+        issues = List.unmodifiable(issues);
   final String text;
   final List<int> uniqueCodePoints;
   final Map<int, CodePointAnalysis> codePointAnalyses;
   final List<int> sortedCodePoints;
+  final List<Issue> issues;
 
   bool get isEmpty => text.isEmpty;
+
+  bool get hasIssues => issues.isNotEmpty;
 
   CodePointAnalysis analysisForIndex(int i) =>
       codePointAnalyses[uniqueCodePoints[i]];

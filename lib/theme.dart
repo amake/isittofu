@@ -26,6 +26,13 @@ final Widget kIconUnsupported = CushionIcon(
   ),
   color: Colors.red.shade50,
 );
+final Widget kIconIssueA11y = CushionIcon(
+  child: Transform.scale(
+    scale: 0.8,
+    child: Icon(Icons.accessibility, color: Colors.white),
+  ),
+  color: Colors.blue,
+);
 
 final ThemeData appTheme = _buildTheme();
 
