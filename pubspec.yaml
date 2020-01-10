@@ -18,6 +18,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - web/assets/images/
   fonts:
     - family: Poppins
       fonts:
