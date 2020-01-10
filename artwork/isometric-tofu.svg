@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1000"
+   height="1000"
+   viewBox="0 0 264.58333 264.58334"
+   version="1.1"
+   id="svg1278"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="isometric-tofu.svg">
+  <title
+     id="title1518">Isometric Tofu</title>
+  <defs
+     id="defs1272" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.131"
+     inkscape:cx="485.85323"
+     inkscape:cy="500"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer4"
+     showgrid="true"
+     inkscape:window-width="1244"
+     inkscape:window-height="761"
+     inkscape:window-x="1776"
+     inkscape:window-y="248"
+     inkscape:window-maximized="0"
+     units="px">
+    <inkscape:grid
+       type="axonomgrid"
+       id="grid1864"
+       units="mm"
+       empspacing="5"
+       visible="true" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata1275">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Isometric Tofu</dc:title>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/by-sa/4.0/" />
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Aaron Madlon-Kay</dc:title>
+          </cc:Agent>
+        </dc:creator>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/by-sa/4.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Notice" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Attribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#ShareAlike" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Frame">
+    <rect
+       transform="translate(0,-32.416649)"
+       style="display:inline;opacity:0.05000006;fill:none;fill-opacity:1;stroke:none;stroke-width:3.96875;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       id="rect863"
+       width="120"
+       height="120"
+       x="72.291664"
+       y="104.70831"
+       inkscape:export-xdpi="38.099998"
+       inkscape:export-ydpi="38.099998" />
+  </g>
+  <g
+     inkscape:label="Tofu block"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-32.41665)"
+     style="display:inline">
+    <path
+       style="display:inline;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#3eb3f8;stroke-width:6.61458333;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       d="m 132.29166,172.29172 51.96153,-30 v -20 l -51.96153,30 z"
+       transform="translate(0,32.41665)"
+       id="path861" />
+    <path
+       style="display:inline;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#3eb3f8;stroke-width:6.61458333;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       d="m 80.330142,122.29172 v 20 l 51.961518,30 v -20 z"
+       transform="translate(0,32.41665)"
+       id="path859" />
+    <path
+       style="display:inline;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#3eb3f8;stroke-width:6.61458333;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       d="m 132.29166,92.291725 -51.961518,29.999995 51.961518,30 51.96153,-30 z"
+       transform="translate(0,32.41665)"
+       id="path5575" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Text"
+     style="display:none">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:35.27777863px;line-height:49.24378204px;font-family:Poppins;-inkscape-font-specification:Poppins;letter-spacing:0px;word-spacing:0px;fill:#3eb3f8;fill-opacity:1;stroke:none;stroke-width:0.2462189px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-56.652012"
+       y="200.90338"
+       id="text5579"
+       transform="matrix(0.93061851,-0.53729284,0.9305912,0.5372771,0,0)"><tspan
+         sodipodi:role="line"
+         id="tspan5577"
+         x="-56.652012"
+         y="200.90338"
+         style="font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;font-size:45.15555573px;line-height:49.24378204px;font-family:'Hiragino Kaku Gothic StdN';-inkscape-font-specification:'Hiragino Kaku Gothic StdN Ultra-Bold';fill:#3eb3f8;fill-opacity:1;stroke-width:0.2462189px">?</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer3"
+     inkscape:label="Text Path"
+     style="display:inline">
+    <g
+       aria-label="?"
+       transform="matrix(0.93061851,-0.53729284,0.9305912,0.5372771,0.91951973,1.7219481)"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:35.27777863px;line-height:49.24378204px;font-family:Poppins;-inkscape-font-specification:Poppins;letter-spacing:0px;word-spacing:0px;display:inline;fill:#3eb3f8;fill-opacity:1;stroke:none;stroke-width:0.2462189px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="text869">
+      <path
+         d="m -38.18339,190.69823 c -0.09031,-0.72249 -0.135466,-1.2192 -0.135466,-1.76107 0,-2.07716 0.677333,-3.2512 2.573866,-4.4704 3.928534,-2.4384 4.380089,-2.75449 5.463823,-3.74791 1.896533,-1.76107 2.799644,-3.88338 2.799644,-6.63787 0,-6.23147 -5.192889,-10.16 -13.501511,-10.16 -5.192889,0 -9.211733,1.53529 -11.830756,4.51556 -1.715911,1.89653 -2.4384,3.6576 -2.889955,6.86364 l 9.302044,0.90311 c 0.180623,-1.39982 0.361245,-2.032 0.8128,-2.75449 0.857956,-1.39982 2.348089,-2.12231 4.380089,-2.12231 2.709334,0 4.289778,1.26436 4.289778,3.38667 0,1.49013 -0.722489,2.4384 -2.935111,3.74791 -3.206045,1.94169 -3.567289,2.21262 -4.651022,3.47698 -1.444978,1.76106 -1.986845,3.56729 -1.986845,6.68302 0,1.30951 0,1.35467 -0.09031,2.07716 z m -8.715022,3.07057 v 8.5344 h 9.076267 v -8.5344 z"
+         style="font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;font-size:45.15555573px;line-height:49.24378204px;font-family:'Hiragino Kaku Gothic StdN';-inkscape-font-specification:'Hiragino Kaku Gothic StdN Ultra-Bold';fill:#3eb3f8;fill-opacity:1;stroke-width:0.2462189px"
+         id="path871"
+         inkscape:connector-curvature="0" />
+    </g>
+  </g>
+</svg>
