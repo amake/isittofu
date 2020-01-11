@@ -28,13 +28,13 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.131"
-     inkscape:cx="485.85323"
-     inkscape:cy="500"
+     inkscape:cx="471.70646"
+     inkscape:cy="570.73386"
      inkscape:document-units="mm"
      inkscape:current-layer="layer4"
      showgrid="true"
-     inkscape:window-width="1244"
-     inkscape:window-height="761"
+     inkscape:window-width="1667"
+     inkscape:window-height="879"
      inkscape:window-x="1776"
      inkscape:window-y="248"
      inkscape:window-maximized="0"
@@ -93,7 +93,8 @@
        x="72.291664"
        y="104.70831"
        inkscape:export-xdpi="38.099998"
-       inkscape:export-ydpi="38.099998" />
+       inkscape:export-ydpi="38.099998"
+       inkscape:export-filename="/Users/amake/Code/isittofu/web/assets/images/favicon.png" />
   </g>
   <g
      inkscape:label="Tofu block"
@@ -102,20 +103,22 @@
      transform="translate(0,-32.41665)"
      style="display:inline">
     <path
-       style="display:inline;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#3eb3f8;stroke-width:6.61458333;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
-       d="m 132.29166,172.29172 51.96153,-30 v -20 l -51.96153,30 z"
-       transform="translate(0,32.41665)"
-       id="path861" />
+       style="display:inline;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#3eb3f8;stroke-width:6.61458349;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       d="m 132.29166,209.70841 51.96153,-30 v -30 l -51.96153,30 z"
+       id="path861"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
     <path
-       style="display:inline;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#3eb3f8;stroke-width:6.61458333;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
-       d="m 80.330142,122.29172 v 20 l 51.961518,30 v -20 z"
-       transform="translate(0,32.41665)"
-       id="path859" />
+       style="display:inline;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#3eb3f8;stroke-width:6.61458349;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       d="m 80.330148,149.70841 -7e-6,30 51.961519,30 v -30 z"
+       id="path859"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
     <path
-       style="display:inline;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#3eb3f8;stroke-width:6.61458333;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
-       d="m 132.29166,92.291725 -51.961518,29.999995 51.961518,30 51.96153,-30 z"
-       transform="translate(0,32.41665)"
-       id="path5575" />
+       style="display:inline;fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#3eb3f8;stroke-width:6.61458349;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:0;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       d="m 132.29166,119.70842 -51.961512,29.99999 51.961512,30 51.96153,-30 z"
+       id="path5575"
+       inkscape:connector-curvature="0" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -142,7 +145,7 @@
      style="display:inline">
     <g
        aria-label="?"
-       transform="matrix(0.93061851,-0.53729284,0.9305912,0.5372771,0.91951973,1.7219481)"
+       transform="matrix(0.93061851,-0.53729284,0.9305912,0.5372771,0.91952547,-3.2780115)"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:35.27777863px;line-height:49.24378204px;font-family:Poppins;-inkscape-font-specification:Poppins;letter-spacing:0px;word-spacing:0px;display:inline;fill:#3eb3f8;fill-opacity:1;stroke:none;stroke-width:0.2462189px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        id="text869">
       <path
