@@ -56,7 +56,7 @@ ThemeData _buildTheme() {
     iconTheme: base.iconTheme.copyWith(size: 27, color: kIconColor),
     textTheme: base.textTheme
         .copyWith(
-          display1: base.textTheme.display1.copyWith(
+          headline4: base.textTheme.headline4.copyWith(
             fontWeight: FontWeight.w900,
             fontSize: 54,
             height: 1.5,
@@ -68,7 +68,7 @@ ThemeData _buildTheme() {
               ),
             ],
           ),
-          title: base.textTheme.title.copyWith(
+          headline6: base.textTheme.headline6.copyWith(
             fontWeight: FontWeight.w600,
             fontSize: 18,
           ),

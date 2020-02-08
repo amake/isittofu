@@ -66,7 +66,7 @@ mixin CharacterTableSource implements DataTableSource {
   }
 
   Widget _fixBodyText(Widget child) =>
-      DefaultTextStyle.merge(style: appTheme.textTheme.body1, child: child);
+      DefaultTextStyle.merge(style: appTheme.textTheme.bodyText2, child: child);
 
   @override
   bool get isRowCountApproximate => false;

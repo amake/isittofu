@@ -113,7 +113,7 @@ class _TextInputCardState extends State<_TextInputCard> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
               'Is your text visible on mobile? Check it out now!',
-              style: Theme.of(context).textTheme.title,
+              style: Theme.of(context).textTheme.headline6,
               textAlign: TextAlign.center,
             ),
           ),
@@ -171,7 +171,7 @@ class _Logo extends StatelessWidget {
     return Html(
       data: '<center>Is it <span>tofu?</span></center>'.toUpperCase(),
       shrinkToFit: true,
-      defaultTextStyle: Theme.of(context).textTheme.display1,
+      defaultTextStyle: Theme.of(context).textTheme.headline4,
       customTextStyle: (node, style) {
         if (node is dom.Element && node.localName == 'span') {
           return style.copyWith(color: Theme.of(context).accentColor);
@@ -203,7 +203,7 @@ class _CompatibilitySummary extends StatelessWidget {
                 Expanded(
                   child: Text(
                     'Overall Compatibility',
-                    style: Theme.of(context).textTheme.title,
+                    style: Theme.of(context).textTheme.headline6,
                   ),
                 ),
                 HelpToggleButton(expanded),
@@ -287,7 +287,7 @@ class _IssuesList extends StatelessWidget {
           children: <Widget>[
             Text(
               'Issues',
-              style: Theme.of(context).textTheme.title,
+              style: Theme.of(context).textTheme.headline6,
             ),
             const SizedBox(height: 32),
             for (final issue in analysis.issues)
@@ -335,7 +335,7 @@ class _CharacterBreakdown extends StatelessWidget {
       // Work around inflexibility of PaginatedDataTable by manually
       // re-applying app text theme
       header: DefaultTextStyle.merge(
-        style: appTheme.textTheme.title,
+        style: appTheme.textTheme.headline6,
         child: const Text('Character Breakdown'),
       ),
       columns: [
@@ -351,7 +351,7 @@ class _CharacterBreakdown extends StatelessWidget {
   }
 
   Widget _fixFontFamily(Widget child) => DefaultTextStyle.merge(
-      style: TextStyle(fontFamily: appTheme.textTheme.body1.fontFamily),
+      style: TextStyle(fontFamily: appTheme.textTheme.bodyText2.fontFamily),
       child: child);
 }
 
