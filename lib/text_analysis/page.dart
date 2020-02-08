@@ -92,8 +92,8 @@ class _TextInputCardState extends State<_TextInputCard> {
     super.initState();
   }
 
-  void _textChanged() =>
-      Provider.of<TextAnalysisModel>(context).setText(_controller.text);
+  void _textChanged() => Provider.of<TextAnalysisModel>(context, listen: false)
+      .setText(_controller.text);
 
   @override
   void dispose() {
