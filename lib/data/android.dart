@@ -93,6 +93,8 @@ final Map<int, List<int>> overrides = Map.unmodifiable({
   // VARIATION SELECTORs do not have a glyph in Android fonts (it happens to
   // have one in some versions of Apple Color Emoji) but is supported
   for (var i = 0xfe00; i <= 0xfe0f; i++) i: _allPlatformIndices,
+  // LINE FEED happens to have a glyph in Android 5+ but is supported in all
+  0x000a: _allPlatformIndices,
 });
 
 String platformToVersionString(int platformIdx) =>
