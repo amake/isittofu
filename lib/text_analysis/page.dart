@@ -196,7 +196,7 @@ class _CompatibilitySummary extends StatelessWidget {
         // right edge
         padding: const EdgeInsets.fromLTRB(24, 8, 8, 24),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Row(
               children: <Widget>[

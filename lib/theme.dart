@@ -140,7 +140,7 @@ class AnimatedShowHide extends StatelessWidget {
     return ValueListenableBuilder<bool>(
       valueListenable: visible,
       builder: (context, value, child) => AnimatedCrossFade(
-        alignment: Alignment.centerLeft,
+        alignment: Alignment.topLeft,
         duration: duration,
         firstChild: child,
         secondChild: hiddenChild,
