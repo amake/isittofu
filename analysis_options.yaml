@@ -4,10 +4,6 @@ analyzer:
   strong-mode:
     implicit-casts: false
     #implicit-dynamic: false
-  exclude:
-    # Workaround until this PR is released:
-    # https://github.com/flutter/flutter/pull/47593
-    - lib/generated_plugin_registrant.dart
 
 linter:
   rules:
