@@ -41,40 +41,48 @@ class TextAnalysisPage extends StatelessWidget {
             constraints: const BoxConstraints(maxWidth: 800),
             child: Builder(
               builder: (context) {
-                final model = Provider.of<TextAnalysisModel>(context);
                 return ListView(
                   shrinkWrap: true,
                   padding: const EdgeInsets.symmetric(horizontal: 8),
-                  children: <Widget>[
-                    const _TextInputCard(),
-                    const SizedBox(height: 24),
-                    ValueListenableBuilder<bool>(
-                      valueListenable: model.isNotEmpty,
-                      builder: (context, value, child) => AnimatedSwitcher(
-                        duration: kOpenCloseAnimationDuration,
-                        transitionBuilder: (child, animation) =>
-                            SizeTransition(child: child, sizeFactor: animation),
-                        child: value
-                            ? Column(
-                                children: <Widget>[
-                                  const _CompatibilitySummary(),
-                                  if (model.analysis.hasIssues)
-                                    const _IssuesList(),
-                                  const _CharacterBreakdown(),
-                                ],
-                              )
-                            : const _LoadingProgress(),
-                      ),
-                    ),
+                  children: const <Widget>[
+                    _TextInputCard(),
+                    SizedBox(height: 24),
+                    _AnalysisBody(),
                     // Offset the size of the appbar to make the content appear
                     // vertically centered when collapsed
-                    const SizedBox(height: kToolbarHeight),
+                    SizedBox(height: kToolbarHeight),
                   ],
                 );
               },
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _AnalysisBody extends StatelessWidget {
+  const _AnalysisBody({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final model = Provider.of<TextAnalysisModel>(context);
+    return ValueListenableBuilder<bool>(
+      valueListenable: model.isNotEmpty,
+      builder: (context, value, child) => AnimatedSwitcher(
+        duration: kOpenCloseAnimationDuration,
+        transitionBuilder: (child, animation) =>
+            SizeTransition(child: child, sizeFactor: animation),
+        child: value
+            ? Column(
+                children: <Widget>[
+                  const _CompatibilitySummary(),
+                  if (model.analysis.hasIssues) const _IssuesList(),
+                  const _CharacterBreakdown(),
+                ],
+              )
+            : const _LoadingProgress(),
       ),
     );
   }
