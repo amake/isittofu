@@ -5,6 +5,8 @@ const Color kShadowColor = Color(0xffcccccc);
 const Color kTextColor = Color(0xcc000000);
 const Color kIconColor = Color(0xaa000000);
 
+const Duration kOpenCloseAnimationDuration = Duration(milliseconds: 200);
+
 final Widget kIconFullySupported = CushionIcon(
   child: Transform.scale(
     scale: 0.75,
@@ -114,40 +116,6 @@ class CushionIcon extends StatelessWidget {
       width: theme.size,
       height: theme.size,
       child: child,
-    );
-  }
-}
-
-class AnimatedShowHide extends StatelessWidget {
-  const AnimatedShowHide(this.visible,
-      {@required this.shownChild,
-      this.hiddenChild = const SizedBox.shrink(),
-      this.duration = const Duration(milliseconds: 200),
-      Key key})
-      : assert(visible != null),
-        assert(shownChild != null),
-        assert(hiddenChild != null),
-        assert(duration != null),
-        super(key: key);
-
-  final ValueNotifier<bool> visible;
-  final Widget shownChild;
-  final Widget hiddenChild;
-  final Duration duration;
-
-  @override
-  Widget build(BuildContext context) {
-    return ValueListenableBuilder<bool>(
-      valueListenable: visible,
-      builder: (context, value, child) => AnimatedCrossFade(
-        alignment: Alignment.topLeft,
-        duration: duration,
-        firstChild: child,
-        secondChild: hiddenChild,
-        crossFadeState:
-            value ? CrossFadeState.showFirst : CrossFadeState.showSecond,
-      ),
-      child: shownChild,
     );
   }
 }

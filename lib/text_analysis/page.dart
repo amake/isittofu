@@ -48,16 +48,23 @@ class TextAnalysisPage extends StatelessWidget {
                   children: <Widget>[
                     const _TextInputCard(),
                     const SizedBox(height: 24),
-                    AnimatedShowHide(
-                      model.isNotEmpty,
-                      shownChild: Column(
-                        children: <Widget>[
-                          const _CompatibilitySummary(),
-                          if (model.analysis.hasIssues) const _IssuesList(),
-                          const _CharacterBreakdown(),
-                        ],
+                    ValueListenableBuilder<bool>(
+                      valueListenable: model.isNotEmpty,
+                      builder: (context, value, child) => AnimatedSwitcher(
+                        duration: kOpenCloseAnimationDuration,
+                        transitionBuilder: (child, animation) =>
+                            SizeTransition(child: child, sizeFactor: animation),
+                        child: value
+                            ? Column(
+                                children: <Widget>[
+                                  const _CompatibilitySummary(),
+                                  if (model.analysis.hasIssues)
+                                    const _IssuesList(),
+                                  const _CharacterBreakdown(),
+                                ],
+                              )
+                            : const _LoadingProgress(),
                       ),
-                      hiddenChild: const _LoadingProgress(),
                     ),
                     // Offset the size of the appbar to make the content appear
                     // vertically centered when collapsed

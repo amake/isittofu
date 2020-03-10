@@ -49,27 +49,34 @@ class ExpandableHelpText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedShowHide(
-      expanded,
-      shownChild: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          const SizedBox(height: 4),
-          Html(
-            data: _kHelpHtml,
-            onLinkTap: launch,
-            defaultTextStyle: DefaultTextStyle.of(context)
-                .style
-                .copyWith(color: Colors.black54),
-          ),
-          const SizedBox(height: 16),
-          Text('Legend', style: Theme.of(context).textTheme.subtitle1),
-          const SizedBox(height: 10),
-          const _Legend(),
-          const SizedBox(height: 24),
-          const Divider(),
-          const SizedBox(height: 6),
-        ],
+    return ValueListenableBuilder<bool>(
+      valueListenable: expanded,
+      builder: (context, value, child) => AnimatedSwitcher(
+        duration: kOpenCloseAnimationDuration,
+        transitionBuilder: (child, animation) =>
+            SizeTransition(child: child, sizeFactor: animation),
+        child: value
+            ? Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  const SizedBox(height: 4),
+                  Html(
+                    data: _kHelpHtml,
+                    onLinkTap: launch,
+                    defaultTextStyle: DefaultTextStyle.of(context)
+                        .style
+                        .copyWith(color: Colors.black54),
+                  ),
+                  const SizedBox(height: 16),
+                  Text('Legend', style: Theme.of(context).textTheme.subtitle1),
+                  const SizedBox(height: 10),
+                  const _Legend(),
+                  const SizedBox(height: 24),
+                  const Divider(),
+                  const SizedBox(height: 6),
+                ],
+              )
+            : const SizedBox.shrink(),
       ),
     );
   }
