@@ -46,7 +46,8 @@ class Analyzer {
   }
 
   Future<CodePointAnalysis> analyzeCodePoint(int codePoint) async {
-    await Future.wait([ios_data.loadLibrary(), android_data.loadLibrary()]);
+    await Future.wait<dynamic>(
+        [ios_data.loadLibrary(), android_data.loadLibrary()]);
     logDebug('Inspecting codepoint $codePoint');
     final iosIndices = ios_data.supportingIndices(codePoint);
     logDebug('iOS indices: $iosIndices');
@@ -82,7 +83,7 @@ class TextAnalysis {
         assert(uniqueCodePoints != null),
         assert(analysis != null),
         uniqueCodePoints = List.unmodifiable(uniqueCodePoints),
-        sortedCodePoints = List.unmodifiable(List.of(uniqueCodePoints)
+        sortedCodePoints = List.unmodifiable(List<int>.of(uniqueCodePoints)
           ..sort((a, b) => analysis[a].compareTo(analysis[b]))),
         codePointAnalyses = Map.unmodifiable(analysis),
         issues = List.unmodifiable(issues);
@@ -140,7 +141,7 @@ class TextAnalysis {
 
 final _kRemoveChars = RegExp(r'[\n\r]');
 
-class CodePointAnalysis implements Comparable {
+class CodePointAnalysis implements Comparable<CodePointAnalysis> {
   CodePointAnalysis({@required this.ios, @required this.android})
       : assert(ios != null),
         assert(android != null),
@@ -196,7 +197,8 @@ class CodePointAnalysis implements Comparable {
   }
 }
 
-class CodePointPlatformAnalysis implements Comparable {
+class CodePointPlatformAnalysis
+    implements Comparable<CodePointPlatformAnalysis> {
   CodePointPlatformAnalysis(this.codePoint, Iterable<int> platformIndices)
       : assert(codePoint != null),
         assert(platformIndices != null),

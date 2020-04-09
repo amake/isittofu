@@ -15,7 +15,7 @@ import 'package:isittofu/data/ios8.3.g.dart';
 import 'package:isittofu/data/ios9.0.g.dart';
 import 'package:isittofu/data/ios9.1.g.dart';
 
-final List<RegExp> patterns = List.unmodifiable([
+final List<RegExp> patterns = List.unmodifiable(<RegExp>[
   ios8_0Pattern,
   ios8_0Pattern, // iOS 8.1 is same as iOS 8.0
   ios8_2Pattern,
@@ -108,7 +108,7 @@ const List<double> distribution = [
 
 final _allPlatformIndices = List.generate(IosPlatform.values.length, (i) => i);
 
-final Map<int, List<int>> overrides = Map.unmodifiable({
+final Map<int, List<int>> overrides = Map.unmodifiable(<int, List<int>>{
   // VARIATION SELECTORs do not have glyphs in all versions but are supported
   for (var i = 0xfe00; i <= 0xfe0f; i++) i: _allPlatformIndices,
 });

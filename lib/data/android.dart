@@ -12,7 +12,7 @@ import 'package:isittofu/data/android28.g.dart';
 import 'package:isittofu/data/android29.g.dart';
 import 'package:isittofu/data/common.dart' as common;
 
-final List<RegExp> patterns = List.unmodifiable([
+final List<RegExp> patterns = List.unmodifiable(<RegExp>[
   android10Pattern,
   android15Pattern,
   android16Pattern,
@@ -89,7 +89,7 @@ const List<double> distribution = [
 final _allPlatformIndices =
     List.generate(AndroidPlatform.values.length, (i) => i);
 
-final Map<int, List<int>> overrides = Map.unmodifiable({
+final Map<int, List<int>> overrides = Map.unmodifiable(<int, List<int>>{
   // VARIATION SELECTORs do not have a glyph in Android fonts (it happens to
   // have one in some versions of Apple Color Emoji) but is supported
   for (var i = 0xfe00; i <= 0xfe0f; i++) i: _allPlatformIndices,
