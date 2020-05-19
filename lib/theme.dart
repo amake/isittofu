@@ -10,28 +10,28 @@ const Duration kOpenCloseAnimationDuration = Duration(milliseconds: 200);
 final Widget kIconFullySupported = CushionIcon(
   child: Transform.scale(
     scale: 0.75,
-    child: Icon(Icons.thumb_up, color: Colors.green),
+    child: const Icon(Icons.thumb_up, color: Colors.green),
   ),
   color: Colors.green.shade50,
 );
 final Widget kIconLimitedSupport = CushionIcon(
   child: Transform.scale(
     scale: 0.8,
-    child: Icon(Icons.warning, color: Colors.orange),
+    child: const Icon(Icons.warning, color: Colors.orange),
   ),
   color: Colors.orange.shade50,
 );
 final Widget kIconUnsupported = CushionIcon(
   child: Transform.scale(
     scale: 0.8,
-    child: Icon(Icons.not_interested, color: Colors.red),
+    child: const Icon(Icons.not_interested, color: Colors.red),
   ),
   color: Colors.red.shade50,
 );
 final Widget kIconIssueA11y = CushionIcon(
   child: Transform.scale(
     scale: 0.8,
-    child: Icon(Icons.accessibility, color: Colors.white),
+    child: const Icon(Icons.accessibility, color: Colors.white),
   ),
   color: Colors.blue,
 );
@@ -63,10 +63,10 @@ ThemeData _buildTheme() {
             fontSize: 54,
             height: 1.5,
             shadows: [
-              Shadow(
+              const Shadow(
                 color: Colors.black12,
                 blurRadius: 16,
-                offset: const Offset(0, 3),
+                offset: Offset(0, 3),
               ),
             ],
           ),
@@ -91,8 +91,9 @@ ThemeData _buildTheme() {
     accentColor: kAccentColor,
     inputDecorationTheme: InputDecorationTheme(
       border: inputBorder,
-      enabledBorder:
-          inputBorder.copyWith(borderSide: BorderSide(color: Colors.black12)),
+      enabledBorder: inputBorder.copyWith(
+        borderSide: const BorderSide(color: Colors.black12),
+      ),
     ),
   );
 }
