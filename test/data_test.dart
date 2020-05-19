@@ -15,7 +15,13 @@ void main() {
   });
 
   test('distributions', () {
-    expect(ios.distribution.reduce((a, b) => a + b), 1);
-    expect(android.distribution.reduce((a, b) => a + b), 1);
+    const epsilon = 1e-10;
+    expectEpsilon(ios.distribution.reduce((a, b) => a + b), 1,
+        epsilon: epsilon);
+    expectEpsilon(android.distribution.reduce((a, b) => a + b), 1,
+        epsilon: epsilon);
   });
 }
+
+void expectEpsilon(num actual, num matcher, {double epsilon}) =>
+    expect(true, (matcher - actual).abs() < epsilon);

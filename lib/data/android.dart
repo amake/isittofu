@@ -67,23 +67,24 @@ const Map<AndroidPlatform, String> sdkToVersion = {
   AndroidPlatform.android29: '10',
 };
 
+// Android Studio 3.6.3; previously at
 // https://developer.android.com/about/dashboards
 const List<double> distribution = [
+  0.000,
+  0.002,
+  0.006,
+  0.008,
   0.003,
-  0.003,
-  0.012,
-  0.015,
-  0.005,
-  0.069,
-  0.03,
-  0.115,
-  0.169,
-  0.114,
-  0.078,
-  0.129,
-  0.154,
-  0.104,
-  0,
+  0.040,
+  0.018,
+  0.074,
+  0.112,
+  0.075,
+  0.054,
+  0.073,
+  0.140,
+  0.313,
+  0.082,
 ];
 
 final _allPlatformIndices =
