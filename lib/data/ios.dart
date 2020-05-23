@@ -8,7 +8,7 @@ import 'package:isittofu/data/ios12.0.g.dart';
 import 'package:isittofu/data/ios12.1.g.dart';
 import 'package:isittofu/data/ios12.4.g.dart';
 import 'package:isittofu/data/ios13.0.g.dart';
-import 'package:isittofu/data/ios13.2.g.dart';
+import 'package:isittofu/data/ios13.1.g.dart';
 import 'package:isittofu/data/ios8.0.g.dart';
 import 'package:isittofu/data/ios8.2.g.dart';
 import 'package:isittofu/data/ios8.3.g.dart';
@@ -39,10 +39,11 @@ final List<RegExp> patterns = List.unmodifiable(<RegExp>[
   ios12_1Pattern, // iOS 12.2 is same as iOS 12.1
   ios12_4Pattern,
   ios13_0Pattern,
-  ios13_0Pattern, // iOS 13.1 is same as iOS 13.0
-  ios13_2Pattern,
-  ios13_2Pattern, // iOS 13.3 is same as iOS 13.2
-  ios13_2Pattern, // iOS 13.4 is same as iOS 13.2
+  ios13_1Pattern,
+  ios13_1Pattern, // iOS 13.2 is same as iOS 13.1
+  ios13_1Pattern, // iOS 13.3 is same as iOS 13.1
+  ios13_1Pattern, // iOS 13.4 is same as iOS 13.1
+  ios13_1Pattern, // iOS 13.5 is same as iOS 13.1
 ]);
 
 enum IosPlatform {
@@ -73,6 +74,7 @@ enum IosPlatform {
   iOS13_2,
   iOS13_3,
   iOS13_4,
+  iOS13_5,
 }
 
 // https://developer.apple.com/support/app-store/
@@ -103,6 +105,7 @@ const List<double> distribution = [
   0.7 / 4,
   0.7 / 4,
   0.7 / 4,
+  0,
   0,
 ];
 
