@@ -38,7 +38,7 @@ const _kHelpHtml = 'These are the versions of iOS and Android that support all '
     '<a href="https://developer.apple.com/support/app-store/">Apple</a> '
     'and '
     '<a href="https://developer.android.com/about/dashboards">Google</a> '
-    '(retrieved May 2020).';
+    '(retrieved June 2020).';
 
 class ExpandableHelpText extends StatelessWidget {
   const ExpandableHelpText(this.expanded, {Key key})
