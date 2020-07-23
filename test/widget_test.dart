@@ -12,5 +12,6 @@ void main() {
   testWidgets('Instantiate', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(MyApp());
+    await tester.pumpAndSettle();
   });
 }
