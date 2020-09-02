@@ -45,6 +45,7 @@ final List<RegExp> patterns = List.unmodifiable(<RegExp>[
   ios13_1Pattern, // iOS 13.4 is same as iOS 13.1
   ios13_1Pattern, // iOS 13.5 is same as iOS 13.1
   ios13_1Pattern, // iOS 13.6 is same as iOS 13.1
+  ios13_1Pattern, // iOS 13.7 is same as iOS 13.1
 ]);
 
 enum IosPlatform {
@@ -77,6 +78,7 @@ enum IosPlatform {
   iOS13_4,
   iOS13_5,
   iOS13_6,
+  iOS13_7,
 }
 
 // https://developer.apple.com/support/app-store/
@@ -103,13 +105,14 @@ const List<double> distribution = [
   0.13 / 4,
   0.13 / 4,
   0.13 / 4,
-  0.81 / 7,
-  0.81 / 7,
-  0.81 / 7,
-  0.81 / 7,
-  0.81 / 7,
-  0.81 / 7,
-  0.81 / 7,
+  0.81 / 8,
+  0.81 / 8,
+  0.81 / 8,
+  0.81 / 8,
+  0.81 / 8,
+  0.81 / 8,
+  0.81 / 8,
+  0.81 / 8
 ];
 
 final _allPlatformIndices = List.generate(IosPlatform.values.length, (i) => i);
