@@ -10,6 +10,7 @@ import 'package:isittofu/data/android24.g.dart';
 import 'package:isittofu/data/android26.g.dart';
 import 'package:isittofu/data/android28.g.dart';
 import 'package:isittofu/data/android29.g.dart';
+import 'package:isittofu/data/android30.g.dart';
 import 'package:isittofu/data/common.dart' as common;
 
 final List<RegExp> patterns = List.unmodifiable(<RegExp>[
@@ -28,6 +29,7 @@ final List<RegExp> patterns = List.unmodifiable(<RegExp>[
   android26Pattern, // Android 27 is same as Android 26
   android28Pattern,
   android29Pattern,
+  android30Pattern,
 ]);
 
 enum AndroidPlatform {
@@ -46,6 +48,7 @@ enum AndroidPlatform {
   android27,
   android28,
   android29,
+  android30,
 }
 
 // See https://source.android.com/setup/start/build-numbers
@@ -65,6 +68,7 @@ const Map<AndroidPlatform, String> sdkToVersion = {
   AndroidPlatform.android27: '8.1',
   AndroidPlatform.android28: '9',
   AndroidPlatform.android29: '10',
+  AndroidPlatform.android30: '11',
 };
 
 // Android Studio 3.6.3; previously at
@@ -85,6 +89,7 @@ const List<double> distribution = [
   0.140,
   0.313,
   0.082,
+  0.000,
 ];
 
 final _allPlatformIndices =
