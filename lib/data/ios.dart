@@ -53,6 +53,7 @@ final List<RegExp> patterns = List.unmodifiable(<RegExp>[
   ios14_1Pattern, // iOS 14.1 differs by a single PUA codepoint; remove this?
   ios14_2Pattern,
   ios14_2Pattern, // iOS 14.3 is same as iOS 14.2
+  ios14_2Pattern, // iOS 14.4 is same as iOS 14.2
 ]);
 
 enum IosPlatform {
@@ -90,6 +91,7 @@ enum IosPlatform {
   iOS14_1,
   iOS14_2,
   iOS14_3,
+  iOS14_4,
 }
 
 // https://developer.apple.com/support/app-store/
@@ -124,6 +126,7 @@ const List<double> distribution = [
   0.81 / 8,
   0.81 / 8,
   0.81 / 8,
+  0,
   0,
   0,
   0,
