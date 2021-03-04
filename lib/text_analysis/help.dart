@@ -54,7 +54,7 @@ class ExpandableHelpText extends StatelessWidget {
       builder: (context, value, child) => AnimatedSwitcher(
         duration: kOpenCloseAnimationDuration,
         transitionBuilder: (child, animation) =>
-            SizeTransition(child: child, sizeFactor: animation),
+            SizeTransition(sizeFactor: animation, child: child),
         child: value
             ? Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

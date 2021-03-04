@@ -73,7 +73,7 @@ class _AnalysisBody extends StatelessWidget {
       builder: (context, value, child) => AnimatedSwitcher(
         duration: kOpenCloseAnimationDuration,
         transitionBuilder: (child, animation) =>
-            SizeTransition(child: child, sizeFactor: animation),
+            SizeTransition(sizeFactor: animation, child: child),
         child: value
             ? Column(
                 children: <Widget>[
@@ -278,8 +278,8 @@ class _PlatformSummary extends StatelessWidget {
         supportLevelIcon(supportLevel),
         const SizedBox(width: 8),
         Transform.scale(
-          child: icon,
           scale: 0.8,
+          child: icon,
         ),
         const SizedBox(width: 8),
         Flexible(child: Text(text)),
@@ -309,8 +309,8 @@ class _IssuesList extends StatelessWidget {
               Row(
                 children: <Widget>[
                   Tooltip(
-                    child: kIconIssueA11y,
                     message: _issueTitle(issue),
+                    child: kIconIssueA11y,
                   ),
                   const SizedBox(width: 24),
                   Expanded(child: Text(_issueText(issue))),
@@ -378,12 +378,12 @@ class _LoadingProgress extends StatelessWidget {
     return ValueListenableBuilder<bool>(
       valueListenable:
           Provider.of<TextAnalysisModel>(context, listen: false).busy,
+      builder: (context, value, child) =>
+          value ? child : const SizedBox.shrink(),
       child: const Padding(
         padding: EdgeInsets.all(16),
         child: Center(child: CircularProgressIndicator()),
       ),
-      builder: (context, value, child) =>
-          value ? child : const SizedBox.shrink(),
     );
   }
 }

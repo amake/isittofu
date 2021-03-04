@@ -8,32 +8,32 @@ const Color kIconColor = Color(0xaa000000);
 const Duration kOpenCloseAnimationDuration = Duration(milliseconds: 200);
 
 final Widget kIconFullySupported = CushionIcon(
+  color: Colors.green.shade50,
   child: Transform.scale(
     scale: 0.75,
     child: const Icon(Icons.thumb_up, color: Colors.green),
   ),
-  color: Colors.green.shade50,
 );
 final Widget kIconLimitedSupport = CushionIcon(
+  color: Colors.orange.shade50,
   child: Transform.scale(
     scale: 0.8,
     child: const Icon(Icons.warning, color: Colors.orange),
   ),
-  color: Colors.orange.shade50,
 );
 final Widget kIconUnsupported = CushionIcon(
+  color: Colors.red.shade50,
   child: Transform.scale(
     scale: 0.8,
     child: const Icon(Icons.not_interested, color: Colors.red),
   ),
-  color: Colors.red.shade50,
 );
 final Widget kIconIssueA11y = CushionIcon(
+  color: Colors.blue,
   child: Transform.scale(
     scale: 0.8,
     child: const Icon(Icons.accessibility, color: Colors.white),
   ),
-  color: Colors.blue,
 );
 
 final ThemeData appTheme = _buildTheme();
