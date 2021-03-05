@@ -1,5 +1,0 @@
-MaterialIcons-Regular.ttf is included as a workaround due to a bug(?) in flutter web:
-https://github.com/flutter/flutter/issues/32540
-
-It was taken from the 2.2.0 release:
-https://github.com/google/material-design-icons/blob/ac75e8329cc936816f1c5e2de182858efe7530ab/iconfont/MaterialIcons-Regular.ttf
