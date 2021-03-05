@@ -183,8 +183,8 @@ class _Logo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text.rich(
       TextSpan(
+        text: 'IS IT ',
         children: [
-          const TextSpan(text: 'IS IT '),
           TextSpan(
             text: 'TOFU?',
             style: TextStyle(color: Theme.of(context).accentColor),

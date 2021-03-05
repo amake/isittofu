@@ -58,24 +58,23 @@ class ExpandableHelpText extends StatelessWidget {
       children: <Widget>[
         const SizedBox(height: 4),
         Text.rich(
-          TextSpan(children: [
-            const TextSpan(
-              text:
-                  'These are the versions of iOS and Android that support all '
-                  'of the characters in your text. The percentages are estimated '
-                  'from data published by ',
-            ),
-            _linkSpan(
-              text: 'Apple',
-              url: 'https://developer.apple.com/support/app-store/',
-            ),
-            const TextSpan(text: ' and '),
-            _linkSpan(
-              text: 'Google',
-              url: 'https://developer.android.com/about/dashboards',
-            ),
-            const TextSpan(text: '(retrieved June 2020).'),
-          ]),
+          TextSpan(
+            text: 'These are the versions of iOS and Android that support all '
+                'of the characters in your text. The percentages are estimated '
+                'from data published by ',
+            children: [
+              _linkSpan(
+                text: 'Apple',
+                url: 'https://developer.apple.com/support/app-store/',
+              ),
+              const TextSpan(text: ' and '),
+              _linkSpan(
+                text: 'Google',
+                url: 'https://developer.android.com/about/dashboards',
+              ),
+              const TextSpan(text: '(retrieved June 2020).'),
+            ],
+          ),
           style: DefaultTextStyle.of(context)
               .style
               .copyWith(color: Colors.black54),
