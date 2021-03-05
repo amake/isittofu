@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:isittofu/text_analysis/analyzer.dart';
 import 'package:isittofu/theme.dart';
@@ -90,9 +91,21 @@ class ExpandableHelpText extends StatelessWidget {
     );
   }
 
-  TextSpan _linkSpan({@required String text, @required String url}) => TextSpan(
-        text: text,
-        recognizer: TapGestureRecognizer()..onTap = () => launch(url),
+  InlineSpan _linkSpan({@required String text, @required String url}) =>
+      WidgetSpan(
+        child: MouseRegion(
+          cursor: SystemMouseCursors.click,
+          child: Text.rich(
+            TextSpan(
+              text: text,
+              recognizer: TapGestureRecognizer()..onTap = () => launch(url),
+              style: const TextStyle(
+                color: Colors.blue,
+                decoration: TextDecoration.underline,
+              ),
+            ),
+          ),
+        ),
       );
 }
 
