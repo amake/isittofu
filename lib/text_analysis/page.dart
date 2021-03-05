@@ -1,8 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_html/flutter_html.dart';
-import 'package:html/dom.dart' as dom;
 import 'package:isittofu/text_analysis/analyzer.dart';
 import 'package:isittofu/text_analysis/help.dart';
 import 'package:isittofu/text_analysis/model.dart';
@@ -183,17 +181,17 @@ class _Logo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Html(
-      data: '<center>Is it <span>tofu?</span></center>'.toUpperCase(),
-      shrinkToFit: true,
-      defaultTextStyle: Theme.of(context).textTheme.headline4,
-      customTextStyle: (node, style) {
-        if (node is dom.Element && node.localName == 'span') {
-          return style.copyWith(color: Theme.of(context).accentColor);
-        } else {
-          return style;
-        }
-      },
+    return Text.rich(
+      TextSpan(
+        children: [
+          const TextSpan(text: 'IS IT '),
+          TextSpan(
+            text: 'TOFU?',
+            style: TextStyle(color: Theme.of(context).accentColor),
+          )
+        ],
+      ),
+      style: Theme.of(context).textTheme.headline4,
     );
   }
 }

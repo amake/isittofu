@@ -1,6 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:isittofu/text_analysis/analyzer.dart';
 import 'package:isittofu/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -32,14 +32,6 @@ class HelpToggleButton extends StatelessWidget {
   }
 }
 
-const _kHelpHtml = 'These are the versions of iOS and Android that support all '
-    'of the characters in your text. The percentages are estimated from '
-    'data published by '
-    '<a href="https://developer.apple.com/support/app-store/">Apple</a> '
-    'and '
-    '<a href="https://developer.android.com/about/dashboards">Google</a> '
-    '(retrieved June 2020).';
-
 class ExpandableHelpText extends StatelessWidget {
   const ExpandableHelpText(this.expanded, {Key key})
       : assert(expanded != null),
@@ -55,31 +47,54 @@ class ExpandableHelpText extends StatelessWidget {
         duration: kOpenCloseAnimationDuration,
         transitionBuilder: (child, animation) =>
             SizeTransition(sizeFactor: animation, child: child),
-        child: value
-            ? Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  const SizedBox(height: 4),
-                  Html(
-                    data: _kHelpHtml,
-                    onLinkTap: launch,
-                    defaultTextStyle: DefaultTextStyle.of(context)
-                        .style
-                        .copyWith(color: Colors.black54),
-                  ),
-                  const SizedBox(height: 16),
-                  Text('Legend', style: Theme.of(context).textTheme.subtitle1),
-                  const SizedBox(height: 10),
-                  const _Legend(),
-                  const SizedBox(height: 24),
-                  const Divider(),
-                  const SizedBox(height: 6),
-                ],
-              )
-            : const SizedBox.shrink(),
+        child: value ? _content(context) : const SizedBox.shrink(),
       ),
     );
   }
+
+  Widget _content(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const SizedBox(height: 4),
+        Text.rich(
+          TextSpan(children: [
+            const TextSpan(
+              text:
+                  'These are the versions of iOS and Android that support all '
+                  'of the characters in your text. The percentages are estimated '
+                  'from data published by ',
+            ),
+            _linkSpan(
+              text: 'Apple',
+              url: 'https://developer.apple.com/support/app-store/',
+            ),
+            const TextSpan(text: ' and '),
+            _linkSpan(
+              text: 'Google',
+              url: 'https://developer.android.com/about/dashboards',
+            ),
+            const TextSpan(text: '(retrieved June 2020).'),
+          ]),
+          style: DefaultTextStyle.of(context)
+              .style
+              .copyWith(color: Colors.black54),
+        ),
+        const SizedBox(height: 16),
+        Text('Legend', style: Theme.of(context).textTheme.subtitle1),
+        const SizedBox(height: 10),
+        const _Legend(),
+        const SizedBox(height: 24),
+        const Divider(),
+        const SizedBox(height: 6),
+      ],
+    );
+  }
+
+  TextSpan _linkSpan({@required String text, @required String url}) => TextSpan(
+        text: text,
+        recognizer: TapGestureRecognizer()..onTap = () => launch(url),
+      );
 }
 
 class _Legend extends StatelessWidget {
