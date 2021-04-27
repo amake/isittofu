@@ -71,7 +71,7 @@ const Map<AndroidPlatform, String> sdkToVersion = {
   AndroidPlatform.android30: '11',
 };
 
-// Android Studio 3.6.3; previously at
+// Android Studio 4.1.3; previously at
 // https://developer.android.com/about/dashboards
 const List<double> distribution = [
   0.000,
