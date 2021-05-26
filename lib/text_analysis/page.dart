@@ -125,7 +125,7 @@ class _TextInputCardState extends State<_TextInputCard> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
-              'Is your text visible on mobile? Check it out now!',
+              'Is your text visible on mobile? Check it out now.',
               style: Theme.of(context).textTheme.headline6,
               textAlign: TextAlign.center,
             ),
