@@ -55,6 +55,7 @@ final List<RegExp> patterns = List.unmodifiable(<RegExp>[
   ios14_2Pattern, // iOS 14.3 is same as iOS 14.2
   ios14_2Pattern, // iOS 14.4 is same as iOS 14.2
   ios14_2Pattern, // iOS 14.5 is same as iOS 14.2
+  ios14_2Pattern, // iOS 14.6 is same as iOS 14.2
 ]);
 
 enum IosPlatform {
@@ -94,6 +95,7 @@ enum IosPlatform {
   iOS14_3,
   iOS14_4,
   iOS14_5,
+  iOS14_6,
 }
 
 // https://developer.apple.com/support/app-store/
@@ -120,19 +122,20 @@ const List<double> distribution = [
   0.12 / 4,
   0.12 / 4,
   0.12 / 4,
-  0.80 / 13,
-  0.80 / 13,
-  0.80 / 13,
-  0.80 / 13,
-  0.80 / 13,
-  0.80 / 13,
-  0.80 / 13,
-  0.80 / 13,
-  0.80 / 13,
-  0.80 / 13,
-  0.80 / 13,
-  0.80 / 13,
-  0.80 / 13,
+  0.80 / 14,
+  0.80 / 14,
+  0.80 / 14,
+  0.80 / 14,
+  0.80 / 14,
+  0.80 / 14,
+  0.80 / 14,
+  0.80 / 14,
+  0.80 / 14,
+  0.80 / 14,
+  0.80 / 14,
+  0.80 / 14,
+  0.80 / 14,
+  0.80 / 14,
   0,
 ];
 
