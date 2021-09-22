@@ -88,7 +88,6 @@ ThemeData _buildTheme() {
     ),
     scaffoldBackgroundColor: Colors.white,
     canvasColor: Colors.white,
-    accentColor: kAccentColor,
     inputDecorationTheme: InputDecorationTheme(
       border: inputBorder,
       enabledBorder: inputBorder.copyWith(
