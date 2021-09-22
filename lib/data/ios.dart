@@ -12,6 +12,7 @@ import 'package:isittofu/data/ios13.1.g.dart';
 import 'package:isittofu/data/ios14.0.g.dart';
 import 'package:isittofu/data/ios14.1.g.dart';
 import 'package:isittofu/data/ios14.2.g.dart';
+import 'package:isittofu/data/ios15.0.g.dart';
 import 'package:isittofu/data/ios8.0.g.dart';
 import 'package:isittofu/data/ios8.2.g.dart';
 import 'package:isittofu/data/ios8.3.g.dart';
@@ -40,6 +41,7 @@ final List<RegExp> patterns = List.unmodifiable(<RegExp>[
   ios12_0Pattern,
   ios12_1Pattern,
   ios12_1Pattern, // iOS 12.2 is same as iOS 12.1
+  ios12_1Pattern, // iOS 12.3 is same as iOS 12.1
   ios12_4Pattern,
   ios13_0Pattern,
   ios13_1Pattern,
@@ -56,6 +58,9 @@ final List<RegExp> patterns = List.unmodifiable(<RegExp>[
   ios14_2Pattern, // iOS 14.4 is same as iOS 14.2
   ios14_2Pattern, // iOS 14.5 is same as iOS 14.2
   ios14_2Pattern, // iOS 14.6 is same as iOS 14.2
+  ios14_2Pattern, // iOS 14.7 is same as iOS 14.2
+  ios14_2Pattern, // iOS 14.8 is same as iOS 14.2
+  ios15_0Pattern,
 ]);
 
 enum IosPlatform {
@@ -80,6 +85,7 @@ enum IosPlatform {
   iOS12_0,
   iOS12_1,
   iOS12_2,
+  iOS12_3,
   iOS12_4,
   iOS13_0,
   iOS13_1,
@@ -96,47 +102,55 @@ enum IosPlatform {
   iOS14_4,
   iOS14_5,
   iOS14_6,
+  iOS14_7,
+  iOS14_8,
+  iOS15_0,
 }
 
+// > As measured by the App Store on June 3, 2021
 // https://developer.apple.com/support/app-store/
 const List<double> distribution = [
-  0.08 / 18,
-  0.08 / 18,
-  0.08 / 18,
-  0.08 / 18,
-  0.08 / 18,
-  0.08 / 18,
-  0.08 / 18,
-  0.08 / 18,
-  0.08 / 18,
-  0.08 / 18,
-  0.08 / 18,
-  0.08 / 18,
-  0.08 / 18,
-  0.08 / 18,
-  0.08 / 18,
-  0.08 / 18,
-  0.08 / 18,
-  0.08 / 18,
-  0.12 / 4,
-  0.12 / 4,
-  0.12 / 4,
-  0.12 / 4,
-  0.80 / 14,
-  0.80 / 14,
-  0.80 / 14,
-  0.80 / 14,
-  0.80 / 14,
-  0.80 / 14,
-  0.80 / 14,
-  0.80 / 14,
-  0.80 / 14,
-  0.80 / 14,
-  0.80 / 14,
-  0.80 / 14,
-  0.80 / 14,
-  0.80 / 14,
-  0,
+  0.07 / 23, // iOS8_0
+  0.07 / 23, // iOS8_1
+  0.07 / 23, // iOS8_2
+  0.07 / 23, // iOS8_3
+  0.07 / 23, // iOS8_4
+  0.07 / 23, // iOS9_0
+  0.07 / 23, // iOS9_1
+  0.07 / 23, // iOS9_2
+  0.07 / 23, // iOS9_3
+  0.07 / 23, // iOS10_0
+  0.07 / 23, // iOS10_1
+  0.07 / 23, // iOS10_2
+  0.07 / 23, // iOS10_3
+  0.07 / 23, // iOS11_0
+  0.07 / 23, // iOS11_1
+  0.07 / 23, // iOS11_2
+  0.07 / 23, // iOS11_3
+  0.07 / 23, // iOS11_4
+  0.07 / 23, // iOS12_0
+  0.07 / 23, // iOS12_1
+  0.07 / 23, // iOS12_2
+  0.07 / 23, // iOS12_3
+  0.07 / 23, // iOS12_4
+  0.08 / 8, // iOS13_0
+  0.08 / 8, // iOS13_1
+  0.08 / 8, // iOS13_2
+  0.08 / 8, // iOS13_3
+  0.08 / 8, // iOS13_4
+  0.08 / 8, // iOS13_5
+  0.08 / 8, // iOS13_6
+  0.08 / 8, // iOS13_7
+  0.85 / 9, // iOS9_0
+  0.85 / 9, // iOS9_1
+  0.85 / 9, // iOS9_2
+  0.85 / 9, // iOS9_3
+  0.85 / 9, // iOS9_4
+  0.85 / 9, // iOS9_5
+  0.85 / 9, // iOS9_6
+  0.85 / 9, // iOS9_7
+  0.85 / 9, // iOS9_8
+  0, // iOS15_0
 ];
 
 final _allPlatformIndices = List.generate(IosPlatform.values.length, (i) => i);
