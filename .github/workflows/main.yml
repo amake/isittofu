@@ -21,7 +21,7 @@ jobs:
       - run: flutter pub get
       - run: flutter analyze
       - run: flutter test test
-      - run: flutter build web --release
+      - run: make build build_args=--release
       - run: |
           cd build/web
           echo tofu.mobi > CNAME
