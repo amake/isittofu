@@ -42,8 +42,10 @@ ThemeData _buildTheme() {
   final inputBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(8),
   );
+  // Emoji break in the main TextField (e.g. 🥶 shows as ��) with
+  // `englishLike2018`. No other `Typography` style has this problem ¯\_(ツ)_/¯
   final base =
-      ThemeData.localize(ThemeData.light(), Typography.englishLike2018);
+      ThemeData.localize(ThemeData.light(), Typography.englishLike2014);
   final actionsIconThemeBase =
       base.appBarTheme.actionsIconTheme ?? const IconThemeData();
   return base.copyWith(
