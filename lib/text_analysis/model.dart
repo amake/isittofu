@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:isittofu/text_analysis/analyzer.dart';
 import 'package:isittofu/theme.dart';
 import 'package:isittofu/window/window.dart';
