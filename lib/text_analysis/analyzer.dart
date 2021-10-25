@@ -79,12 +79,9 @@ class TextAnalysis {
     Iterable<int> uniqueCodePoints,
     Map<int, CodePointAnalysis> analysis,
     Iterable<Issue> issues,
-  )   : assert(text != null),
-        assert(uniqueCodePoints != null),
-        assert(analysis != null),
-        uniqueCodePoints = List.unmodifiable(uniqueCodePoints),
+  )   : uniqueCodePoints = List.unmodifiable(uniqueCodePoints),
         sortedCodePoints = List.unmodifiable(List<int>.of(uniqueCodePoints)
-          ..sort((a, b) => analysis[a].compareTo(analysis[b]))),
+          ..sort((a, b) => analysis[a]!.compareTo(analysis[b]!))),
         codePointAnalyses = Map.unmodifiable(analysis),
         issues = List.unmodifiable(issues);
   final String text;
@@ -98,7 +95,7 @@ class TextAnalysis {
   bool get hasIssues => issues.isNotEmpty;
 
   CodePointAnalysis analysisForIndex(int i) =>
-      codePointAnalyses[uniqueCodePoints[i]];
+      codePointAnalyses[uniqueCodePoints[i]]!;
 
   List<int> get iosSupportedIndices => _supportedIndices(
       codePointAnalyses.values.map((analysis) => analysis.ios));
@@ -121,7 +118,7 @@ class TextAnalysis {
   String get androidSupportString =>
       android_data.supportedString(androidSupportedIndices, os: true);
 
-  SupportLevel get androidSupportLevel => isEmpty
+  SupportLevel? get androidSupportLevel => isEmpty
       ? null
       : _supportLevel(
           codePointAnalyses.values
@@ -130,7 +127,7 @@ class TextAnalysis {
               .map((analysis) => analysis.androidSupportedShare)
               .reduce(min));
 
-  SupportLevel get iosSupportLevel => isEmpty
+  SupportLevel? get iosSupportLevel => isEmpty
       ? null
       : _supportLevel(
           codePointAnalyses.values.every((analysis) => analysis.ios.supported),
@@ -142,10 +139,8 @@ class TextAnalysis {
 final _kRemoveChars = RegExp(r'[\n\r]');
 
 class CodePointAnalysis implements Comparable<CodePointAnalysis> {
-  CodePointAnalysis({@required this.ios, @required this.android})
-      : assert(ios != null),
-        assert(android != null),
-        assert(ios.codePoint == android.codePoint);
+  CodePointAnalysis({required this.ios, required this.android})
+      : assert(ios.codePoint == android.codePoint);
 
   final CodePointPlatformAnalysis ios;
   final CodePointPlatformAnalysis android;
@@ -200,9 +195,7 @@ class CodePointAnalysis implements Comparable<CodePointAnalysis> {
 class CodePointPlatformAnalysis
     implements Comparable<CodePointPlatformAnalysis> {
   CodePointPlatformAnalysis(this.codePoint, Iterable<int> platformIndices)
-      : assert(codePoint != null),
-        assert(platformIndices != null),
-        assert(listEquals(
+      : assert(listEquals(
             platformIndices.toList(), List.of(platformIndices)..sort())),
         platformIndices = List.unmodifiable(platformIndices);
 

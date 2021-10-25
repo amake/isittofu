@@ -8,9 +8,9 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TextAnalysisPage extends StatelessWidget {
-  const TextAnalysisPage({Key key}) : super(key: key);
+  const TextAnalysisPage({Key? key}) : super(key: key);
 
-  String get initialText => window.decodedQuery['q'];
+  String? get initialText => window.decodedQuery['q'];
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +59,7 @@ class TextAnalysisPage extends StatelessWidget {
 }
 
 class _AnalysisBody extends StatelessWidget {
-  const _AnalysisBody({Key key}) : super(key: key);
+  const _AnalysisBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -85,14 +85,14 @@ class _AnalysisBody extends StatelessWidget {
 }
 
 class _TextInputCard extends StatefulWidget {
-  const _TextInputCard({Key key}) : super(key: key);
+  const _TextInputCard({Key? key}) : super(key: key);
 
   @override
   _TextInputCardState createState() => _TextInputCardState();
 }
 
 class _TextInputCardState extends State<_TextInputCard> {
-  TextEditingController _controller;
+  late TextEditingController _controller;
 
   @override
   void initState() {
@@ -154,9 +154,7 @@ class _TextInputCardState extends State<_TextInputCard> {
 }
 
 class _ClearTextButton extends StatelessWidget {
-  const _ClearTextButton(this.controller, {Key key})
-      : assert(controller != null),
-        super(key: key);
+  const _ClearTextButton(this.controller, {Key? key}) : super(key: key);
 
   final TextEditingController controller;
 
@@ -165,7 +163,7 @@ class _ClearTextButton extends StatelessWidget {
     return ValueListenableBuilder<TextEditingValue>(
       valueListenable: controller,
       builder: (context, value, child) =>
-          value.text.isNotEmpty ? child : const SizedBox.shrink(),
+          value.text.isNotEmpty ? child! : const SizedBox.shrink(),
       child: IconButton(
         icon: const CushionIcon(child: Icon(Icons.clear)),
         onPressed: controller.clear,
@@ -175,7 +173,7 @@ class _ClearTextButton extends StatelessWidget {
 }
 
 class _Logo extends StatelessWidget {
-  const _Logo({Key key}) : super(key: key);
+  const _Logo({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -195,7 +193,7 @@ class _Logo extends StatelessWidget {
 }
 
 class _CompatibilitySummary extends StatelessWidget {
-  const _CompatibilitySummary({Key key}) : super(key: key);
+  const _CompatibilitySummary({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -255,14 +253,12 @@ class _CompatibilitySummary extends StatelessWidget {
 
 class _PlatformSummary extends StatelessWidget {
   const _PlatformSummary({
-    @required this.supportLevel,
-    @required this.text,
-    @required this.icon,
-    Key key,
-  })  : assert(text != null),
-        assert(icon != null),
-        super(key: key);
-  final SupportLevel supportLevel;
+    required this.text,
+    required this.icon,
+    this.supportLevel,
+    Key? key,
+  }) : super(key: key);
+  final SupportLevel? supportLevel;
   final String text;
   final Widget icon;
 
@@ -285,7 +281,7 @@ class _PlatformSummary extends StatelessWidget {
 }
 
 class _IssuesList extends StatelessWidget {
-  const _IssuesList({Key key}) : super(key: key);
+  const _IssuesList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -324,7 +320,6 @@ String _issueTitle(Issue issue) {
     case IssueType.mathA11y:
       return 'Accessibility';
   }
-  throw Exception('Unknown issue type: ${issue.type}');
 }
 
 String _issueText(Issue issue) {
@@ -334,11 +329,10 @@ String _issueText(Issue issue) {
           'not recommended for use as stylzed text, and can cause problems with '
           'accessibility tools like screen readers';
   }
-  throw Exception('Unknown issue type: ${issue.type}');
 }
 
 class _CharacterBreakdown extends StatelessWidget {
-  const _CharacterBreakdown({Key key}) : super(key: key);
+  const _CharacterBreakdown({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -362,12 +356,12 @@ class _CharacterBreakdown extends StatelessWidget {
   }
 
   Widget _fixFontFamily(Widget child) => DefaultTextStyle.merge(
-      style: TextStyle(fontFamily: appTheme.textTheme.bodyText2.fontFamily),
+      style: TextStyle(fontFamily: appTheme.textTheme.bodyText2!.fontFamily),
       child: child);
 }
 
 class _LoadingProgress extends StatelessWidget {
-  const _LoadingProgress({Key key}) : super(key: key);
+  const _LoadingProgress({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -375,7 +369,7 @@ class _LoadingProgress extends StatelessWidget {
       valueListenable:
           Provider.of<TextAnalysisModel>(context, listen: false).busy,
       builder: (context, value, child) =>
-          value ? child : const SizedBox.shrink(),
+          value ? child! : const SizedBox.shrink(),
       child: const Padding(
         padding: EdgeInsets.all(16),
         child: Center(child: CircularProgressIndicator()),

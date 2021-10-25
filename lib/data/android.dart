@@ -109,7 +109,7 @@ final Map<int, List<int>> overrides = Map.unmodifiable(<int, List<int>>{
 });
 
 String platformToVersionString(int platformIdx) =>
-    sdkToVersion[AndroidPlatform.values[platformIdx]];
+    sdkToVersion[AndroidPlatform.values[platformIdx]]!;
 
 Iterable<int> supportingIndices(int codePoint) =>
     overrides[codePoint] ?? common.supportingIndices(codePoint, patterns);

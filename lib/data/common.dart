@@ -14,8 +14,8 @@ typedef VersionConverter = String Function(int);
 String supportedString(
   List<int> platformIndices,
   VersionConverter versionConverter, {
-  String osName,
-  double share,
+  String? osName,
+  double? share,
 }) {
   if (platformIndices.isEmpty) {
     return osName == null ? 'Unsupported' : '$osName unsupported';

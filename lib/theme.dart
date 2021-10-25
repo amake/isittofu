@@ -58,7 +58,7 @@ ThemeData _buildTheme() {
     iconTheme: base.iconTheme.copyWith(size: 27, color: kIconColor),
     textTheme: base.textTheme
         .copyWith(
-          headline4: base.textTheme.headline4.copyWith(
+          headline4: base.textTheme.headline4!.copyWith(
             fontWeight: FontWeight.w900,
             fontSize: 54,
             height: 1.5,
@@ -70,7 +70,7 @@ ThemeData _buildTheme() {
               ),
             ],
           ),
-          headline6: base.textTheme.headline6.copyWith(
+          headline6: base.textTheme.headline6!.copyWith(
             fontWeight: FontWeight.w600,
             fontSize: 18,
           ),
@@ -98,11 +98,10 @@ ThemeData _buildTheme() {
 }
 
 class CushionIcon extends StatelessWidget {
-  const CushionIcon({@required this.child, this.color, Key key})
-      : assert(child != null),
-        super(key: key);
+  const CushionIcon({required this.child, this.color, Key? key})
+      : super(key: key);
 
-  final Color color;
+  final Color? color;
   final Widget child;
 
   @override
@@ -111,7 +110,7 @@ class CushionIcon extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(4),
-        color: color ?? theme.color.withOpacity(0.1),
+        color: color ?? theme.color?.withOpacity(0.1),
       ),
       width: theme.size,
       height: theme.size,

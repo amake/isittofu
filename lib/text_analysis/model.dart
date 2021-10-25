@@ -4,7 +4,7 @@ import 'package:isittofu/theme.dart';
 import 'package:isittofu/window/window.dart';
 
 class TextAnalysisModel extends ChangeNotifier with CharacterTableSource {
-  TextAnalysisModel(this.context, {String initialText}) {
+  TextAnalysisModel(this.context, {String? initialText}) {
     setText(initialText ?? '');
     // Run analysis once to force load deferred imports
     const Analyzer().analyzeText('a');
@@ -13,7 +13,7 @@ class TextAnalysisModel extends ChangeNotifier with CharacterTableSource {
   @override
   final BuildContext context;
 
-  String _text;
+  String _text = '';
 
   String get text => _text;
 
@@ -46,7 +46,7 @@ mixin CharacterTableSource implements DataTableSource {
   @override
   DataRow getRow(int index) {
     final codePoint = analysis.sortedCodePoints[index];
-    final codePointAnalysis = analysis.codePointAnalyses[codePoint];
+    final codePointAnalysis = analysis.codePointAnalyses[codePoint]!;
     return DataRow(
       key: ValueKey(codePoint),
       cells: [
@@ -77,7 +77,7 @@ mixin CharacterTableSource implements DataTableSource {
   int get selectedRowCount => 0;
 }
 
-Widget supportLevelIcon(SupportLevel level) {
+Widget supportLevelIcon(SupportLevel? level) {
   switch (level) {
     case SupportLevel.fullySupported:
       return kIconFullySupported;
@@ -85,7 +85,8 @@ Widget supportLevelIcon(SupportLevel level) {
       return kIconLimitedSupport;
     case SupportLevel.unsupported:
       return kIconUnsupported;
+    case null:
+      // Can happen during animated hiding/showing
+      return const SizedBox.shrink();
   }
-  // Can happen during animated hiding/showing
-  return const SizedBox.shrink();
 }

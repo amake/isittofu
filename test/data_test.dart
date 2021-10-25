@@ -23,5 +23,5 @@ void main() {
   });
 }
 
-void expectEpsilon(num actual, num matcher, {double epsilon}) =>
+void expectEpsilon(num actual, num matcher, {required double epsilon}) =>
     expect(true, (matcher - actual).abs() < epsilon);
