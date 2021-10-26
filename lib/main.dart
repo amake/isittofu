@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Is it tofu?',
+      title: 'Is It Tofu?',
       theme: appTheme,
       home: const TextAnalysisPage(),
     );
