@@ -13,6 +13,7 @@ import 'package:isittofu/data/ios14.0.g.dart';
 import 'package:isittofu/data/ios14.1.g.dart';
 import 'package:isittofu/data/ios14.2.g.dart';
 import 'package:isittofu/data/ios15.0.g.dart';
+import 'package:isittofu/data/ios15.4.g.dart';
 import 'package:isittofu/data/ios8.0.g.dart';
 import 'package:isittofu/data/ios8.2.g.dart';
 import 'package:isittofu/data/ios8.3.g.dart';
@@ -64,6 +65,7 @@ final List<RegExp> patterns = List.unmodifiable(<RegExp>[
   ios15_0Pattern, // iOS 15.1 is same as iOS 15.0
   ios15_0Pattern, // iOS 15.2 is same as iOS 15.0
   ios15_0Pattern, // iOS 15.3 is same as iOS 15.0
+  ios15_4Pattern,
 ]);
 
 enum IosPlatform {
@@ -111,6 +113,7 @@ enum IosPlatform {
   iOS15_1,
   iOS15_2,
   iOS15_3,
+  iIO15_4,
 }
 
 // > As measured by the App Store on January 11, 2022
@@ -160,6 +163,7 @@ const List<double> distribution = [
   0.63 / 4, // iOS15_1
   0.63 / 4, // iOS15_2
   0.63 / 4, // iOS15_3
+  0,
 ];
 
 final _allPlatformIndices = List.generate(IosPlatform.values.length, (i) => i);
