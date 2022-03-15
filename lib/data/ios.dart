@@ -113,7 +113,7 @@ enum IosPlatform {
   iOS15_1,
   iOS15_2,
   iOS15_3,
-  iIO15_4,
+  iOS15_4,
 }
 
 // > As measured by the App Store on January 11, 2022
