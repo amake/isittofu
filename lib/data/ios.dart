@@ -66,6 +66,7 @@ final List<RegExp> patterns = List.unmodifiable(<RegExp>[
   ios15_0Pattern, // iOS 15.2 is same as iOS 15.0
   ios15_0Pattern, // iOS 15.3 is same as iOS 15.0
   ios15_4Pattern,
+  ios15_4Pattern,
 ]);
 
 enum IosPlatform {
@@ -114,6 +115,7 @@ enum IosPlatform {
   iOS15_2,
   iOS15_3,
   iOS15_4,
+  iOS15_5,
 }
 
 // > As measured by the App Store on January 11, 2022
@@ -163,7 +165,8 @@ const List<double> distribution = [
   0.63 / 4, // iOS15_1
   0.63 / 4, // iOS15_2
   0.63 / 4, // iOS15_3
-  0,
+  0, // iOS15_4
+  0, // iOS15_5
 ];
 
 final _allPlatformIndices = List.generate(IosPlatform.values.length, (i) => i);
