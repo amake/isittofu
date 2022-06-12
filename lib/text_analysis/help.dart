@@ -60,12 +60,14 @@ class ExpandableHelpText extends StatelessWidget {
             children: [
               _linkSpan(
                 text: 'Apple',
-                url: 'https://developer.apple.com/support/app-store/',
+                url:
+                    Uri.parse('https://developer.apple.com/support/app-store/'),
               ),
               const TextSpan(text: ' and '),
               _linkSpan(
                 text: 'Google',
-                url: 'https://developer.android.com/about/dashboards',
+                url:
+                    Uri.parse('https://developer.android.com/about/dashboards'),
               ),
               const TextSpan(text: ' (retrieved February 2022).'),
             ],
@@ -85,14 +87,13 @@ class ExpandableHelpText extends StatelessWidget {
     );
   }
 
-  InlineSpan _linkSpan({required String text, required String url}) =>
-      WidgetSpan(
+  InlineSpan _linkSpan({required String text, required Uri url}) => WidgetSpan(
         child: MouseRegion(
           cursor: SystemMouseCursors.click,
           child: Text.rich(
             TextSpan(
               text: text,
-              recognizer: TapGestureRecognizer()..onTap = () => launch(url),
+              recognizer: TapGestureRecognizer()..onTap = () => launchUrl(url),
               style: const TextStyle(
                 color: Colors.blue,
                 decoration: TextDecoration.underline,
