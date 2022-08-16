@@ -66,7 +66,7 @@ final List<RegExp> patterns = List.unmodifiable(<RegExp>[
   ios15_0Pattern, // iOS 15.2 is same as iOS 15.0
   ios15_0Pattern, // iOS 15.3 is same as iOS 15.0
   ios15_4Pattern,
-  ios15_4Pattern,
+  ios15_4Pattern, // iOS 15.5 is same as iOS 15.4
 ]);
 
 enum IosPlatform {
