@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TextAnalysisPage extends StatelessWidget {
-  const TextAnalysisPage({Key? key}) : super(key: key);
+  const TextAnalysisPage({super.key});
 
   String? get initialText => window.decodedQuery['q'];
 
@@ -61,7 +61,7 @@ class TextAnalysisPage extends StatelessWidget {
 }
 
 class _AnalysisBody extends StatelessWidget {
-  const _AnalysisBody({Key? key}) : super(key: key);
+  const _AnalysisBody();
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +87,7 @@ class _AnalysisBody extends StatelessWidget {
 }
 
 class _TextInputCard extends StatefulWidget {
-  const _TextInputCard({Key? key}) : super(key: key);
+  const _TextInputCard();
 
   @override
   _TextInputCardState createState() => _TextInputCardState();
@@ -156,7 +156,7 @@ class _TextInputCardState extends State<_TextInputCard> {
 }
 
 class _ClearTextButton extends StatelessWidget {
-  const _ClearTextButton(this.controller, {Key? key}) : super(key: key);
+  const _ClearTextButton(this.controller);
 
   final TextEditingController controller;
 
@@ -175,7 +175,7 @@ class _ClearTextButton extends StatelessWidget {
 }
 
 class _Logo extends StatelessWidget {
-  const _Logo({Key? key}) : super(key: key);
+  const _Logo();
 
   @override
   Widget build(BuildContext context) {
@@ -195,7 +195,7 @@ class _Logo extends StatelessWidget {
 }
 
 class _CompatibilitySummary extends StatelessWidget {
-  const _CompatibilitySummary({Key? key}) : super(key: key);
+  const _CompatibilitySummary();
 
   @override
   Widget build(BuildContext context) {
@@ -258,8 +258,7 @@ class _PlatformSummary extends StatelessWidget {
     required this.text,
     required this.icon,
     this.supportLevel,
-    Key? key,
-  }) : super(key: key);
+  });
   final SupportLevel? supportLevel;
   final String text;
   final Widget icon;
@@ -283,7 +282,7 @@ class _PlatformSummary extends StatelessWidget {
 }
 
 class _IssuesList extends StatelessWidget {
-  const _IssuesList({Key? key}) : super(key: key);
+  const _IssuesList();
 
   @override
   Widget build(BuildContext context) {
@@ -334,7 +333,7 @@ String _issueText(Issue issue) {
 }
 
 class _CharacterBreakdown extends StatelessWidget {
-  const _CharacterBreakdown({Key? key}) : super(key: key);
+  const _CharacterBreakdown();
 
   @override
   Widget build(BuildContext context) {
@@ -363,7 +362,7 @@ class _CharacterBreakdown extends StatelessWidget {
 }
 
 class _LoadingProgress extends StatelessWidget {
-  const _LoadingProgress({Key? key}) : super(key: key);
+  const _LoadingProgress();
 
   @override
   Widget build(BuildContext context) {

@@ -5,7 +5,7 @@ import 'package:isittofu/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HelpToggleButton extends StatelessWidget {
-  const HelpToggleButton(this.enabled, {Key? key}) : super(key: key);
+  const HelpToggleButton(this.enabled, {super.key});
 
   final ValueNotifier<bool> enabled;
 
@@ -30,7 +30,7 @@ class HelpToggleButton extends StatelessWidget {
 }
 
 class ExpandableHelpText extends StatelessWidget {
-  const ExpandableHelpText(this.expanded, {Key? key}) : super(key: key);
+  const ExpandableHelpText(this.expanded, {super.key});
 
   final ValueNotifier<bool> expanded;
 
@@ -105,7 +105,7 @@ class ExpandableHelpText extends StatelessWidget {
 }
 
 class _Legend extends StatelessWidget {
-  const _Legend({Key? key}) : super(key: key);
+  const _Legend();
 
   @override
   Widget build(BuildContext context) {

@@ -100,8 +100,7 @@ ThemeData _buildTheme() {
 }
 
 class CushionIcon extends StatelessWidget {
-  const CushionIcon({required this.child, this.color, Key? key})
-      : super(key: key);
+  const CushionIcon({required this.child, this.color, super.key});
 
   final Color? color;
   final Widget child;
