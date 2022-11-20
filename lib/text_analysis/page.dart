@@ -126,7 +126,7 @@ class _TextInputCardState extends State<_TextInputCard> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
               'Is your text visible on mobile? Check it out now.',
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
               textAlign: TextAlign.center,
             ),
           ),
@@ -189,7 +189,7 @@ class _Logo extends StatelessWidget {
           )
         ],
       ),
-      style: Theme.of(context).textTheme.headline4,
+      style: Theme.of(context).textTheme.headlineMedium,
     );
   }
 }
@@ -214,7 +214,7 @@ class _CompatibilitySummary extends StatelessWidget {
                 Expanded(
                   child: Text(
                     'Overall Compatibility',
-                    style: Theme.of(context).textTheme.headline6,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
                 HelpToggleButton(expanded),
@@ -295,7 +295,7 @@ class _IssuesList extends StatelessWidget {
           children: <Widget>[
             Text(
               'Issues',
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(height: 32),
             for (final issue in analysis.issues)
@@ -341,7 +341,7 @@ class _CharacterBreakdown extends StatelessWidget {
       // Work around inflexibility of PaginatedDataTable by manually
       // re-applying app text theme
       header: DefaultTextStyle.merge(
-        style: appTheme.textTheme.headline6,
+        style: appTheme.textTheme.titleLarge,
         child: const Text('Character Breakdown'),
       ),
       columns: [
@@ -357,7 +357,7 @@ class _CharacterBreakdown extends StatelessWidget {
   }
 
   Widget _fixFontFamily(Widget child) => DefaultTextStyle.merge(
-      style: TextStyle(fontFamily: appTheme.textTheme.bodyText2!.fontFamily),
+      style: TextStyle(fontFamily: appTheme.textTheme.bodyMedium!.fontFamily),
       child: child);
 }
 

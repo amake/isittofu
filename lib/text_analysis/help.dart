@@ -77,7 +77,7 @@ class ExpandableHelpText extends StatelessWidget {
               .copyWith(color: Colors.black54),
         ),
         const SizedBox(height: 16),
-        Text('Legend', style: Theme.of(context).textTheme.subtitle1),
+        Text('Legend', style: Theme.of(context).textTheme.titleMedium),
         const SizedBox(height: 10),
         const _Legend(),
         const SizedBox(height: 24),
@@ -114,7 +114,7 @@ class _Legend extends StatelessWidget {
       data: IconThemeData(size: IconTheme.of(context).size),
       child: DefaultTextStyle.merge(
         style: TextStyle(
-          fontSize: Theme.of(context).textTheme.bodyText2!.fontSize,
+          fontSize: Theme.of(context).textTheme.bodyMedium!.fontSize,
         ),
         child: Column(
           children: <Widget>[
