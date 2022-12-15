@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:isittofu/text_analysis/page.dart';
 import 'package:isittofu/theme.dart';
+import 'package:isittofu/window/window.dart';
 
 void main() => runApp(const MyApp());
 
@@ -12,7 +13,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Is It Tofu?',
       theme: appTheme,
-      home: const TextAnalysisPage(),
+      home: TextAnalysisPage(
+        initialText: window.decodedQuery['q'],
+      ),
     );
   }
 }

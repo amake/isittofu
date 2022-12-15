@@ -3,14 +3,13 @@ import 'package:isittofu/text_analysis/analyzer.dart';
 import 'package:isittofu/text_analysis/help.dart';
 import 'package:isittofu/text_analysis/model.dart';
 import 'package:isittofu/theme.dart';
-import 'package:isittofu/window/window.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class TextAnalysisPage extends StatelessWidget {
-  const TextAnalysisPage({super.key});
+  const TextAnalysisPage({super.key, this.initialText});
 
-  String? get initialText => window.decodedQuery['q'];
+  final String? initialText;
 
   @override
   Widget build(BuildContext context) {
