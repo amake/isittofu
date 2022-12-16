@@ -136,7 +136,7 @@ class _TextInputCardState extends State<_TextInputCard> {
             child: TextField(
               decoration: InputDecoration(
                 hintText:
-                    'Enter it here to see if any of it turns to “tofu”...',
+                    'Enter text here to see if any of it turns to “tofu”...',
                 suffixIcon: _ClearTextButton(_controller),
               ),
               minLines: 1,
