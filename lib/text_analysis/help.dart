@@ -123,7 +123,7 @@ class _Legend extends StatelessWidget {
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                    'Supported by ≥$thresholdPct% of both iOS and Android devices'),
+                    'Supported by ≥$thresholdPct% of both iOS and Android devices (including the latest OS)'),
               )
             ]),
             const SizedBox(height: 16),
