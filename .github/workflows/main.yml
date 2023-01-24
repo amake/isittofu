@@ -24,7 +24,7 @@ jobs:
       - run: make build build_args=--release
       - run: |
           cd build/web
-          echo tofu.mobi > CNAME
+          echo tofu.quest > CNAME
           git init
           git config --global user.email aaron@madlon-kay.com
           git config --global user.name 'Aaron Madlon-Kay'
