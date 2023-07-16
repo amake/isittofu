@@ -14,6 +14,7 @@ import 'package:isittofu/data/android30.g.dart';
 import 'package:isittofu/data/android31.g.dart';
 import 'package:isittofu/data/android32.g.dart';
 import 'package:isittofu/data/android33.g.dart';
+import 'package:isittofu/data/android34.g.dart';
 import 'package:isittofu/data/common.dart' as common;
 
 final List<RegExp> patterns = List.unmodifiable(<RegExp>[
@@ -36,6 +37,7 @@ final List<RegExp> patterns = List.unmodifiable(<RegExp>[
   android31Pattern,
   android32Pattern,
   android33Pattern,
+  android34Pattern,
 ]);
 
 enum AndroidPlatform {
@@ -58,6 +60,7 @@ enum AndroidPlatform {
   android31,
   android32,
   android33,
+  android34,
 }
 
 // See https://source.android.com/setup/start/build-numbers
@@ -81,6 +84,7 @@ const Map<AndroidPlatform, String> sdkToVersion = {
   AndroidPlatform.android31: '12',
   AndroidPlatform.android32: '12L',
   AndroidPlatform.android33: '13',
+  AndroidPlatform.android34: '14',
 };
 
 // Android Studio 2022.2.1 Patch 1 (data updated January 6, 2023); previously at
@@ -105,6 +109,7 @@ const List<double> distribution = [
   0.189, // 12 (24.1%)
   0.000, // 12L
   0.052, // 13 (5.2%)
+  0, // 14 not released yet
 ];
 
 final _allPlatformIndices =
