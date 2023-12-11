@@ -87,7 +87,7 @@ const Map<AndroidPlatform, String> sdkToVersion = {
   AndroidPlatform.android34: '14',
 };
 
-// Android Studio 2022.2.1 Patch 1 (data updated January 6, 2023); previously at
+// Android Studio 2023.1.1 (data updated October 1, 2023); previously at
 // https://developer.android.com/about/dashboards
 const List<double> distribution = [
   0.000, // 2.3.3
@@ -95,21 +95,21 @@ const List<double> distribution = [
   0.000, // 4.1
   0.000, // 4.2
   0.000, // 4.3
-  0.007, // 4.4 (100%)
-  0.003, // 5.0 (99.3%)
-  0.018, // 5.1 (99.0%)
-  0.028, // 6.0 (97.2%)
-  0.019, // 7.0 (94.4%)
-  0.018, // 7.1 (92.5%)
-  0.026, // 8.0 (90.7%)
-  0.069, // 8.1 (88.1%)
-  0.132, // 9 (81.2%)
-  0.195, // 10 (68.0%)
-  0.244, // 11 (48.5%)
-  0.189, // 12 (24.1%)
+  0.004, // 4.4 (100%)
+  0.002, // 5.0 (99.6%)
+  0.012, // 5.1 (99.4%)
+  0.019, // 6.0 (98.2%)
+  0.013, // 7.0 (96.3%)
+  0.013, // 7.1 (95.0%)
+  0.019, // 8.0 (93.7%)
+  0.054, // 8.1 (91.8%)
+  0.105, // 9 (86.4%)
+  0.161, // 10 (75.9%)
+  0.216, // 11 (59.8%)
+  0.158, // 12 (38.2%)
   0.000, // 12L
-  0.052, // 13 (5.2%)
-  0, // 14 not released yet
+  0.224, // 13 (22.4%)
+  0, // 14 not listed
 ];
 
 final _allPlatformIndices =
