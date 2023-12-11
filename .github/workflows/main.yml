@@ -19,7 +19,7 @@ jobs:
       - run: flutter config --enable-web
       - run: flutter pub get
       - run: flutter analyze
-      - run: flutter test test
+      - run: flutter test
       - run: make build build_args=--release
       - run: |
           cd build/web
