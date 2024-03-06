@@ -87,7 +87,7 @@ const Map<AndroidPlatform, String> sdkToVersion = {
   AndroidPlatform.android34: '14',
 };
 
-// Android Studio 2023.1.1 (data updated October 1, 2023); previously at
+// Android Studio 2023.2.1 (data updated October 1, 2023); previously at
 // https://developer.android.com/about/dashboards
 const List<double> distribution = [
   0.000, // 2.3.3
