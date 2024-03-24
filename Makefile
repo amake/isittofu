@@ -1,4 +1,4 @@
-override build_args += --web-renderer html
+override build_args += --web-renderer html --base-href /
 
 .PHONY: run
 run: ## Run in debug mode
