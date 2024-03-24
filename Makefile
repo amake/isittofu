@@ -14,7 +14,7 @@ build-release: ## Build the web artifact for release
 build-release: build_args += --release
 build-release: build
 
-serve = cd $(1) && python3 -m http.server & pid=$$!; trap 'kill $$pid' EXIT
+serve = python3 -m http.server --directory $(1) & trap "kill $$!" EXIT
 
 .PHONY: web-release-serve
 web-release-serve: ## Serve the web release locally over HTTP
@@ -23,7 +23,7 @@ web-release-serve: build
 
 .PHONY: test
 test: ## Run tests
-test: lint test-unit
+test: lint test-unit test-integration
 
 .PHONY: lint
 lint: ## Run linter
@@ -32,6 +32,21 @@ lint: ## Run linter
 .PHONY: test-unit
 test-unit: ## Run unit tests
 	flutter test
+
+env := .env
+
+$(env):
+	python3 -m venv $(@)
+	$(@)/bin/pip install shot-scraper
+	$(@)/bin/shot-scraper install
+
+.PHONY: test-integration
+test-integration: $(env) ## Run integration tests
+	$(call serve,build/web); $(env)/bin/shot-scraper 'http://localhost:8000?q=a' \
+		--wait-for 'document.querySelector("flutter-view")' \
+		-o $(@).png \
+		--log-console 2>&1 \
+	| awk '/Failed/ {f++}; {print}; END {exit f}'
 
 .PHONY: clean
 clean: ## Clean up build artifacts
