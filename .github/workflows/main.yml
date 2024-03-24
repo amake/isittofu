@@ -20,7 +20,7 @@ jobs:
       - run: flutter pub get
       - run: flutter analyze
       - run: flutter test
-      - run: make build build_args=--release
+      - run: make build-release
       - name: deploy
         run: |
           cd build/web

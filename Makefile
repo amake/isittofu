@@ -9,6 +9,11 @@ run: ## Run in debug mode
 build: ## Build the web artifact
 	flutter build web $(build_args) --base-href /
 
+.PHONY: build-release
+build-release: ## Build the web artifact for release
+build-release: build_args += --release
+build-release: build
+
 serve = cd $(1) && python3 -m http.server & pid=$$!; trap 'kill $$pid' EXIT
 
 .PHONY: web-release-serve
