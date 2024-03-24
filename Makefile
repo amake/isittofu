@@ -42,7 +42,7 @@ $(env):
 
 .PHONY: test-integration
 test-integration: ## Run integration tests
-test-integration: build-release | $(env)
+test-integration: clean build-release | $(env)
 	$(call serve,build/web); $(env)/bin/shot-scraper 'http://localhost:8000?q=a' \
 		--wait-for 'document.querySelector("flutter-view")' \
 		-o $(@).png \
