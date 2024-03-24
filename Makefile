@@ -1,3 +1,4 @@
+SHELL := /usr/bin/env bash
 override build_args += --web-renderer html --base-href /
 
 .PHONY: run
@@ -8,10 +9,12 @@ run: ## Run in debug mode
 build: ## Build the web artifact
 	flutter build web $(build_args)
 
+serve = cd $(1) && python3 -m http.server & pid=$$!; trap 'kill $$pid' EXIT
+
 .PHONY: web-release-serve
 web-release-serve: ## Serve the web release locally over HTTP
 web-release-serve: build
-	cd build/web && python3 -m http.server & open http://localhost:8000 && wait
+	$(call serve,build/web); open http://localhost:8000 && wait
 
 .PHONY: help
 help: ## Show this help text
