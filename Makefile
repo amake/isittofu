@@ -33,6 +33,10 @@ lint: ## Run linter
 test-unit: ## Run unit tests
 	flutter test
 
+.PHONY: clean
+clean: ## Clean up build artifacts
+	flutter clean
+
 .PHONY: help
 help: ## Show this help text
 	$(info usage: make [target])
