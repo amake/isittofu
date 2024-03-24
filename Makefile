@@ -21,6 +21,18 @@ web-release-serve: ## Serve the web release locally over HTTP
 web-release-serve: build
 	$(call serve,build/web); open http://localhost:8000 && wait
 
+.PHONY: test
+test: ## Run tests
+test: lint test-unit
+
+.PHONY: lint
+lint: ## Run linter
+	flutter analyze
+
+.PHONY: test-unit
+test-unit: ## Run unit tests
+	flutter test
+
 .PHONY: help
 help: ## Show this help text
 	$(info usage: make [target])

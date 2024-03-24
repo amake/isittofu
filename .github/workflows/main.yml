@@ -18,8 +18,7 @@ jobs:
           channel: 'beta'
       - run: flutter config --enable-web
       - run: flutter pub get
-      - run: flutter analyze
-      - run: flutter test
+      - run: make test
       - run: make build-release
       - name: deploy
         run: |
