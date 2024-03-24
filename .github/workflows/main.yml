@@ -21,7 +21,8 @@ jobs:
       - run: flutter analyze
       - run: flutter test
       - run: make build build_args=--release
-      - run: |
+      - name: deploy
+        run: |
           cd build/web
           echo tofu.quest > CNAME
           git init
