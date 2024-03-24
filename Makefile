@@ -1,5 +1,5 @@
 SHELL := /usr/bin/env bash
-override build_args += --web-renderer html --base-href /
+override build_args += --web-renderer html
 
 .PHONY: run
 run: ## Run in debug mode
@@ -7,7 +7,7 @@ run: ## Run in debug mode
 
 .PHONY: build
 build: ## Build the web artifact
-	flutter build web $(build_args)
+	flutter build web $(build_args) --base-href /
 
 serve = cd $(1) && python3 -m http.server & pid=$$!; trap 'kill $$pid' EXIT
 
