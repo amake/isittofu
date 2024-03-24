@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
-import 'package:isittofu/data/android.dart' deferred as android_data;
-import 'package:isittofu/data/ios.dart' deferred as ios_data;
+import 'package:isittofu/data/android.dart' as android_data;
+import 'package:isittofu/data/ios.dart' as ios_data;
 import 'package:isittofu/util.dart';
 
 const double kLimitedSupportThreshold = 0.7;
@@ -52,8 +52,6 @@ class Analyzer {
   }
 
   Future<CodePointAnalysis> analyzeCodePoint(int codePoint) async {
-    await Future.wait<dynamic>(
-        [ios_data.loadLibrary(), android_data.loadLibrary()]);
     logDebug('Inspecting codepoint $codePoint');
     final iosIndices = ios_data.supportingIndices(codePoint);
     final latestIosIndex = ios_data.IosPlatform.values.length - 1;
