@@ -8,7 +8,7 @@ unsupported character.
 
 ## Methodology
 
-The input text is split up into UTF-16 Unicode codepoints, and is compared
+The input text is split up into UTF-16 Unicode code units, and is compared
 against data compiled by the
 [CodePointCoverage](https://github.com/amake/CodePointCoverage) project.
 
@@ -23,8 +23,12 @@ Emulator system images downloadable with the Android SDK.
 
 Note that this methodology is not completely accurate. Known issues:
 
-- Codepoints may be supported but not have glyphs (especially e.g. [variation
-  selectors](https://en.wikipedia.org/wiki/Variation_Selectors_(Unicode_block)))
+- Codepoints need not have their own glyphs to be considered "supported"; see
+  e.g. [variation
+  selectors](https://en.wikipedia.org/wiki/Variation_Selectors_(Unicode_block))
+- Codepoint-level analysis cannot account for support for multi-codepoint
+  grapheme clusters like [emoji ZWJ
+  sequences](https://www.unicode.org/emoji/charts/emoji-zwj-sequences.html)
 - Especially on Android, vendors may bundle different fonts. Even "vanilla"
   Android may have different fonts from the SDK
   ([example](https://github.com/amake/isittofu/issues/1))
