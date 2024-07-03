@@ -16,12 +16,7 @@ void main() {
 
   test('distributions', () {
     const epsilon = 1e-10;
-    expectEpsilon(ios.distribution.reduce((a, b) => a + b), 1,
-        epsilon: epsilon);
-    expectEpsilon(android.distribution.reduce((a, b) => a + b), 1,
-        epsilon: epsilon);
+    expect(ios.distribution.reduce((a, b) => a + b), closeTo(1, epsilon));
+    expect(android.distribution.reduce((a, b) => a + b), closeTo(1, epsilon));
   });
 }
-
-void expectEpsilon(num actual, num matcher, {required double epsilon}) =>
-    expect(true, (matcher - actual).abs() < epsilon);
