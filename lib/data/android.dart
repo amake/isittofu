@@ -15,6 +15,7 @@ import 'package:isittofu/data/android31.g.dart';
 import 'package:isittofu/data/android32.g.dart';
 import 'package:isittofu/data/android33.g.dart';
 import 'package:isittofu/data/android34.g.dart';
+import 'package:isittofu/data/android35.g.dart';
 import 'package:isittofu/data/common.dart' as common;
 
 final List<RegExp> patterns = List.unmodifiable(<RegExp>[
@@ -38,6 +39,7 @@ final List<RegExp> patterns = List.unmodifiable(<RegExp>[
   android32Pattern,
   android33Pattern,
   android34Pattern,
+  android35Pattern,
 ]);
 
 enum AndroidPlatform {
@@ -61,6 +63,7 @@ enum AndroidPlatform {
   android32,
   android33,
   android34,
+  android35,
 }
 
 // See https://source.android.com/setup/start/build-numbers
@@ -85,6 +88,7 @@ const Map<AndroidPlatform, String> sdkToVersion = {
   AndroidPlatform.android32: '12L',
   AndroidPlatform.android33: '13',
   AndroidPlatform.android34: '14',
+  AndroidPlatform.android35: '15',
 };
 
 // Android Studio 2023.2.1 (data updated October 1, 2023); previously at
