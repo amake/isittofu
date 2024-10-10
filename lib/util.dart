@@ -18,16 +18,18 @@ extension IterUtils<T> on Iterable<T> {
   }
 }
 
+typedef Range = ({int to, int from});
+
 extension IntIterUtils on Iterable<int> {
-  List<List<int>> ranges() {
+  List<Range> ranges() {
     if (isEmpty) {
       return [];
     }
-    return fold<List<List<int>>>(<List<int>>[], (acc, idx) {
-      if (acc.isEmpty || acc.last[1] + 1 < idx) {
-        acc.add([idx, idx]);
+    return fold<List<Range>>(<Range>[], (acc, idx) {
+      if (acc.isEmpty || acc.last.to + 1 < idx) {
+        acc.add((from: idx, to: idx));
       } else {
-        acc.last[1] = idx;
+        acc[acc.length - 1] = (from: acc.last.from, to: idx);
       }
       return acc;
     });

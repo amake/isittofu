@@ -18,12 +18,12 @@ import 'package:isittofu/data/ios16.0.g.dart';
 import 'package:isittofu/data/ios16.2.g.dart';
 import 'package:isittofu/data/ios16.4.g.dart';
 import 'package:isittofu/data/ios17.0.g.dart';
+import 'package:isittofu/data/ios18.0.g.dart';
 import 'package:isittofu/data/ios8.0.g.dart';
 import 'package:isittofu/data/ios8.2.g.dart';
 import 'package:isittofu/data/ios8.3.g.dart';
 import 'package:isittofu/data/ios9.0.g.dart';
 import 'package:isittofu/data/ios9.1.g.dart';
-import 'package:isittofu/data/ios18.0.g.dart';
 
 final List<RegExp> patterns = List.unmodifiable(<RegExp>[
   ios8_0Pattern,
@@ -258,3 +258,6 @@ String supportedString(
 
 double supportedShare(List<int> platformIndices) =>
     common.supportedShare(platformIndices, distribution);
+
+String versionCoverageString() =>
+    common.versionCoverageString(_allPlatformIndices, _toVersionString);

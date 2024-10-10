@@ -235,11 +235,13 @@ class _CompatibilitySummary extends StatelessWidget {
                   _PlatformSummary(
                     supportLevel: analysis.androidSupportLevel,
                     text: analysis.androidSupportString,
+                    tooltip: analysis.androidVersionCoverageString,
                     icon: const Icon(Icons.android),
                   ),
                   _PlatformSummary(
                     supportLevel: analysis.iosSupportLevel,
                     text: analysis.iosSupportString,
+                    tooltip: analysis.iosVersionCoverageString,
                     icon: const Icon(Icons.phone_iphone),
                   ),
                 ],
@@ -255,27 +257,32 @@ class _CompatibilitySummary extends StatelessWidget {
 class _PlatformSummary extends StatelessWidget {
   const _PlatformSummary({
     required this.text,
+    required this.tooltip,
     required this.icon,
     this.supportLevel,
   });
   final SupportLevel? supportLevel;
   final String text;
+  final String tooltip;
   final Widget icon;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        supportLevelIcon(supportLevel),
-        const SizedBox(width: 8),
-        Transform.scale(
-          scale: 0.8,
-          child: icon,
-        ),
-        const SizedBox(width: 8),
-        Flexible(child: Text(text)),
-      ],
+    return Tooltip(
+      message: tooltip,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          supportLevelIcon(supportLevel),
+          const SizedBox(width: 8),
+          Transform.scale(
+            scale: 0.8,
+            child: icon,
+          ),
+          const SizedBox(width: 8),
+          Flexible(child: Text(text)),
+        ],
+      ),
     );
   }
 }

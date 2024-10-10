@@ -148,3 +148,6 @@ String supportedString(
 
 double supportedShare(List<int> platformIndices) =>
     common.supportedShare(platformIndices, distribution);
+
+String versionCoverageString() =>
+    common.versionCoverageString(_allPlatformIndices, platformToVersionString);

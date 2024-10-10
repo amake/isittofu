@@ -125,8 +125,13 @@ class TextAnalysis {
   String get iosSupportString =>
       ios_data.supportedString(iosSupportedIndices, os: true);
 
+  String get iosVersionCoverageString => ios_data.versionCoverageString();
+
   String get androidSupportString =>
       android_data.supportedString(androidSupportedIndices, os: true);
+
+  String get androidVersionCoverageString =>
+      android_data.versionCoverageString();
 
   SupportLevel? get androidSupportLevel => isEmpty
       ? null

@@ -20,17 +20,10 @@ String supportedString(
   if (platformIndices.isEmpty) {
     return osName == null ? 'Unsupported' : '$osName unsupported';
   }
-  final rangeStrings = platformIndices.ranges().map((range) {
-    assert(range.length == 2, 'Range list must have two members; was $range');
-    if (range[0] == range[1]) {
-      return versionConverter(range[0]);
-    } else {
-      final start = versionConverter(range[0]);
-      final end = versionConverter(range[1]);
-      return '$start–$end';
-    }
-  });
-  final range = rangeStrings.join(', ');
+  final range = platformIndices
+      .ranges()
+      .map((range) => versionRangeString(range, versionConverter))
+      .join(', ');
   final withoutShare = osName == null ? range : '$osName $range';
 
   if (share == null) {
@@ -41,7 +34,25 @@ String supportedString(
   }
 }
 
+String versionRangeString(Range range, VersionConverter versionConverter) {
+  if (range.from == range.to) {
+    return versionConverter(range.from);
+  } else {
+    final start = versionConverter(range.from);
+    final end = versionConverter(range.to);
+    return '$start–$end';
+  }
+}
+
 double supportedShare(List<int> platformIndices, List<double> distribution) =>
     platformIndices.isEmpty
         ? 0
         : platformIndices.map((i) => distribution[i]).reduce((a, b) => a + b);
+
+String versionCoverageString(
+    List<int> platformIndices, VersionConverter versionConverter) {
+  final range = versionRangeString(
+      (from: platformIndices.first, to: platformIndices.last),
+      versionConverter);
+  return 'Evaluated versions $range';
+}
