@@ -29,7 +29,7 @@ extension IntIterUtils on Iterable<int> {
       if (acc.isEmpty || acc.last.to + 1 < idx) {
         acc.add((from: idx, to: idx));
       } else {
-        acc[acc.length - 1] = (from: acc.last.from, to: idx);
+        acc.last = (from: acc.last.from, to: idx);
       }
       return acc;
     });
