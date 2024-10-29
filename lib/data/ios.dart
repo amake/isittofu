@@ -19,6 +19,7 @@ import 'package:isittofu/data/ios16.2.g.dart';
 import 'package:isittofu/data/ios16.4.g.dart';
 import 'package:isittofu/data/ios17.0.g.dart';
 import 'package:isittofu/data/ios18.0.g.dart';
+import 'package:isittofu/data/ios18.1.g.dart';
 import 'package:isittofu/data/ios8.0.g.dart';
 import 'package:isittofu/data/ios8.2.g.dart';
 import 'package:isittofu/data/ios8.3.g.dart';
@@ -90,6 +91,7 @@ final List<RegExp> patterns = List.unmodifiable(<RegExp>[
   ios17_0Pattern, // iOS 17.6 is same as iOS 17.0
   ios17_0Pattern, // iOS 17.7 is same as iOS 17.0
   ios18_0Pattern,
+  ios18_1Pattern,
 ]);
 
 enum IosPlatform {
@@ -157,6 +159,7 @@ enum IosPlatform {
   iOS17_6,
   iOS17_7,
   iOS18_0,
+  iOS18_1,
 }
 
 // As measured by the App Store on June 9, 2024
@@ -226,6 +229,7 @@ const List<double> distribution = [
   0, // iOS17_6
   0, // iOS17_7
   0, // iOS18_0
+  0, // iOS18_1
 ];
 
 final _allPlatformIndices = List.generate(IosPlatform.values.length, (i) => i);
