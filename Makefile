@@ -14,12 +14,13 @@ build-release: ## Build the web artifact for release
 build-release: build_args += --release
 build-release: build
 
-serve = python3 -m http.server --directory $(1) & trap "kill $$!" EXIT
+port := 8080
+serve = python3 -m http.server --directory $(1) $(port) & trap "kill $$!" EXIT
 
 .PHONY: web-release-serve
 web-release-serve: ## Serve the web release locally over HTTP
 web-release-serve: build
-	$(call serve,build/web); open http://localhost:8000 && wait
+	$(call serve,build/web); open http://localhost:$(port) && wait
 
 .PHONY: test
 test: ## Run tests
@@ -43,7 +44,7 @@ $(env):
 .PHONY: test-integration
 test-integration: ## Run integration tests
 test-integration: clean build-release | $(env)
-	$(call serve,build/web); $(env)/bin/shot-scraper 'http://localhost:8000?q=a' \
+	$(call serve,build/web); $(env)/bin/shot-scraper 'http://localhost:$(port)?q=a' \
 		--wait-for 'document.querySelector("flutter-view")' \
 		-o $(@).png \
 		--log-console 2>&1 \
