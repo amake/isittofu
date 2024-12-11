@@ -113,7 +113,7 @@ class CushionIcon extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(4),
-        color: color ?? theme.color?.withOpacity(0.1),
+        color: color ?? theme.color?.withAlpha(26),
       ),
       width: theme.size,
       height: theme.size,
