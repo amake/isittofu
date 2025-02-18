@@ -4,6 +4,7 @@ version: 1.0.0+1
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
+  flutter: ^3.27.4 # web renderer is gone after 3.27
 
 dependencies:
   flutter:
