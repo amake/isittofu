@@ -1,6 +1,6 @@
 SHELL := /usr/bin/env bash
 override build_args += --web-renderer html
-flutter := fvm flutter
+flutter := $(shell command -v fvm) flutter
 
 .PHONY: run
 run: ## Run in debug mode
