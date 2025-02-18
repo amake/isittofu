@@ -34,29 +34,29 @@ class TextAnalysisPage extends StatelessWidget {
         create: (context) =>
             TextAnalysisModel(context, initialText: initialText),
         child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 800),
-            child: Builder(
-              builder: (context) {
-                return ListView(
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  children: const <Widget>[
-                    _TextInputCard(),
-                    SizedBox(height: 24),
-                    _AnalysisBody(),
-                    // Offset the size of the appbar to make the content appear
-                    // vertically centered when collapsed
-                    SizedBox(height: kToolbarHeight),
-                  ],
-                );
-              },
-            ),
+          child: ListView(
+            shrinkWrap: true,
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            children: const [
+              _TextInputCard(),
+              SizedBox(height: 24),
+              _AnalysisBody(),
+              // Offset the size of the appbar to make the content appear
+              // vertically centered when collapsed
+              SizedBox(height: kToolbarHeight),
+            ].map(_constrain).toList(growable: false),
           ),
         ),
       ),
     );
   }
+
+  Widget _constrain(Widget child) => Center(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: 800),
+          child: child,
+        ),
+      );
 }
 
 class _AnalysisBody extends StatelessWidget {
