@@ -39,3 +39,6 @@
 # Custom
 .env
 test-integration.png
+
+# FVM Version Cache
+.fvm/

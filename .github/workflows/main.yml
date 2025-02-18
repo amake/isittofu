@@ -19,8 +19,8 @@ jobs:
           flutter-version: 3.27.x
       - run: flutter config --enable-web
       - run: flutter pub get
-      - run: make test
-      - run: make build-release
+      - run: make test flutter=flutter
+      - run: make build-release flutter=flutter
       - name: deploy
         run: |
           cd build/web

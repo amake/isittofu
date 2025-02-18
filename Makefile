@@ -1,13 +1,14 @@
 SHELL := /usr/bin/env bash
 override build_args += --web-renderer html
+flutter := fvm flutter
 
 .PHONY: run
 run: ## Run in debug mode
-	flutter run $(build_args)
+	$(flutter) run $(build_args)
 
 .PHONY: build
 build: ## Build the web artifact
-	flutter build web $(build_args) --base-href /
+	$(flutter) build web $(build_args) --base-href /
 
 .PHONY: build-release
 build-release: ## Build the web artifact for release
@@ -28,11 +29,11 @@ test: lint test-unit test-integration
 
 .PHONY: lint
 lint: ## Run linter
-	flutter analyze
+	$(flutter) analyze
 
 .PHONY: test-unit
 test-unit: ## Run unit tests
-	flutter test
+	$(flutter) test
 
 env := .env
 
@@ -52,7 +53,7 @@ test-integration: clean build-release | $(env)
 
 .PHONY: clean
 clean: ## Clean up build artifacts
-	flutter clean
+	$(flutter) clean
 
 .PHONY: help
 help: ## Show this help text
