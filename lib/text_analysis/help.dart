@@ -69,7 +69,7 @@ class ExpandableHelpText extends StatelessWidget {
                 url:
                     Uri.parse('https://developer.android.com/about/dashboards'),
               ),
-              const TextSpan(text: ' (retrieved July 2024).'),
+              const TextSpan(text: ' (retrieved June 2025).'),
             ],
           ),
           style: DefaultTextStyle.of(context)
