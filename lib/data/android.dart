@@ -16,6 +16,7 @@ import 'package:isittofu/data/android32.g.dart';
 import 'package:isittofu/data/android33.g.dart';
 import 'package:isittofu/data/android34.g.dart';
 import 'package:isittofu/data/android35.g.dart';
+import 'package:isittofu/data/android36.g.dart';
 import 'package:isittofu/data/common.dart' as common;
 
 final List<RegExp> patterns = List.unmodifiable(<RegExp>[
@@ -40,6 +41,7 @@ final List<RegExp> patterns = List.unmodifiable(<RegExp>[
   android33Pattern,
   android34Pattern,
   android35Pattern,
+  android36Pattern,
 ]);
 
 enum AndroidPlatform {
@@ -64,6 +66,7 @@ enum AndroidPlatform {
   android33,
   android34,
   android35,
+  android36,
 }
 
 // See https://source.android.com/setup/start/build-numbers
@@ -89,6 +92,7 @@ const Map<AndroidPlatform, String> sdkToVersion = {
   AndroidPlatform.android33: '13',
   AndroidPlatform.android34: '14',
   AndroidPlatform.android35: '15',
+  AndroidPlatform.android36: '16',
 };
 
 // Android Studio 2024.3.2 Patch 1 (data updated April 1, 2025); previously at
@@ -114,7 +118,8 @@ const List<double> distribution = [
   0.000, // 12L
   0.168, // 13 (48.7%)
   0.274, // 14 (31.9%)
-  0.045, // 15 not listed
+  0.045, // 15 (4.5%)
+  0.000, // 16 not listed
 ];
 
 final _allPlatformIndices =
