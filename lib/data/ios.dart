@@ -24,6 +24,7 @@ import 'package:isittofu/data/ios18.4.g.dart';
 import 'package:isittofu/data/ios18.5.g.dart';
 import 'package:isittofu/data/ios26.0.g.dart';
 import 'package:isittofu/data/ios26.4.g.dart';
+import 'package:isittofu/data/ios27.0.g.dart';
 import 'package:isittofu/data/ios8.0.g.dart';
 import 'package:isittofu/data/ios8.2.g.dart';
 import 'package:isittofu/data/ios8.3.g.dart';
@@ -110,6 +111,7 @@ final List<RegExp> patterns = List.unmodifiable(<RegExp>[
   ios26_4Pattern, // iOS 26.5 is same as iOS 26.4
   ios26_4Pattern, // iOS 26.6 is same as iOS 26.4
   ios26_4Pattern, // iOS 26.7 is same as iOS 26.4
+  ios27_0Pattern,
 ]);
 
 enum IosPlatform {
@@ -192,6 +194,7 @@ enum IosPlatform {
   iOS26_5,
   iOS26_6,
   iOS26_7,
+  iOS27_0,
 }
 
 // As measured by the App Store on June 7, 2026
@@ -276,6 +279,7 @@ const List<double> distribution = [
   0.79 / 8, // iOS26.5
   0.79 / 8, // iOS26.6
   0.79 / 8, // iOS26.7
+  0, // iOS27.0
 ];
 
 final _allPlatformIndices = List.generate(IosPlatform.values.length, (i) => i);
