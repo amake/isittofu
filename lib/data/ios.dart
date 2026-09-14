@@ -109,6 +109,7 @@ final List<RegExp> patterns = List.unmodifiable(<RegExp>[
   ios26_4Pattern,
   ios26_4Pattern, // iOS 26.5 is same as iOS 26.4
   ios26_4Pattern, // iOS 26.6 is same as iOS 26.4
+  ios26_4Pattern, // iOS 26.7 is same as iOS 26.4
 ]);
 
 enum IosPlatform {
@@ -190,6 +191,7 @@ enum IosPlatform {
   iOS26_4,
   iOS26_5,
   iOS26_6,
+  iOS26_7,
 }
 
 // As measured by the App Store on June 7, 2026
@@ -266,13 +268,14 @@ const List<double> distribution = [
   0.14 / 8, // iOS18_5
   0.14 / 8, // iOS18_8
   0.14 / 8, // iOS18_7
-  0.79 / 7, // iOS26.0
-  0.79 / 7, // iOS26.1
-  0.79 / 7, // iOS26.2
-  0.79 / 7, // iOS26.3
-  0.79 / 7, // iOS26.4
-  0.79 / 7, // iOS26.5
-  0.79 / 7, // iOS26.6
+  0.79 / 8, // iOS26.0
+  0.79 / 8, // iOS26.1
+  0.79 / 8, // iOS26.2
+  0.79 / 8, // iOS26.3
+  0.79 / 8, // iOS26.4
+  0.79 / 8, // iOS26.5
+  0.79 / 8, // iOS26.6
+  0.79 / 8, // iOS26.7
 ];
 
 final _allPlatformIndices = List.generate(IosPlatform.values.length, (i) => i);
