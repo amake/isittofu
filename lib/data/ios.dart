@@ -25,6 +25,13 @@ import 'package:isittofu/data/ios18.5.g.dart';
 import 'package:isittofu/data/ios26.0.g.dart';
 import 'package:isittofu/data/ios26.4.g.dart';
 import 'package:isittofu/data/ios27.0.g.dart';
+import 'package:isittofu/data/ios27.2.g.dart';
+import 'package:isittofu/data/ios4.0.g.dart';
+import 'package:isittofu/data/ios4.1.g.dart';
+import 'package:isittofu/data/ios4.2.g.dart';
+import 'package:isittofu/data/ios5.0.g.dart';
+import 'package:isittofu/data/ios6.0.g.dart';
+import 'package:isittofu/data/ios7.0.g.dart';
 import 'package:isittofu/data/ios8.0.g.dart';
 import 'package:isittofu/data/ios8.2.g.dart';
 import 'package:isittofu/data/ios8.3.g.dart';
@@ -32,31 +39,41 @@ import 'package:isittofu/data/ios9.0.g.dart';
 import 'package:isittofu/data/ios9.1.g.dart';
 
 final List<RegExp> patterns = List.unmodifiable(<RegExp>[
+  ios4_0Pattern,
+  ios4_1Pattern,
+  ios4_2Pattern,
+  ios4_2Pattern, // iOS 4.3 is same as iOS 4.2?
+  ios5_0Pattern,
+  ios5_0Pattern, // iOS 5.1 is same as iOS 5.0?
+  ios6_0Pattern,
+  ios6_0Pattern, // iOS 6.1 is same as iOS 6.0?
+  ios7_0Pattern,
+  ios7_0Pattern, // iOS 7.1 is same as iOS 7.0?
   ios8_0Pattern,
   ios8_0Pattern, // iOS 8.1 is same as iOS 8.0
-  ios8_2Pattern,
-  ios8_3Pattern,
+  ios8_2Pattern, // iOS 8.2 differs by a Sinhala codepoint & 4 PUA codepoints
+  ios8_3Pattern, // Emojis Only
   ios8_3Pattern, // iOS 8.4 is same as iOS 8.3
   ios9_0Pattern,
-  ios9_1Pattern,
+  ios9_1Pattern, // Emojis Only
   ios9_1Pattern, // iOS 9.2 is same as iOS 9.1
   ios9_1Pattern, // iOS 9.3 is same as iOS 9.1
   ios10_0Pattern,
   ios10_0Pattern, // iOS 10.1 is same as iOS 10.0
-  ios10_2Pattern,
+  ios10_2Pattern, // Emojis Only
   ios10_2Pattern, // iOS 10.3 is same as iOS 10.2
   ios11_0Pattern,
-  ios11_1Pattern,
+  ios11_1Pattern, // Emojis Only including Tags block
   ios11_1Pattern, // iOS 11.2 is same as iOS 11.1
-  ios11_3Pattern,
+  ios11_3Pattern, // iOS 11.3 differs by 2 Quebec-French Trademark signs
   ios11_3Pattern, // iOS 11.4 is same as iOS 11.3
   ios12_0Pattern,
-  ios12_1Pattern,
-  ios12_1Pattern, // iOS 12.2 is same as iOS 12.1
-  ios12_1Pattern, // iOS 12.3 is same as iOS 12.1
-  ios12_4Pattern,
+  ios12_1Pattern, // iOS 12.1 differs by Emojis and Georgian Extended block
+  ios12_2Pattern, // iOS 12.2 differs by 5 Latin codepoints
+  ios12_2Pattern, // iOS 12.3 is same as iOS 12.2
+  ios12_4Pattern, // iOS 12.4 differs by Square Reiwa Symbol and 6 PUA codepoints
   ios13_0Pattern,
-  ios13_1Pattern,
+  ios13_1Pattern, // Emojis Only
   ios13_1Pattern, // iOS 13.2 is same as iOS 13.1
   ios13_1Pattern, // iOS 13.3 is same as iOS 13.1
   ios13_1Pattern, // iOS 13.4 is same as iOS 13.1
@@ -65,7 +82,7 @@ final List<RegExp> patterns = List.unmodifiable(<RegExp>[
   ios13_1Pattern, // iOS 13.7 is same as iOS 13.1
   ios14_0Pattern,
   ios14_1Pattern, // iOS 14.1 differs by a single PUA codepoint; remove this?
-  ios14_2Pattern,
+  ios14_2Pattern, // iOS 14.2 differs by Emojis and Tamil Supplement block
   ios14_2Pattern, // iOS 14.3 is same as iOS 14.2
   ios14_2Pattern, // iOS 14.4 is same as iOS 14.2
   ios14_2Pattern, // iOS 14.5 is same as iOS 14.2
@@ -76,15 +93,15 @@ final List<RegExp> patterns = List.unmodifiable(<RegExp>[
   ios15_0Pattern, // iOS 15.1 is same as iOS 15.0
   ios15_0Pattern, // iOS 15.2 is same as iOS 15.0
   ios15_0Pattern, // iOS 15.3 is same as iOS 15.0
-  ios15_4Pattern,
+  ios15_4Pattern, // Emojis Only
   ios15_4Pattern, // iOS 15.5 is same as iOS 15.4
   ios15_4Pattern, // iOS 15.6 is same as iOS 15.4
   ios15_4Pattern, // iOS 15.7 is same as iOS 15.4
   ios16_0Pattern,
   ios16_0Pattern, // iOS 16.1 is same as iOS 16.0
-  ios16_2Pattern,
+  ios16_2Pattern, // iOS 16.2 removes 8 Runic codepoints
   ios16_2Pattern, // iOS 16.3 is same as iOS 16.2
-  ios16_4Pattern,
+  ios16_4Pattern, // iOS 16.4 differs by Emojis with Bopomofo extensions and CJK ideographs
   ios16_4Pattern, // iOS 16.5 is same as iOS 16.4
   ios16_4Pattern, // iOS 16.6 is same as iOS 16.4
   ios17_0Pattern,
@@ -96,26 +113,37 @@ final List<RegExp> patterns = List.unmodifiable(<RegExp>[
   ios17_0Pattern, // iOS 17.6 is same as iOS 17.0
   ios17_0Pattern, // iOS 17.7 is same as iOS 17.0
   ios18_0Pattern,
-  ios18_1Pattern,
+  ios18_1Pattern, // iOS 18.1 differs by 15 Mongolian codepoints
   ios18_1Pattern, // iOS 18.2 is same as iOS 18.1
   ios18_1Pattern, // iOS 18.3 is same as iOS 18.1
-  ios18_4Pattern,
-  ios18_5Pattern,
+  ios18_4Pattern, // iOS 18.4 differs by Emojis with Indic script extensions
+  ios18_5Pattern, // iOS 18.5 removes 31 Sinhala codepoints
   ios18_5Pattern, // iOS 18.6 is same as iOS 18.5
   ios18_5Pattern, // iOS 18.7 is same as iOS 18.5
   ios26_0Pattern,
   ios26_0Pattern, // iOS 26.1 is same as iOS 26.0
   ios26_0Pattern, // iOS 26.2 is same as iOS 26.0
   ios26_0Pattern, // iOS 26.3 is same as iOS 26.0
-  ios26_4Pattern,
+  ios26_4Pattern, // iOS 26.4 differs by emojis with Saudi Riyal sign
   ios26_4Pattern, // iOS 26.5 is same as iOS 26.4
   ios26_4Pattern, // iOS 26.6 is same as iOS 26.4
   ios26_4Pattern, // iOS 26.7 is same as iOS 26.4
   ios27_0Pattern,
   ios27_0Pattern, // iOS 27.1 is same as iOS 27.0
+  ios27_2Pattern, // New Codepoints?
 ]);
 
 enum IosPlatform {
+  iOS4_0,
+  iOS4_1,
+  iOS4_2,
+  iOS4_3,
+  iOS5_0,
+  iOS5_1,
+  iOS6_0,
+  iOS6_1,
+  iOS7_0,
+  iOS7_1,
   iOS8_0,
   iOS8_1,
   iOS8_2,
@@ -197,11 +225,24 @@ enum IosPlatform {
   iOS26_7,
   iOS27_0,
   iOS27_1,
+  iOS27_2,
 }
 
-// As measured by the App Store on June 7, 2026
+// As measured by the App Store on September 16, 2026
 // https://developer.apple.com/support/app-store/
 const List<double> distribution = [
+  0.07 / 63, // iOS4_0
+  0.07 / 63, // iOS4_1
+  0.07 / 63, // iOS4_2
+  0.07 / 63, // iOS4_3
+  0.07 / 63, // iOS5_0
+  0.07 / 63, // iOS5_1
+  0.07 / 63, // iOS6_0
+  0.07 / 63, // iOS6_1
+  0.07 / 63, // iOS7_0
+  0.07 / 63, // iOS7_1
+  0.07 / 63, // iOS8_0
+  0.07 / 63, // iOS8_0
   0.07 / 63, // iOS8_0
   0.07 / 63, // iOS8_1
   0.07 / 63, // iOS8_2
@@ -283,6 +324,7 @@ const List<double> distribution = [
   0.79 / 8, // iOS26.7
   0, // iOS27.0
   0, // iOS27.1
+  0, // iOS27.2
 ];
 
 final _allPlatformIndices = List.generate(IosPlatform.values.length, (i) => i);
